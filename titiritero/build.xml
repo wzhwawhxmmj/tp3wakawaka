@@ -1,0 +1,14 @@
+<project name="titiritero" basedir="." default="build">
+	<property name="build" location="build" />
+
+	<target name="setup">
+		<delete dir="${build}" />
+		<mkdir dir="${build}"/>
+	</target>
+		
+	<target name="build" depends="setup">
+		<echo>Iniciando construcción del proyecto titiritero</echo>
+		<javac srcdir="src" destdir="${build}"></javac>
+	</target>
+ 
+</project>
