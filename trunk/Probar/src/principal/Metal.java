@@ -1,5 +1,4 @@
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
-
 package principal;
 
 public class Metal {
