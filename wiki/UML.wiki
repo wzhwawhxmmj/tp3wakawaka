@@ -2,3 +2,6 @@
 
 *Comer un Fantasma*
 http://tp3wakawaka.googlecode.com/svn/trunk/Doc/ComerUnFantasma.png
+
+*El Fantasma Rojo*
+http://tp3wakawaka.googlecode.com/svn/trunk/Doc/UMLEstadoFantasmaRojo.png
