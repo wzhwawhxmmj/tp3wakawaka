@@ -1,4 +1,5 @@
-import ar.uba.fi.algo3.titiritero.ControladorJuego;
+import src.ar.uba.fi.algo3.titiritero.ControladorJuego;
+
 import java.util.ArrayList;
 package principal;
 
@@ -9,6 +10,7 @@ public class Metal {
 		System.out.println("probando mas cosas");
 		
 		econtrol = new ControladorJuego();
+
  		econtrol.comenzarJuego(); 
 
 	}
