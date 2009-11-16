@@ -1,4 +1,4 @@
-package src.ar.uba.fi.algo3.titiritero.vista;
+package ar.uba.fi.algo3.titiritero.vista;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;

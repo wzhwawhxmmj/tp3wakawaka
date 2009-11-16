@@ -1,4 +1,4 @@
-package src.ar.uba.fi.algo3.titiritero;
+package ar.uba.fi.algo3.titiritero;
 
 /*
  * Esta abstraccion representa a todos los objetos Vista de la aplicacion
