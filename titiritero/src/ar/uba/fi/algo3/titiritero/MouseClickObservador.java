@@ -1,4 +1,4 @@
-package ar.uba.fi.algo3.titiritero;
+package src.ar.uba.fi.algo3.titiritero;
 
 public interface MouseClickObservador {
 	

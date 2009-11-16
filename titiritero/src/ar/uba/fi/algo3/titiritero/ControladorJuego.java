@@ -1,4 +1,4 @@
-package ar.uba.fi.algo3.titiritero;
+package src.ar.uba.fi.algo3.titiritero;
 
 import java.util.ArrayList;
 import java.util.Iterator;
