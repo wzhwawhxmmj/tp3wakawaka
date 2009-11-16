@@ -1,0 +1,4 @@
+#summary Diagramas de Clase, Secuencia y Estado
+
+*Comer un Fantasma*
+http://tp3wakawaka.googlecode.com/svn/trunk/doc/ComerUnFantasma.png
