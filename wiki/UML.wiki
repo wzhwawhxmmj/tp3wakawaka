@@ -7,4 +7,4 @@ http://tp3wakawaka.googlecode.com/svn/trunk/Doc/ComerUnFantasma.png
 http://tp3wakawaka.googlecode.com/svn/trunk/Doc/UMLEstadoFantasmaRojo.png
 
 *Diagrama de clases básico*
-http://code.google.com/p/tp3wakawaka/source/browse/trunk/Doc/Diagrama%20de%20Clases%20B%C3%A1sico.png
+http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama de Clases Básico.png
