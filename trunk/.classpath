@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="Probar/src"/>
 	<classpathentry kind="src" path="titiritero/src"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="lib/jmock-2.5.1.jar"/>
-	<classpathentry kind="lib" path="lib/hamcrest-core-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/hamcrest-library-1.1.jar"/>
+        <classpathentry kind="lib" path="titiritero/lib/jmock-2.5.1.jar"/>
+        <classpathentry kind="lib" path="titiritero/lib/hamcrest-core-1.1.jar"/>
+        <classpathentry kind="lib" path="titiritero/lib/hamcrest-library-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
