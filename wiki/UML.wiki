@@ -15,3 +15,7 @@ http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Clases%20Básico
 *Diagrama de relaciones básico*
 
 http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Relaciones%20Basico.png
+
+*Diagrama nuevo propuesto*
+
+http://tp3wakawaka.googlecode.com/svn/trunk/Doc/ideaNuevaClases.png
