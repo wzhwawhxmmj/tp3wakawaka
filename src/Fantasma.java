@@ -1,34 +1,22 @@
 
 public abstract class Fantasma extends Personaje {
 
-	private boolean vivo;
+	private boolean azul;
 	
-	public Fantasma(Punto p){
+	public Fantasma(Posicion posicion){
+		super(posicion);
 		this.vivo = true;
+		this.azul = false;
+	}
+
+	public void volverseAzul() {
+		this.azul = true;
 	}
 	
-	public void mover(Direccion d) {
-		// TODO Auto-generated method stub
-		
+	public boolean estaAzul() {
+		return this.azul;
 	}
+	
+	public abstract void comportamiento();
 
-	public void comer(Personaje p) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public boolean getVivo() {
-		// TODO Auto-generated method stub
-		return this.vivo;
-	}
-
-	public void setAzul(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void morir() {
-		// TODO Auto-generated method stub
-		
-	}
 }
