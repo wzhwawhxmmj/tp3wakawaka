@@ -7,7 +7,15 @@ public class Pacman extends Entidad{
 	}
 
 	public void comer(Entidad j) {
-		// TODO Auto-generated method stub
+		System.out.println("me como cosas locas");
+		
+	}
+	
+	public void comer(Fantasma f) {
+		
+		if (f.estaAzul()){
+			System.out.println("me como los fantasmas");
+		}
 		
 	}
 
