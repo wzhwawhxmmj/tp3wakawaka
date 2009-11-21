@@ -12,6 +12,16 @@ public class Posicion extends Punto{
 		super(ente.getPosicion().getx(),ente.getPosicion().gety());		
 	}
 	
+	public boolean equals(Posicion posicion){
+		if ((posicion.getx() == this.getx()) && (posicion.gety() == this.gety())){
+			return true;
+		}else {
+			return false;
+		}
+		
+		
+	}
+	
 	public void derecha(){
 		int avance = this.getx() + 1;
 		this.setx(avance);
