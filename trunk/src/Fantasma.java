@@ -1,5 +1,5 @@
 
-public abstract class Fantasma {
+public abstract class Fantasma extends Personaje {
 
 	private boolean vivo;
 	
@@ -12,7 +12,7 @@ public abstract class Fantasma {
 		
 	}
 
-	public void comer(Jugador pacman) {
+	public void comer(Personaje p) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -23,6 +23,11 @@ public abstract class Fantasma {
 	}
 
 	public void setAzul(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void morir() {
 		// TODO Auto-generated method stub
 		
 	}

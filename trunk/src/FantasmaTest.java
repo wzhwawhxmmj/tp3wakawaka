@@ -2,7 +2,6 @@ import junit.framework.TestCase;
 
 public class FantasmaTest extends TestCase {
 	
-	
 	public void testMoverFantasmaALugarPermitido(){
 		Punto p = new Punto(1,1);
 		Fantasma f = new FantasmaRojo(p);		
@@ -34,7 +33,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testComerPacmanEnEstadoValido(){
 		Punto p = new Punto(1,1);
-		Jugador pacman = new Pacman(p);
+		Personaje pacman = new Pacman(p);
 		Fantasma f = new FantasmaRojo(p);
 		
 		f.comer(pacman);
@@ -44,7 +43,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testComerPacmanEnEstadoInvalido(){
 		Punto p = new Punto(1,1);
-		Jugador pacman = new Pacman(p);
+		Personaje pacman = new Pacman(p);
 		Fantasma f = new FantasmaRojo(p);
 		
 		f.setAzul(true);
@@ -52,6 +51,31 @@ public class FantasmaTest extends TestCase {
 		f.comer(pacman);
 		
 		assertFalse(f.getVivo());
+	}
+	
+	public void testMorirEnEstadoValido(){
+		Punto p = new Punto(1,1);
+		Fantasma f = new FantasmaRojo(p);
 		
+		f.setAzul(true);
+		
+		try{
+			f.morir();
+		}catch (RuntimeException e){
+			fail();
+		}
+		
+	}
+	
+	public void testMorirEnEstadoInvalido(){
+		Punto p = new Punto(1,1);
+		Fantasma f = new FantasmaRojo(p);
+
+		try{
+			f.morir();
+			fail();
+		}catch (RuntimeException e){
+			
+		}
 	}
 }
