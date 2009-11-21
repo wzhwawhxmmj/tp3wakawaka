@@ -8,7 +8,6 @@ public class FantasmaTest extends TestCase {
 		
 		// Todavia no existe la clase escenario
 		// por lo tanto esta prueba queda relegada
-		
 		fail();
 		
 		try{
@@ -25,7 +24,6 @@ public class FantasmaTest extends TestCase {
 		
 		// Todavia no existe la clase escenario
 		// por lo tanto esta prueba queda relegada
-		
 		fail();
 		
 		try{
