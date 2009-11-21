@@ -9,11 +9,6 @@ public class FantasmaRojo extends Fantasma {
 		
 	}
 
-	public void comer(Personaje j) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void morir() {
 		// TODO Auto-generated method stub
 		
