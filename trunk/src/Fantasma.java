@@ -24,7 +24,7 @@ public abstract class Fantasma extends Personaje {
 	public abstract void comportamiento();
 	
 	public void comer(Personaje p){
-		p.morir();
+		if (!this.estaAzul()) p.morir();
 	}
 
 }
