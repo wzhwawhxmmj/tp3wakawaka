@@ -78,4 +78,16 @@ public class FantasmaTest extends TestCase {
 			
 		}
 	}
+	
+	public void testPorbarCosasDePolimorfismo(){
+		Fantasma f = new FantasmaRojo(new Posicion(1,1));
+		Pacman p = new Pacman(new Posicion(1,1));
+		Pacman p2 = new Pacman(new Posicion(1,1));
+		
+		f.volverseAzul();
+		
+		p.comer(f);
+		p.comer(p2);
+		
+	}
 }

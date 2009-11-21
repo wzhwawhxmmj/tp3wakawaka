@@ -13,6 +13,12 @@ public abstract class Entidad {
 		return this.posicion;
 	}
 	
+	public void setPosicion(Posicion p) {
+
+		this.posicion = p;
+		
+	}
+	
 	public boolean estaVivo() {
 		return this.vivo;
 	}
@@ -26,6 +32,7 @@ public abstract class Entidad {
 		try {
 		
 			this.escenario.ponerEnPosicion(p);
+			this.setPosicion(p);
 		
 		}catch(PosicionIlegalException e){
 		
