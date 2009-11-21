@@ -3,28 +3,34 @@ import junit.framework.TestCase;
 public class FantasmaTest extends TestCase {
 	
 	public void testMoverFantasmaALugarPermitido(){
-		Punto p = new Punto(1,1);
-		Fantasma f = new FantasmaRojo(p);		
-		Direccion d = new Direccion();
+		Fantasma f = new FantasmaRojo(new Posicion(1,1));		
+		Posicion pos = new Posicion(f);
 		
-		d.derecha();
+		// Todavia no existe la clase escenario
+		// por lo tanto esta prueba queda relegada
+		
+		fail();
 		
 		try{
-			f.mover(d);
+			pos.derecha();
+			f.mover(pos);
 		}catch(RuntimeException e){
 			
 		}
 	}
 	
 	public void testMoverFantasmaALugarNoPermitido(){
-		Punto p = new Punto(1,1);
-		Fantasma f = new FantasmaRojo(p);		
-		Direccion d = new Direccion();
+		Fantasma f = new FantasmaRojo(new Posicion(1,1));		
+		Posicion pos = new Posicion(f);
 		
-		d.derecha();
+		// Todavia no existe la clase escenario
+		// por lo tanto esta prueba queda relegada
+		
+		fail();
 		
 		try{
-			f.mover(d);
+			pos.derecha();
+			f.mover(pos);
 			fail();
 		}catch(RuntimeException e){
 			
@@ -32,32 +38,29 @@ public class FantasmaTest extends TestCase {
 	}
 	
 	public void testComerPacmanEnEstadoValido(){
-		Punto p = new Punto(1,1);
-		Personaje pacman = new Pacman(p);
-		Fantasma f = new FantasmaRojo(p);
+		Personaje pacman = new Pacman(new Posicion(1,1));
+		Fantasma f = new FantasmaRojo(new Posicion(1,1));
 		
 		f.comer(pacman);
 		
-		assertTrue(f.getVivo());
+		assertTrue(f.estaVivo());
 	}
 	
 	public void testComerPacmanEnEstadoInvalido(){
-		Punto p = new Punto(1,1);
-		Personaje pacman = new Pacman(p);
-		Fantasma f = new FantasmaRojo(p);
+		Personaje pacman = new Pacman(new Posicion(1,1));
+		Fantasma f = new FantasmaRojo(new Posicion(1,1));
 		
-		f.setAzul(true);
+		f.volverseAzul();
 		
 		f.comer(pacman);
 		
-		assertFalse(f.getVivo());
+		assertFalse(f.estaVivo());
 	}
 	
 	public void testMorirEnEstadoValido(){
-		Punto p = new Punto(1,1);
-		Fantasma f = new FantasmaRojo(p);
+		Fantasma f = new FantasmaRojo(new Posicion(1,1));
 		
-		f.setAzul(true);
+		f.volverseAzul();
 		
 		try{
 			f.morir();
@@ -68,8 +71,7 @@ public class FantasmaTest extends TestCase {
 	}
 	
 	public void testMorirEnEstadoInvalido(){
-		Punto p = new Punto(1,1);
-		Fantasma f = new FantasmaRojo(p);
+		Fantasma f = new FantasmaRojo(new Posicion(1,1));
 
 		try{
 			f.morir();
