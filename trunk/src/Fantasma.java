@@ -13,6 +13,10 @@ public abstract class Fantasma extends Personaje {
 		this.azul = true;
 	}
 	
+	public void volverseNormal(){
+		this.azul = false;
+	}
+	
 	public boolean estaAzul() {
 		return this.azul;
 	}
