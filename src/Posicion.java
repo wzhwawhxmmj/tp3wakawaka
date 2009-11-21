@@ -8,7 +8,7 @@ public class Posicion extends Punto{
 		super(x,y);
 	}
 	
-	public Posicion(Personaje ente){
+	public Posicion(Entidad ente){
 		super(ente.getPosicion().getx(),ente.getPosicion().gety());		
 	}
 	

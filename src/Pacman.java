@@ -1,12 +1,12 @@
 
-public class Pacman extends Personaje{
+public class Pacman extends Entidad{
 
 	public Pacman(Posicion posicion) {
 		super(posicion);
 
 	}
 
-	public void comer(Personaje j) {
+	public void comer(Entidad j) {
 		// TODO Auto-generated method stub
 		
 	}

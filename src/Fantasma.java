@@ -1,5 +1,5 @@
 
-public abstract class Fantasma extends Personaje {
+public abstract class Fantasma extends Entidad {
 
 	private boolean azul;
 	
@@ -23,7 +23,7 @@ public abstract class Fantasma extends Personaje {
 	
 	public abstract void comportamiento();
 	
-	public void comer(Personaje p){
+	public void comer(Entidad p){
 		if (!this.estaAzul()) p.morir();
 	}
 

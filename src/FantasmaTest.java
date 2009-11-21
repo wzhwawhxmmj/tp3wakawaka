@@ -36,7 +36,7 @@ public class FantasmaTest extends TestCase {
 	}
 	
 	public void testComerPacmanEnEstadoValido(){
-		Personaje pacman = new Pacman(new Posicion(1,1));
+		Entidad pacman = new Pacman(new Posicion(1,1));
 		Fantasma f = new FantasmaRojo(new Posicion(1,1));
 		
 		f.comer(pacman);
@@ -45,7 +45,7 @@ public class FantasmaTest extends TestCase {
 	}
 	
 	public void testComerPacmanEnEstadoInvalido(){
-		Personaje pacman = new Pacman(new Posicion(1,1));
+		Entidad pacman = new Pacman(new Posicion(1,1));
 		Fantasma f = new FantasmaRojo(new Posicion(1,1));
 		
 		f.volverseAzul();
