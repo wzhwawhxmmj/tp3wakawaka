@@ -1,11 +1,11 @@
 
-public abstract class Personaje {
+public abstract class Entidad {
 
 	private Posicion posicion;
 	protected boolean vivo;
 	protected Escenario escenario;
 	
-	public Personaje(Posicion p){
+	public Entidad(Posicion p){
 		this.posicion = p;
 	}
 	
@@ -17,7 +17,7 @@ public abstract class Personaje {
 		return this.vivo;
 	}
 	
-	public abstract void comer(Personaje p);
+	public abstract void comer(Entidad p);
 
 	public abstract void morir();
 
