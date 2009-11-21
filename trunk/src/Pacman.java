@@ -6,7 +6,7 @@ public class Pacman extends Entidad{
 
 	}
 
-	public void comer(Entidad j) {
+	public void comer(Entidad j) {		
 		System.out.println("me como cosas locas");
 		
 	}
