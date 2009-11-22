@@ -1,7 +1,10 @@
 public class Pacman extends Entidad{
 
+	Direccion direccion;
+	
 	public Pacman(Posicion posicion) {
 		super(posicion);
+		this.direccion = Direccion.NINGUNA;
 	}
 
 	public void comer(Entidad j) {		
@@ -19,8 +22,7 @@ public class Pacman extends Entidad{
 	}
 	
     public void vivir() {
-    	///???
-    	
+    	this.moverHacia(direccion);
     }
 
 }
