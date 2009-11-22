@@ -40,6 +40,23 @@ public abstract class Entidad {
 			throw new PosicionIlegalException();			
 		
 		}
+		
 	}
-
+	
+    public void moverHacia(Direccion unaDireccion) {
+		switch (unaDireccion) {
+			case ARRIBA:  this.getPosicion().arriba();
+                          break;
+			case ABAJO:   this.getPosicion().abajo();
+                          break;
+			case IZQUIERDA:this.getPosicion().izquierda();
+                          break;
+			case DERECHA: this.getPosicion().derecha();
+                          break;
+			case NINGUNA: break;
+            default:      throw new DireccionInvalidaException();
+	}
+  }
+    
 }
+
