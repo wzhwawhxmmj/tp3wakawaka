@@ -7,6 +7,7 @@ public abstract class Entidad {
 	
 	public Entidad(Posicion p){
 		this.posicion = p;
+		vivo = true;
 	}
 	
 	public Posicion getPosicion(){
