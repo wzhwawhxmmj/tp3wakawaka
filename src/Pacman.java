@@ -1,27 +1,26 @@
-
 public class Pacman extends Entidad{
 
 	public Pacman(Posicion posicion) {
 		super(posicion);
-
 	}
 
 	public void comer(Entidad j) {		
-		System.out.println("me como cosas locas");
-		
+		//Se supone que esta entidad es una fruta o punto amarillo
+		j.morir();
 	}
 	
 	public void comer(Fantasma f) {
-		
-		if (f.estaAzul()){
-			System.out.println("me como los fantasmas");
-		}
-		
+		if (f.estaAzul())f.morir();
 	}
 
 	public void morir() {
-		// TODO Auto-generated method stub
-		
+		this.vivo = false;
+		//"che juego, fijate mis vidas y revivime."
 	}
+	
+    public void vivir() {
+    	///???
+    	
+    }
 
 }
