@@ -1,5 +1,5 @@
 
-abstract class Ueb {
+public abstract class Ueb {
 
 		private  boolean pisablePorIA; 
 		private boolean pisablePorJugador;

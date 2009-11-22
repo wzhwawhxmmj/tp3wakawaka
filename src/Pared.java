@@ -2,7 +2,7 @@
 public class Pared extends Ueb {
 			
 	public Pared (){
-		this.setPisablePorIA(true); 
+		this.setPisablePorIA(false); 
 		this.setPisablePorJugador(false);
 			
 	 }
