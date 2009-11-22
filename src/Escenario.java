@@ -18,6 +18,13 @@ public class Escenario {/*creando el escenario, nada raro*/
 		
 		this.tablero.put(p, elemento);
 	}
+	
+	public Ueb sacarEnPosicion(Punto p){
+		
+		return (Ueb)this.tablero.get(p);
+		
+	}
+	
 
 
 
