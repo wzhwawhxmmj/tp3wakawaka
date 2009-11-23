@@ -3,8 +3,8 @@ public abstract class Fantasma extends Entidad {
 
 	private boolean azul;
 	
-	public Fantasma(Posicion posicion){
-		super(posicion);
+	public Fantasma(Escenario escenario, Posicion posicion){
+		super(escenario, posicion);
 		this.azul = false;
 	}
 
