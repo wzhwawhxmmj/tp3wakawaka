@@ -12,7 +12,7 @@ public class FantasmaTest extends TestCase {
 		
 		try{
 			pos.derecha();
-			f.mover(pos);
+			f.cambiarPosicion(pos);
 		}catch(RuntimeException e){
 			
 		}
@@ -28,7 +28,7 @@ public class FantasmaTest extends TestCase {
 		
 		try{
 			pos.derecha();
-			f.mover(pos);
+			f.cambiarPosicion(pos);
 			fail();
 		}catch(RuntimeException e){
 			
