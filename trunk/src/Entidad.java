@@ -2,12 +2,11 @@
 public abstract class Entidad {
 
 	private Posicion posicion;
-	protected boolean vivo;
-	protected Escenario escenario;
+	private boolean vivo;
 	
 	public Entidad(Posicion p){
 		this.posicion = p;
-		vivo = true;
+		this.vivo = true;
 	}
 	
 	public Posicion getPosicion(){
@@ -24,15 +23,16 @@ public abstract class Entidad {
 		return this.vivo;
 	}
 	
-	public abstract void comer(Entidad p);
+	public void estaVivo(boolean estado) {
+		this.vivo = estado;
+	}
 
 	public abstract void morir();
 
-	public void mover(Posicion p){
+	public void cambiarPosicion(Posicion p){
 		
 		try {
-		
-			this.escenario.ponerEnPosicion(p);
+
 			this.setPosicion(p);
 		
 		}catch(PosicionIlegalException e){

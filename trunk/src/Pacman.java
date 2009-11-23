@@ -17,7 +17,7 @@ public class Pacman extends Entidad{
 	}
 
 	public void morir() {
-		this.vivo = false;
+		this.estaVivo(false);
 		//"che juego, fijate mis vidas y revivime."
 	}
 	

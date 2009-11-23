@@ -5,7 +5,6 @@ public abstract class Fantasma extends Entidad {
 	
 	public Fantasma(Posicion posicion){
 		super(posicion);
-		this.vivo = true;
 		this.azul = false;
 	}
 
