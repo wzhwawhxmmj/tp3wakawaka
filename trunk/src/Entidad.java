@@ -3,10 +3,12 @@ public abstract class Entidad {
 
 	private Posicion posicion;
 	private boolean vivo;
+	private Escenario escenario;
 	
-	public Entidad(Posicion p){
+	public Entidad(Escenario escenario, Posicion p){
 		this.posicion = p;
 		this.vivo = true;
+		this.escenario = escenario;
 	}
 	
 	public Posicion getPosicion(){
@@ -14,20 +16,20 @@ public abstract class Entidad {
 	}
 	
 	public void setPosicion(Posicion p) {
-
 		this.posicion = p;
-		
 	}
 	
 	public boolean estaVivo() {
 		return this.vivo;
 	}
 	
-	public void estaVivo(boolean estado) {
-		this.vivo = estado;
+	public void revivir() {
+		this.vivo = true;
 	}
 
-	public abstract void morir();
+	public void morir(){
+		this.vivo = false;
+	}
 
 	public void cambiarPosicion(Posicion p){
 		
@@ -45,18 +47,17 @@ public abstract class Entidad {
 	
     public void moverHacia(Direccion unaDireccion) {
 		switch (unaDireccion) {
-			case ARRIBA:  this.getPosicion().arriba();
+			case ARRIBA:  this.getPosicion().avanzarArriba();
                           break;
-			case ABAJO:   this.getPosicion().abajo();
+			case ABAJO:   this.getPosicion().avanzarAbajo();
                           break;
-			case IZQUIERDA:this.getPosicion().izquierda();
+			case IZQUIERDA:this.getPosicion().avanzarIzquierda();
                           break;
-			case DERECHA: this.getPosicion().derecha();
+			case DERECHA: this.getPosicion().avanzarDerecha();
                           break;
 			case NINGUNA: break;
             default:      throw new DireccionInvalidaException();
-	}
+		}
   }
     
 }
-

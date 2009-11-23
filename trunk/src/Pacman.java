@@ -2,8 +2,8 @@ public class Pacman extends Entidad{
 
 	Direccion direccion;
 	
-	public Pacman(Posicion posicion) {
-		super(posicion);
+	public Pacman(Escenario escenario, Posicion posicion) {
+		super(escenario, posicion);
 		this.direccion = Direccion.NINGUNA;
 	}
 

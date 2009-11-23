@@ -1,8 +1,8 @@
 
 public class FantasmaRojo extends Fantasma {
 
-	public FantasmaRojo(Posicion p) {
-		super(p);
+	public FantasmaRojo(Escenario escenario, Posicion p) {
+		super(escenario, p);
 	}
 	
 	public void comportamiento(){

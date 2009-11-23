@@ -3,7 +3,8 @@ import junit.framework.TestCase;
 public class FantasmaTest extends TestCase {
 	
 	public void testMoverFantasmaALugarPermitido(){
-		Fantasma f = new FantasmaRojo(new Posicion(1,1));		
+		Escenario e = new Escenario();
+		Fantasma f = new FantasmaRojo(e, new Posicion(1,1));		
 		Posicion pos = new Posicion(f);
 		
 		// Todavia no existe la clase escenario
@@ -11,15 +12,16 @@ public class FantasmaTest extends TestCase {
 		fail();
 		
 		try{
-			pos.derecha();
+			pos.avanzarDerecha();
 			f.cambiarPosicion(pos);
-		}catch(RuntimeException e){
+		}catch(RuntimeException ex){
 			
 		}
 	}
 	
 	public void testMoverFantasmaALugarNoPermitido(){
-		Fantasma f = new FantasmaRojo(new Posicion(1,1));		
+		Escenario e = new Escenario();
+		Fantasma f = new FantasmaRojo(e, new Posicion(1,1));		
 		Posicion pos = new Posicion(f);
 		
 		// Todavia no existe la clase escenario
@@ -27,17 +29,18 @@ public class FantasmaTest extends TestCase {
 		fail();
 		
 		try{
-			pos.derecha();
+			pos.avanzarDerecha();
 			f.cambiarPosicion(pos);
 			fail();
-		}catch(RuntimeException e){
+		}catch(RuntimeException ex){
 			
 		}
 	}
 	
 	public void testComerPacmanEnEstadoValido(){
-		Entidad pacman = new Pacman(new Posicion(1,1));
-		Fantasma f = new FantasmaRojo(new Posicion(1,1));
+		Escenario e = new Escenario();
+		Entidad pacman = new Pacman(e, new Posicion(1,1));
+		Fantasma f = new FantasmaRojo(e, new Posicion(1,1));
 		
 		f.comer(pacman);
 		
@@ -45,8 +48,9 @@ public class FantasmaTest extends TestCase {
 	}
 	
 	public void testComerPacmanEnEstadoInvalido(){
-		Entidad pacman = new Pacman(new Posicion(1,1));
-		Fantasma f = new FantasmaRojo(new Posicion(1,1));
+		Escenario e = new Escenario();
+		Entidad pacman = new Pacman(e, new Posicion(1,1));
+		Fantasma f = new FantasmaRojo(e, new Posicion(1,1));
 		
 		f.volverseAzul();
 		
@@ -56,25 +60,27 @@ public class FantasmaTest extends TestCase {
 	}
 	
 	public void testMorirEnEstadoValido(){
-		Fantasma f = new FantasmaRojo(new Posicion(1,1));
+		Escenario e = new Escenario();
+		Fantasma f = new FantasmaRojo(e, new Posicion(1,1));
 		
 		f.volverseAzul();
 		
 		try{
 			f.morir();
-		}catch (RuntimeException e){
+		}catch (RuntimeException ex){
 			fail();
 		}
 		
 	}
 	
 	public void testMorirEnEstadoInvalido(){
-		Fantasma f = new FantasmaRojo(new Posicion(1,1));
+		Escenario e = new Escenario();
+		Fantasma f = new FantasmaRojo(e, new Posicion(1,1));
 
 		try{
 			f.morir();
 			fail();
-		}catch (RuntimeException e){
+		}catch (RuntimeException ex){
 			
 		}
 	}
