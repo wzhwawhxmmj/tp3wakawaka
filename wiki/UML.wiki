@@ -1,5 +1,5 @@
 #summary Diagramas de Clase, Secuencia y Estado
-#sidebar TableOfContents
+<wiki:toc max_depth="2" />
 
 =Clases=
 
