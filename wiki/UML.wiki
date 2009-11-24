@@ -1,21 +1,32 @@
 #summary Diagramas de Clase, Secuencia y Estado
+#sidebar TableOfContents
 
-*Comer un Fantasma*
+=Clases=
 
-http://tp3wakawaka.googlecode.com/svn/trunk/Doc/ComerUnFantasma.png
 
-*El Fantasma Rojo*
+==Entidades==
 
-http://tp3wakawaka.googlecode.com/svn/trunk/Doc/UMLEstadoFantasmaRojo.png
+http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Clases%20Entidades.png
 
-*Diagrama de clases básico*
+==Escenario==
 
-http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Clases%20Básico.png
+http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Clases%20Escenario.png
 
-*Diagrama de relaciones básico*
+----
+=Relaciones=
 
 http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Relaciones%20Basico.png
 
-*Diagrama nuevo propuesto*
+----
+=Secuencia=
 
-http://tp3wakawaka.googlecode.com/svn/trunk/Doc/ideaNuevaClases.png
+==Comer un Fantasma==
+
+http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Secuencia%20Comer%20Fantasma.png
+
+----
+=Estado=
+
+==El Fantasma Rojo==
+
+http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Estado%20Fantasma%20Rojo.png
