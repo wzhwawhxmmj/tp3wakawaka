@@ -1,5 +1,5 @@
 
-public abstract class Fantasma extends Entidad {
+public abstract class Fantasma extends Jugador {
 
 	private boolean azul;
 	

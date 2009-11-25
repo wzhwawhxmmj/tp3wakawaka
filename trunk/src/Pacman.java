@@ -1,4 +1,4 @@
-public class Pacman extends Entidad{
+public class Pacman extends Jugador{
 
 	Direccion direccion;
 	
@@ -16,10 +16,7 @@ public class Pacman extends Entidad{
 		if (f.estaAzul())f.morir();
 	}
 
-	public void morir() {
-		this.estaVivo(false);
-		//"che juego, fijate mis vidas y revivime."
-	}
+
 	
     public void vivir() {
     	this.moverHacia(direccion);
