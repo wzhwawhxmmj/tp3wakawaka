@@ -8,8 +8,8 @@ public class Posicion extends Punto{
 		super(x,y);
 	}
 	
-	public Posicion(Entidad ente){
-		super(ente.getPosicion().getx(),ente.getPosicion().gety());		
+	public Posicion(Jugador jugador){
+		super(jugador.getPosicion().getx(),jugador.getPosicion().gety());		
 	}
 	
 	public boolean equals(Posicion posicion){
