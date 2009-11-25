@@ -1,0 +1,63 @@
+#relaciones y responsabilidades
+<wiki:toc max_depth="2" />
+
+http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Relaciones%20Basico.png
+
+
+= Escenario =
+Contiene 
+ * UEB
+
+== Responsabilidades ==
+ * Fijarse si en ciertas coordenadas un Jugador pueden avanzar
+ * Buscar el camino mas corto entre dos puntos (y solo retornar la direccion)
+
+= Piso =
+Contiene 
+ * Comestible
+
+== Responsabilidades == 
+ * Retornar el comestible que contiene
+ * Permitir el avance al Pacman y Fantasmas
+
+
+= Pildora = 
+Conoce
+ * Juego
+
+== Responsabilidades == 
+ * Modificar el juego al activarse (en este caso ordena poner los fantasmas azules)
+
+= Fantasma =
+Conoce
+ * Pacman
+ * Escenario
+
+== Responsabilidades == 
+ * Comportarse segun su inteligencia y las cosas que conoce
+ * Comer al fantasma si se lo ordenan
+
+= Pacman = 
+Conoce
+ * Fantasma (por parametro)
+ * Comestible (por parametro)
+
+== Responsabilidades ==
+ * Comer al fantasma que le ordenan, si puede hacerlo
+ * Comer y activar el comestible que le ordenan
+
+= Juego =
+Instancia y conoce
+ * Fantasma 
+ * Pacman 
+ * Tablero 
+ * Input 
+ * Graficador
+
+== Responsabilidades ==
+ * Ordenarle al Pacman hacia donde moverse (fijarse antes si puede).
+ * Ordenarle a los fantasmas que se "comporten"
+ * Controlar y acutar ante impacto entre fantasmas y pacman
+ * Obtener comestibles del tablero y darselos al Pacman para que los coma.
+
+
