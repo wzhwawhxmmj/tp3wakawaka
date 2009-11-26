@@ -10,6 +10,15 @@ public class Juego {
 	//A verificar 
 	//Private bool frutaComida;
 	
+	
+	private void inicializarFantasmas(){
+		
+		arrayDeFantasmas[0] = new FantasmaRojo;
+		arrayDeFantasmas[1] = new FantasmaCeleste;
+		arrayDeFantasmas[2] = new FantasmaRosa;
+		arrayDeFantasmas[3] = new FantasmaNaranja;
+	}
+	
 	public void inicializar (){
 		
 		this.pacman = new Pacman;
@@ -18,6 +27,6 @@ public class Juego {
 		this.puntaje = 0;
 		this.vidas = 3;
 		this.nivelActual = 1;
-		
+		this.inicializarFantasmas ();
 	}
 }
