@@ -1,4 +1,3 @@
-
 public class DireccionInvalidaException extends RuntimeException {
 
 	/**

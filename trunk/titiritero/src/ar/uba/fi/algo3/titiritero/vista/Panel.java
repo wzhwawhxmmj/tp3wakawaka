@@ -9,7 +9,6 @@ import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
 public class Panel extends java.awt.Panel implements SuperficieDeDibujo {
 
-
 	private static final long serialVersionUID = -5159188497592488407L;
 	private Image imagen;
 
@@ -21,7 +20,7 @@ public class Panel extends java.awt.Panel implements SuperficieDeDibujo {
 	public void paint(Graphics g) {
 		g.drawImage(this.imagen, 0, 0, null);
 	}
-	
+
 	@Override
 	public void actualizar() {
 		this.repaint();
@@ -29,23 +28,23 @@ public class Panel extends java.awt.Panel implements SuperficieDeDibujo {
 
 	@Override
 	public void limpiar() {
-		if(this.imagen == null)
+		if (this.imagen == null)
 			this.imagen = this.createImage(getSize().width, getSize().height);
-		Graphics superficieParaDibujar =  this.imagen.getGraphics();
+		Graphics superficieParaDibujar = this.imagen.getGraphics();
 		superficieParaDibujar.setColor(Color.YELLOW);// 
-		superficieParaDibujar.fillRect(0, 0, this.getSize().width, this.getSize().height);
+		superficieParaDibujar.fillRect(0, 0, this.getSize().width, this
+				.getSize().height);
 		this.setBackground(Color.RED);
 	}
 
-	public Object getBuffer(){
+	public Object getBuffer() {
 		return this.imagen.getGraphics();
 	}
-	
-	public Panel(int ancho,int alto, ControladorJuego unControlador){
+
+	public Panel(int ancho, int alto, ControladorJuego unControlador) {
 		this.addMouseListener(new MouseClickController(unControlador));
 		this.setSize(ancho, alto);
 		this.setVisible(true);
 	}
-	
 
 }

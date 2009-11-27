@@ -1,4 +1,3 @@
-
 public enum Estado {
-VIVO,MUERTO,
+	VIVO, MUERTO,
 }

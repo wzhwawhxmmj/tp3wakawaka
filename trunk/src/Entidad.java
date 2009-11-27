@@ -1,21 +1,21 @@
-
 public abstract class Entidad {
 
 	private Estado estado;
-	public Entidad(){
+
+	public Entidad() {
 		this.estado = Estado.VIVO;
 	}
-	
+
 	public Estado estaVivo() {
 		return this.estado;
 	}
-	
+
 	public void revivir() {
 		this.estado = Estado.VIVO;
 	}
 
-	public void morir(){
+	public void morir() {
 		this.estado = Estado.MUERTO;
 	}
-    
+
 }
