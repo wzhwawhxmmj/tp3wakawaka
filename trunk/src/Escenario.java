@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Escenario {private static final Casillero Casillero = null;
+public class Escenario {
 /* creando el escenario, nada raro */
 
 	private HashMap <Punto, Casillero>  tablero;
