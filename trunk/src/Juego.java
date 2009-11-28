@@ -24,7 +24,7 @@ public class Juego {
 	
 	private void inicializarFantasmas(Escenario escenario){
 		
-	float velocidadAcutal = 1 + (0,2 * (this.nivelActual - 1));
+	float velocidadActual = 1 + (0,2 * (this.nivelActual - 1));
 		
 		arrayDeFantasmas[0] = new FantasmaRojo(escenario, escenario.getPosicionCasa(), velocidadActual);
 		arrayDeFantasmas[1] = new FantasmaCeleste(escenario, escenario.getPosicionCasa(), velocidadActual);
