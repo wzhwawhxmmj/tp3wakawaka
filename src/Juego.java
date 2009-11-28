@@ -4,6 +4,7 @@ public class Juego {
 	private Pacman pacman;
 	private Fantasma[] arrayDeFantasmas;
 	private ListaDeEscenarios listaDeEscenarios;
+	private Escenario escenarioActual;
 	private long puntaje;
 	private int vidas;
 	private int nivelActual;
@@ -17,7 +18,8 @@ public class Juego {
 		this.nivelActual = 1;
 		this.arrayDeFantasmas = new Fantasma[4];
 		this.listaDeEscenarios = new ListaDeEscenarios();
-		
+		this.pacman = null;
+		this.escenarioActual = null;
 	}	
 	
 
@@ -37,6 +39,7 @@ public class Juego {
 		
 		Escenario escenario = listaDeEscenarios.getEscenario(nivel);
 		
+		this.escenarioActual = escenario;
 		this.inicializarFantasmas (escenario);
 		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman());
 		
