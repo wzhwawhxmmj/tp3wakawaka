@@ -1,16 +1,13 @@
 public class FantasmaCeleste extends Fantasma {
 
-	public FantasmaCeleste(Escenario escenario, Posicion p) {
-		super(escenario, p);
+	public FantasmaCeleste(Escenario escenario, Posicion pos, int velocidad) {
+		super(escenario, pos, velocidad);
 	}
 
-	public void comportamiento() {
-
-	}
-
-	public void morir() {
+	@Override
+	public void estrategizar() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

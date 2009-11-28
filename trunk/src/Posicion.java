@@ -8,18 +8,15 @@ public class Posicion extends Punto {
 		super(x, y);
 	}
 
-	public Posicion(Jugador jugador) {
-		super(jugador.getPosicion().getx(), jugador.getPosicion().gety());
+	public Posicion(Entidad entidad) {
+		super(entidad.getPosicion().getx(), entidad.getPosicion().gety());
 	}
 
 	public boolean equals(Posicion posicion) {
-		if ((posicion.getx() == this.getx())
-				&& (posicion.gety() == this.gety())) {
-			return true;
-		} else {
+		if ((posicion.getx() == this.getx()) 
+				&& (posicion.gety() == this.gety())) return true;
+		else 
 			return false;
-		}
-
 	}
 
 	public void avanzarDerecha() {
