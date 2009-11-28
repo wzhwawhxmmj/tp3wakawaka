@@ -1,17 +1,17 @@
-public abstract class Fantasma extends Jugador {
+public abstract class Fantasma extends NoJugador {
 
 	private boolean azul;
 
-	public Fantasma(Escenario escenario, Posicion posicion) {
-		super(escenario, posicion);
+	public Fantasma(Escenario escenario, Posicion posicion, int velocidad) {
+		super(posicion, velocidad);
 		this.azul = false;
 	}
 
-	public void volverseAzul() {
+	public void volverAzul() {
 		this.azul = true;
 	}
 
-	public void volverseNormal() {
+	public void volverNormal() {
 		this.azul = false;
 	}
 
@@ -19,11 +19,5 @@ public abstract class Fantasma extends Jugador {
 		return this.azul;
 	}
 
-	public abstract void comportamiento();
-
-	public void comer(Entidad p) {
-		if (!this.estaAzul())
-			p.morir();
-	}
-
+	public abstract void estrategizar();
 }
