@@ -1,16 +1,12 @@
 public class FantasmaRojo extends Fantasma {
 
-	public FantasmaRojo(Escenario escenario, Posicion p) {
-		super(escenario, p);
+	public FantasmaRojo(Escenario escenario, Posicion pos, int velocidad) {
+		super(escenario, pos, velocidad);
 	}
 
-	public void comportamiento() {
-
-	}
-
-	public void morir() {
+	public void estrategizar() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

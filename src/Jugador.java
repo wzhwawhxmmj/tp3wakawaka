@@ -3,9 +3,9 @@ public abstract class Jugador extends Entidad {
 	private Posicion posicion;
 	private Escenario escenario;
 
-	public Jugador(Escenario escenario, Posicion p) {
-		super();
-		this.posicion = p;
+	public Jugador(Escenario escenario, Posicion posicion, int velocidad) {
+		super(posicion);
+		this.posicion = posicion;
 		this.escenario = escenario;
 	}
 
@@ -42,14 +42,6 @@ public abstract class Jugador extends Entidad {
 		default:
 			throw new DireccionInvalidaException();
 		}
-	}
-
-	public void setPosicion(Posicion p) {
-		this.posicion = p;
-	}
-
-	public Posicion getPosicion() {
-		return this.posicion;
 	}
 
 }
