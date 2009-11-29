@@ -4,14 +4,14 @@ public abstract class Fantasma extends NoJugador {
 	private Escenario escenario;
 	private float velocidad;
 
-	public Fantasma(Escenario escenario, Posicion posicion, int velocidad) {
-		super(posicion);
+	public Fantasma(Escenario escenario, Posicion posicion, float velocidad, int puntosAlSerComido) {
+		super(posicion, puntosAlSerComido);
 		this.velocidad = velocidad;
 		this.azul = false;
 		//Metodo que coloca al fantasma en el escenario
 	}
 
-	public void setVelocidad(int velocidad){
+	public void setVelocidad(float velocidad){
 		this.velocidad = velocidad;
 	}
 	
