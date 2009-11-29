@@ -1,12 +1,17 @@
 import java.util.*;
 
 public class Escenario {
-/* creando el escenario, nada raro */
-
+/* creando el escenario, los puntos valen 10 pts y las pildoras 30 pts*/
+	private long puntosRestantes;
+	private long puntosTotales;
+	
 	private HashMap <Punto, Casillero>  tablero;
-
+	
+	
 	public Escenario() {
 		this.tablero = new HashMap <Punto, Casillero>();
+		this.setPuntosRestantes(2530);/*241*10 + 4 * 30*/
+		this.setPuntosTotales(2530);
 	}
 
 	public void ponerEnPosicion(Punto p,Casillero casillero) {
@@ -39,6 +44,22 @@ public class Escenario {
 			i++;
 		}
 		
+	}
+
+	public void setPuntosTotales(long puntosTotales) {
+		this.puntosTotales = puntosTotales;
+	}
+
+	public long getPuntosTotales() {
+		return puntosTotales;
+	}
+
+	public void setPuntosRestantes(long puntosRestantes) {
+		this.puntosRestantes = puntosRestantes;
+	}
+
+	public long getPuntosRestantes() {
+		return puntosRestantes;
 	}
 
 }
