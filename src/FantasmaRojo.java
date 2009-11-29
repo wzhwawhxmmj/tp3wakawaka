@@ -7,21 +7,36 @@ public class FantasmaRojo extends Fantasma {
 		this.velocidadEnModoRapido = velocidad + velocidad * (1/5);
 	}
 
-	public void activarModoRapido(){
+	private void activarModoRapido(){
 		this.setVelocidad(this.velocidadEnModoRapido);
 	}
 	
-	public void estrategizar() {
+	/*
+	private boolean pasarLimite(){
 		
-		/*int limiteModoRapido = this.getEscenario().getPuntitosTotales() * (1/5);  
+		int limiteModoRapido = this.getEscenario().getPuntitosTotales() * (1/5);  
 		
 		if (this.getEscenario().getPuntitosRestantes() <= limiteModoRapido) {
-			this.activarModoRapido();
+			return true;
 		}
+		
+	}
+	*/
+	
+	public void estrategizar() {
+		
+		/*
+		if (this.pasarLimite) this.activarModoRapido();
 		
 		this.moverHacia(this.caminoMasCortoHasta(escenario.getPosicionPacman()));
 		
 		*/		
+	}
+
+	@Override
+	public void actuar() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
