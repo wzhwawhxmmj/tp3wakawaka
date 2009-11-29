@@ -57,5 +57,10 @@ public class Juego {
 		}
 	}
 
+	public int getPuntajePacman(){
+		this.puntaje = this.pacman.getPuntaje();
+		this.pacman.clearPuntaje();
+		
+	}
 
 }
