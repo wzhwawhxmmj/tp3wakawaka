@@ -2,7 +2,7 @@ public abstract class Fantasma extends NoJugador {
 
 	private boolean azul;
 	private Escenario escenario;
-	private int velocidad;
+	private float velocidad;
 
 	public Fantasma(Escenario escenario, Posicion posicion, int velocidad) {
 		super(posicion);
@@ -15,7 +15,7 @@ public abstract class Fantasma extends NoJugador {
 		this.velocidad = velocidad;
 	}
 	
-	public int getVelocidad(){
+	public float getVelocidad(){
 		return this.velocidad;
 	}
 	
