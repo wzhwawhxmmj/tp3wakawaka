@@ -46,8 +46,14 @@ public class Juego {
 	}
 	
 	public void jugar(){
-		while (listaDeEscenarios.tieneSiguiente()){
-			
+		while ((listaDeEscenarios.tieneSiguiente())&& (this.vidas != 0)){
+			this.inicializarNivel(this.nivelActual);
+			while ((this.escenarioActual.hayPuntos()) && (this.vidas != 0)){
+				/*Si no lo estoy pensando mal, acá va todo lo que es el titiritero
+				 *y esas yerbas, Este sería el método príncipal, falta discutir
+				 *Como termina el juego. 
+				 */
+			}
 		}
 	}
 
