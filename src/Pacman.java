@@ -9,7 +9,7 @@ public class Pacman extends Jugador {
 
 	public void comer(NoJugador algunaCosa) {
 		// Se supone que esta entidad es una fruta o punto amarillo
-		algunaCosa.morir();
+		algunaCosa.actuar();
 	}
 
 

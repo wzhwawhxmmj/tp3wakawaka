@@ -16,4 +16,5 @@ public abstract class NoJugador extends Entidad {
 		return this.puntosAlSerComido;
 	}
 
+	public abstract void actuar();
 }
