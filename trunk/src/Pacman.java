@@ -2,21 +2,22 @@ public class Pacman extends Jugador {
 
 	Direccion direccion;
 
-	public Pacman(Escenario escenario, Posicion posicion) {
-		super(escenario, posicion);
+	public Pacman(Escenario escenario, Posicion posicion, int velocidad) {
+		super(escenario, posicion, velocidad);
 		this.direccion = Direccion.NINGUNA;
 	}
 
-	public void comer(Entidad j) {
+	public void comer(NoJugador algunaCosa) {
 		// Se supone que esta entidad es una fruta o punto amarillo
-		j.morir();
+		algunaCosa.morir();
 	}
 
-	public void comer(Fantasma f) {
-		if (f.estaAzul())
-			f.morir();
-	}
 
+
+	public void cambiarDireccion(Direccion direccion){
+		this.direccion = direccion;
+	}
+	
 	public void vivir() {
 		this.moverHacia(direccion);
 	}
