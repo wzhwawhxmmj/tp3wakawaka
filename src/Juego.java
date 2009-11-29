@@ -44,6 +44,12 @@ public class Juego {
 		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman());
 		
 	}
+	
+	public void jugar(){
+		while (listaDeEscenarios.tieneSiguiente()){
+			
+		}
+	}
 
 
 }
