@@ -1,3 +1,5 @@
+
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class ListaDeEscenarios {
@@ -11,35 +13,44 @@ public class ListaDeEscenarios {
 		this.nivelActual = 0;
 	}
 	
-	public void cargarEscenarios (){
-		/*Acá se cargan los escenarios de Coco
-		 * 
-		*/
+	public void cargarEscenarios () throws IOException{
+		
+			
 		Escenario escenario = new Escenario();
+		Posicion posicion = new Posicion(1,1);
 		
-		Posicion posicion = new Posicion(2,2);
+		Pared pared = new Pared();		
+		Casillero casillero = new Casillero();		
+		Puntito puntito = new Puntito(posicion,10);		
 		
-		Casa casa = new Casa();
 		
-		Pared pared = new Pared();
+		casillero.agregarComestible(puntito);
 		
-		Casillero casillero = new Casillero();
+		escenario.ponerEnPosicion(posicion, pared);
+		
+		
+		
+		
+						
+		for(int i =0; i <24;i++){
+			
+			for(int j =0; j <24;i++){
+					
+				posicion.setx(i);
+				posicion.sety(j);
+				if (((posicion.getx()>1)&&(posicion.getx()<24))&&
+				((posicion.gety()>1)&&(posicion.gety()<24)))
+				escenario.ponerEnPosicion(posicion,casillero);
+				else
+				escenario.ponerEnPosicion(posicion, pared);
+					
+				
+			}
+			
+		}
 		
 	
 		
-		Puntito puntito = new Puntito(posicion,10);
-		
-		Pildora pildora = new Pildora(posicion, 30);
-		
-		Fruta fruta = new Fruta(posicion, 100);
-		
-		casillero.agregarComestible(puntito);
-		casillero.agregarComestible(pildora );
-		casillero.agregarComestible(fruta);
-		
-		escenario.ponerEnPosicion(posicion, casillero);
-		escenario.ponerEnPosicion(new Posicion (15,15), casa);
-		escenario.ponerEnPosicion(new Posicion (1,1), pared);
 		
 	}
 	

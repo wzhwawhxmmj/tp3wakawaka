@@ -25,27 +25,7 @@ public class Escenario {
 
 	}
 	
-	public void CargarTablero(){
-		/* falta cargar de alguna manera el casillero con
-		 * fruta, pildora o punto y fantasma para cada posicion*/
-		Punto p = new Punto(1, 1);
-		Casillero c = new Casillero();
-		int i= 1;
-		int j=1;
-				
-		while (p.getx()<51){
-			
-			while (p.gety()<51){
-				ponerEnPosicion(p,c);
-				p.sety(j);
-				j++;
-			}
-			p.setx(i);
-			i++;
-		}
-		
-	}
-
+	
 	public void setPuntosTotales(long puntosTotales) {
 		this.puntosTotales = puntosTotales;
 	}
