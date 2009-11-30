@@ -1,33 +1,37 @@
-import java.util.Collections;
-
 public class Utilitario {
 	
 	public Utilitario(){
 	}
 	
+	private static Direccion iteracionCaminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada, int numeroDePasadas,Direccion mejorDireccion){
+		
+		if (escenario.sacarEnPosicion(salida).isPisablePorIA()){
+			if (salida.equals(llegada)){ 
+				 
+			     }
+			 Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarArriba()  ,llegada, numeroDePasadas + 1, mejorDireccion);
+		       salida.avanzarAbajo();
+			 Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarAbajo()   ,llegada, numeroDePasadas + 1, mejorDireccion);
+			   salida.avanzarArriba();
+			 Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarDerecha() ,llegada, numeroDePasadas + 1, mejorDireccion);
+			   salida.avanzarIzquierda();
+			 Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarIzquierda(),llegada,numeroDePasadas + 1, mejorDireccion);
+			   salida.avanzarDerecha();
+
+	    }
+		return mejorDireccion;
+	}	
+	  	
+	
 	public static Direccion caminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada){
-		Ueb aux;
-		Direccion direccionARetornar = Direccion.NINGUNA;
+
+		Direccion direccionProxima = Direccion.NINGUNA; 
 		int numeroDePasadas = 0;
-				
+		
 		if(!escenario.sacarEnPosicion(salida).isPisablePorIA())
 			throw new PosicionIlegalException();
 
-		aux = escenario.sacarEnPosicion(salida);
-		if (aux.isPisablePorIA()){ 
-			 Utilitario.caminoMasCorto(escenario, salida.avanzarArriba(), llegada);
-		     salida.avanzarAbajo();
-			 Utilitario.caminoMasCorto(escenario, salida.avanzarAbajo(), llegada);
-			 salida.avanzarArriba();
-			 Utilitario.caminoMasCorto(escenario, salida.avanzarDerecha(), llegada);
-			 salida.avanzarIzquierda();
-			 Utilitario.caminoMasCorto(escenario, salida.avanzarIzquierda(), llegada);
-			 salida.avanzarDerecha();
-			 if (salida == llegada){ 
-			 //direccionARetornar = ???;  	 
-		     }
-		}  
-		return direccionARetornar;
+		return iteracionCaminoMasCorto(escenario, salida, llegada, numeroDePasadas, direccionProxima);
 	}
 
 
