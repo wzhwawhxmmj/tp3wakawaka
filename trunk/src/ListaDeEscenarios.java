@@ -1,12 +1,13 @@
+import java.util.LinkedList;
 
 public class ListaDeEscenarios {
 
-	private Collection<Escenario> listaDeEscenarios;
+	private LinkedList<Escenario> listaDeEscenarios;
 	private int nivelActual;
 	
 	
 	public ListaDeEscenarios (){
-		this.listaDeEscenarios = new List<Escenario>();
+		this.listaDeEscenarios = new LinkedList<Escenario>();
 		this.nivelActual = 0;
 	}
 	
@@ -24,7 +25,7 @@ public class ListaDeEscenarios {
 	
 	public boolean tieneSiguiente (){
 		try{
-			his.listaDeEscenarios.get(this.nivelActual)
+			this.listaDeEscenarios.get(this.nivelActual);
 			return true;
 		}
 		catch (IndexOutOfBoundsException exception){
