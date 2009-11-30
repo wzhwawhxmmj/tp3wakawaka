@@ -1,5 +1,8 @@
 import java.util.ArrayList;
+
 import java.util.List;
+
+
 
 public class Casillero extends Ueb {
 	/*Se rellenan con cosas No jugador, fruta,puntito, pildora y fantasma*/
@@ -25,6 +28,7 @@ public class Casillero extends Ueb {
 		/*Lo usaremos para vaciar la lista cuando el pacman pase
 		 * por aqui.
 		 */
+		
 		NoJugador comestible;
 		
 		comestible = casillero.get(i);
