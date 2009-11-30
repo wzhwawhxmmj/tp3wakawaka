@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Casillero {
-
-	private List<Object> casillero;
+public class Casillero extends Ueb {
+	/*Se rellenan con cosas No jugador, fruta,puntito, pildora y fantasma*/
+	private List<NoJugador> casillero;
 
 	public Casillero() {
 
-		casillero = new ArrayList<Object>();
+		casillero = new ArrayList<NoJugador>();
 	}
 
-	public void agregarComestible(Object comestible) {
+	public void agregarComestible(NoJugador comestible) {
 
 		casillero.add(comestible);
 
@@ -21,11 +21,11 @@ public class Casillero {
 		return casillero.size();
 	}
 	
-	public Object sacarComestible(int i){
+	public NoJugador sacarComestible(int i){
 		/*Lo usaremos para vaciar la lista cuando el pacman pase
 		 * por aqui.
 		 */
-		Object comestible;
+		NoJugador comestible;
 		
 		comestible = casillero.get(i);
 		casillero.remove(i);

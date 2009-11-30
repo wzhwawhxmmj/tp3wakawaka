@@ -19,8 +19,8 @@ public class Escenario {
 		this.tablero.put(p, casillero);
 	}
 
-	public Casillero sacarEnPosicion(Punto p) {
-
+	public Ueb sacarEnPosicion(Punto p) {
+		/*Retorna un Ueb, puede ser pared, casa o piso (CASILLERO llamado asi por coco.)*/
 		return  this.tablero.get(p);
 
 	}
