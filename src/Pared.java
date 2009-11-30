@@ -6,12 +6,6 @@ public class Pared extends Ueb {
 
 	}
 
-	public void ponerPared(Punto p) {
-
-	}
-
-	public void sacarPared(Punto p) {
-
-	}
+	
 
 }
