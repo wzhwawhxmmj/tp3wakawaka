@@ -7,6 +7,7 @@ import java.util.List;
 public class Casillero extends Ueb {
 	/*Se rellenan con cosas No jugador, fruta,puntito, pildora y fantasma*/
 	private List<NoJugador> casillero;
+	
 
 	public Casillero() {
 

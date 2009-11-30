@@ -15,6 +15,32 @@ public class ListaDeEscenarios {
 		/*Acá se cargan los escenarios de Coco
 		 * 
 		*/
+		Escenario escenario = new Escenario();
+		
+		Posicion posicion = new Posicion(2,2);
+		
+		Casa casa = new Casa();
+		
+		Pared pared = new Pared();
+		
+		Casillero casillero = new Casillero();
+		
+	
+		
+		Puntito puntito = new Puntito(posicion,10);
+		
+		Pildora pildora = new Pildora(posicion, 30);
+		
+		Fruta fruta = new Fruta(posicion, 100);
+		
+		casillero.agregarComestible(puntito);
+		casillero.agregarComestible(pildora );
+		casillero.agregarComestible(fruta);
+		
+		escenario.ponerEnPosicion(posicion, casillero);
+		escenario.ponerEnPosicion(new Posicion (15,15), casa);
+		escenario.ponerEnPosicion(new Posicion (1,1), pared);
+		
 	}
 	
 	public Escenario getEscenario(int nivel){
