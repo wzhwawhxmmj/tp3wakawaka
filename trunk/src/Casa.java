@@ -25,7 +25,7 @@ public class Casa extends Ueb {
 		return ContenedorDeFantasmas.size();
 	}
 	
-	public Fantasma sacarComestible(int i){
+	public Fantasma sacarFantasma(int i){
 		/*Lo usaremos para vaciar la lista cuando el pacman pase
 		 * por aqui.
 		 */
@@ -38,12 +38,14 @@ public class Casa extends Ueb {
 		
 	}
 	
-	public void vaciarCasillero(){
+	public void vaciarCasa(){
 	
 		ContenedorDeFantasmas.clear();
 	}
 	
-
+	public boolean casaVacia(){
+		return  ContenedorDeFantasmas.isEmpty();
+	}
 	
 
 }
