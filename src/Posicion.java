@@ -19,27 +19,23 @@ public class Posicion extends Punto {
 			return false;
 	}
 
-	public Posicion avanzarDerecha() {
+	public void avanzarDerecha() {
 		int avance = this.getx() + 1;
 		this.setx(avance);
-		return this;
 	}
 
-	public Posicion avanzarIzquierda() {
+	public void avanzarIzquierda() {
 		int avance = this.getx() - 1;
 		this.setx(avance);
-		return this;
 	}
 
-	public Posicion avanzarArriba() {
+	public void avanzarArriba() {
 		int avance = this.gety() + 1;
 		this.sety(avance);
-		return this;
 	}
 
-	public Posicion avanzarAbajo() {
+	public void avanzarAbajo() {
 		int avance = this.gety() - 1;
 		this.sety(avance);
-		return this;
 	}
 }
