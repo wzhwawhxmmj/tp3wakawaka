@@ -3,10 +3,13 @@
 public class Utilitario {
 	
 	
-	class EnteroModificable {
+	static class EnteroModificable {
 		int valor;
 		public EnteroModificable(int valor){
 			this.valor = valor;
+		}
+		public static EnteroModificable Crear(int valor){
+			return new EnteroModificable(valor);
 		}
 		public void modificar(int valor){
 			this.valor = valor;
@@ -18,10 +21,7 @@ public class Utilitario {
 	
 	
 	
-	
-	public Utilitario(){
-	}
-	
+
 	private static void iteracionCaminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada, int numeroDePasadas,EnteroModificable menorCantidad){
 		
 		if (escenario.sacarEnPosicion(salida).isPisablePorIA()){
@@ -61,7 +61,7 @@ public class Utilitario {
 		int mejorDireccionEnInt = SIN_DIRECCION_EN_INT;
 		EnteroModificable cantidad[] = new EnteroModificable[MAX_DIRECCIONES];
 		for(int i=0; i<MAX_DIRECCIONES;i++)
-			cantidad[i] = new EnteroModificable(CANTIDAD_DE_PASOS_EXAGERADA);
+			cantidad[i] = EnteroModificable.Crear(CANTIDAD_DE_PASOS_EXAGERADA);
 		
 		
 		if(!escenario.sacarEnPosicion(salida).isPisablePorIA())
