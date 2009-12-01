@@ -2,19 +2,35 @@
 
 public class Utilitario {
 	
+	
+	class EnteroModificable {
+		int valor;
+		public EnteroModificable(int valor){
+			this.valor = valor;
+		}
+		public void modificar(int valor){
+			this.valor = valor;
+		}
+		public int obtener(){
+			return valor;
+		}
+	}
+	
+	
+	
+	
 	public Utilitario(){
 	}
 	
-
-	private static void iteracionCaminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada, int numeroDePasadas,int menorCantidad){
+	private static void iteracionCaminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada, int numeroDePasadas,EnteroModificable menorCantidad){
 		
 		if (escenario.sacarEnPosicion(salida).isPisablePorIA()){
 			if (salida.equals(llegada)){ 
-                  if(numeroDePasadas < menorCantidad){
-                	  menorCantidad = numeroDePasadas;
+                  if(numeroDePasadas < menorCantidad.obtener()){
+                	  menorCantidad.modificar(numeroDePasadas);
                   }
 			     }
-			else{
+			else if(numeroDePasadas < menorCantidad.obtener()){
 				salida.avanzarArriba();
 				Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
 				salida.avanzarAbajo();
@@ -33,15 +49,20 @@ public class Utilitario {
 	
 	public static Direccion caminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada){
 		
-		final Direccion IntADireccion[] = {Direccion.ARRIBA, Direccion.ABAJO, Direccion.DERECHA, Direccion.IZQUIERDA};
-		final int MAXDirecciones = IntADireccion.length;
-		Integer cantidad[] = new Integer[MAXDirecciones];
+		//constantes
+		final Direccion INT_A_DIRECCION[] = {Direccion.ARRIBA, Direccion.ABAJO, Direccion.DERECHA, Direccion.IZQUIERDA};
+		final int MAX_DIRECCIONES = INT_A_DIRECCION.length;
+		final int SIN_DIRECCION_EN_INT = -1;
+		final int CANTIDAD_DE_PASOS_EXAGERADA = 999;
 		
-		final int UnaCantidadDePasosExagerada = 999;
+		//inicializacion
 		int numeroDePasadas = 0;
+		int mejorCantidad = CANTIDAD_DE_PASOS_EXAGERADA;
+		int mejorDireccionEnInt = SIN_DIRECCION_EN_INT;
+		EnteroModificable cantidad[] = new EnteroModificable[MAX_DIRECCIONES];
+		for(int i=0; i<MAX_DIRECCIONES;i++)
+			cantidad[i] = new EnteroModificable(CANTIDAD_DE_PASOS_EXAGERADA);
 		
-		int mejorCantidad;
-		int mejorDireccionEnInt;
 		
 		if(!escenario.sacarEnPosicion(salida).isPisablePorIA())
 			throw new PosicionIlegalException();
@@ -59,14 +80,16 @@ public class Utilitario {
 		Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[3]);
 		salida.avanzarDerecha();
 		   
-		mejorCantidad = UnaCantidadDePasosExagerada;
-		mejorDireccionEnInt = -1;
-		for(int i=0; i<MAXDirecciones; i++){
-			if(mejorCantidad > cantidad[i].intValue()){
-			   mejorCantidad = cantidad[i].intValue();
+		for(int i=0; i<MAX_DIRECCIONES; i++){
+			if(mejorCantidad > cantidad[i].obtener()){
+			   mejorCantidad = cantidad[i].obtener();
 			   mejorDireccionEnInt = i;
 			   }
 			}
-		return IntADireccion[mejorDireccionEnInt];
+		
+		if(mejorDireccionEnInt == SIN_DIRECCION_EN_INT)
+			throw new CaminoImposibleException();
+		
+		return INT_A_DIRECCION[mejorDireccionEnInt];
 		}
 }
