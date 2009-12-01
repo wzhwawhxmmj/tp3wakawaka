@@ -1,11 +1,11 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
+
 
 public class Utilitario {
 	
 	public Utilitario(){
 	}
 	
+
 	private static void iteracionCaminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada, int numeroDePasadas,int menorCantidad){
 		
 		if (escenario.sacarEnPosicion(salida).isPisablePorIA()){
@@ -15,13 +15,17 @@ public class Utilitario {
                   }
 			     }
 			else{
-				Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarArriba()  ,llegada, numeroDePasadas + 1, menorCantidad);
-				salida.avanzarAbajo();
-				Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarAbajo()   ,llegada, numeroDePasadas + 1, menorCantidad);
 				salida.avanzarArriba();
-				Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarDerecha() ,llegada, numeroDePasadas + 1, menorCantidad);
+				Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
+				salida.avanzarAbajo();
+				salida.avanzarAbajo();
+				Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
+				salida.avanzarArriba();
+				salida.avanzarDerecha();
+				Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
 				salida.avanzarIzquierda();
-				Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarIzquierda(),llegada,numeroDePasadas + 1, menorCantidad);
+				salida.avanzarIzquierda();
+				Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
 				salida.avanzarDerecha();}
 	    }
 	}	
@@ -42,14 +46,18 @@ public class Utilitario {
 		if(!escenario.sacarEnPosicion(salida).isPisablePorIA())
 			throw new PosicionIlegalException();
 		
-		Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarArriba()  ,llegada, numeroDePasadas + 1, cantidad[0]);
-	       salida.avanzarAbajo();
-		Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarAbajo()   ,llegada, numeroDePasadas + 1, cantidad[1]);
-		   salida.avanzarArriba();
-		Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarDerecha() ,llegada, numeroDePasadas + 1, cantidad[2]);
-		   salida.avanzarIzquierda();
-		Utilitario.iteracionCaminoMasCorto(escenario, salida.avanzarIzquierda(),llegada,numeroDePasadas + 1, cantidad[3]);
-		   salida.avanzarDerecha();
+		salida.avanzarArriba();
+		Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[0]);
+		salida.avanzarAbajo();
+		salida.avanzarAbajo();
+		Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[1]);
+		salida.avanzarArriba();
+		salida.avanzarDerecha();
+		Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[2]);
+		salida.avanzarIzquierda();
+		salida.avanzarIzquierda();
+		Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[3]);
+		salida.avanzarDerecha();
 		   
 		mejorCantidad = UnaCantidadDePasosExagerada;
 		mejorDireccionEnInt = -1;
