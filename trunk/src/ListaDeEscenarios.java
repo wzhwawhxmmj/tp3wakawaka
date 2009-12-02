@@ -21,10 +21,9 @@ public class ListaDeEscenarios {
 		
 		Pared pared = new Pared();		
 		Piso casillero = new Piso();		
-		Puntito puntito = new Puntito(posicion,10);		
 		
 		
-		casillero.agregarComestible(puntito);
+		casillero.ponerPunto(posicion);
 		
 		escenario.ponerEnPosicion(posicion, pared);
 		
