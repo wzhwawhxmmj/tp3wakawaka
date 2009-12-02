@@ -20,7 +20,7 @@ public class ListaDeEscenarios {
 		Posicion posicion = new Posicion(1,1);
 		
 		Pared pared = new Pared();		
-		Casillero casillero = new Casillero();		
+		Piso casillero = new Piso();		
 		Puntito puntito = new Puntito(posicion,10);		
 		
 		
