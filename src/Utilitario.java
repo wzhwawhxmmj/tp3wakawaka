@@ -1,15 +1,12 @@
-
-
-public class Utilitario {
+public class Utilitario {//clase temporal
+	//luego se pasara todo al escenario, 
+	//o se convertira esto en un estilo de "iterador"
 	
 	
-	static class EnteroModificable {
+	private class EnteroModificable {
 		int valor;
 		public EnteroModificable(int valor){
 			this.valor = valor;
-		}
-		public static EnteroModificable Crear(int valor){
-			return new EnteroModificable(valor);
 		}
 		public void modificar(int valor){
 			this.valor = valor;
@@ -18,11 +15,8 @@ public class Utilitario {
 			return valor;
 		}
 	}
-	
-	
-	
 
-	private static void iteracionCaminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada, int numeroDePasadas,EnteroModificable menorCantidad){
+	private void iteracionCaminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada, int numeroDePasadas,EnteroModificable menorCantidad){
 		
 		if (escenario.sacarEnPosicion(salida).isPisablePorIA()){
 			if (salida.equals(llegada)){ 
@@ -32,22 +26,21 @@ public class Utilitario {
 			     }
 			else if(numeroDePasadas < menorCantidad.obtener()){
 				salida.avanzarArriba();
-				Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
+				this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
 				salida.avanzarAbajo();
 				salida.avanzarAbajo();
-				Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
+				this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
 				salida.avanzarArriba();
 				salida.avanzarDerecha();
-				Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
+				this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
 				salida.avanzarIzquierda();
 				salida.avanzarIzquierda();
-				Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
+				this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
 				salida.avanzarDerecha();}
 	    }
 	}	
-	  	
-	
-	public static Direccion caminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada){
+
+	public Direccion caminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada){
 		
 		//constantes
 		final Direccion INT_A_DIRECCION[] = {Direccion.ARRIBA, Direccion.ABAJO, Direccion.DERECHA, Direccion.IZQUIERDA};
@@ -61,35 +54,38 @@ public class Utilitario {
 		int mejorDireccionEnInt = SIN_DIRECCION_EN_INT;
 		EnteroModificable cantidad[] = new EnteroModificable[MAX_DIRECCIONES];
 		for(int i=0; i<MAX_DIRECCIONES;i++)
-			cantidad[i] = EnteroModificable.Crear(CANTIDAD_DE_PASOS_EXAGERADA);
+			cantidad[i] = new EnteroModificable(CANTIDAD_DE_PASOS_EXAGERADA);
 		
-		
+		//chequeo
 		if(!escenario.sacarEnPosicion(salida).isPisablePorIA())
 			throw new PosicionIlegalException();
 		
+		//iteraciones
 		salida.avanzarArriba();
-		Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[0]);
+		this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[0]);
 		salida.avanzarAbajo();
 		salida.avanzarAbajo();
-		Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[1]);
+		this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[1]);
 		salida.avanzarArriba();
 		salida.avanzarDerecha();
-		Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[2]);
+		this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[2]);
 		salida.avanzarIzquierda();
 		salida.avanzarIzquierda();
-		Utilitario.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[3]);
+		this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[3]);
 		salida.avanzarDerecha();
-		   
+		
+		//compara los 4 mejores caminos
 		for(int i=0; i<MAX_DIRECCIONES; i++){
 			if(mejorCantidad > cantidad[i].obtener()){
 			   mejorCantidad = cantidad[i].obtener();
 			   mejorDireccionEnInt = i;
 			   }
 			}
-		
+		//otro chequeo
 		if(mejorDireccionEnInt == SIN_DIRECCION_EN_INT)
 			throw new CaminoImposibleException();
 		
+		//retorna la mejor de las 4 direcciones
 		return INT_A_DIRECCION[mejorDireccionEnInt];
 		}
 }
