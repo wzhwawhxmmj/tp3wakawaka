@@ -1,91 +1,64 @@
-public class Utilitario {//clase temporal
-	//luego se pasara todo al escenario, 
-	//o se convertira esto en un estilo de "iterador"
+public class Utilitario {
+	//su nombre final sera Calculador, y tendra ciertas similitudes con un iterador.
+	
+	static final int NUM_PASOS_SIN_DEFINIR_AUN = -1;
+	
+	Escenario escenario;
+	int pasosEfectuados,pasosMejorCamino;
+	Direccion direccionInicialActual,mejorDireccion;
+	
+	public Utilitario(Escenario elEscenarioQueMeDan){
+		pasosEfectuados = 0;
+		pasosMejorCamino = NUM_PASOS_SIN_DEFINIR_AUN;
+		this.escenario = elEscenarioQueMeDan;
+		direccionInicialActual = Direccion.NINGUNA;
+	}
 	
 	
-	private class EnteroModificable {
-		int valor;
-		public EnteroModificable(int valor){
-			this.valor = valor;
-		}
-		public void modificar(int valor){
-			this.valor = valor;
-		}
-		public int obtener(){
-			return valor;
+	private void iterarHacia(Direccion direccion, Posicion salida, Posicion llegada){
+		if(pasosEfectuados == 1)
+			direccionInicialActual = direccion;
+		
+		switch (direccion){
+		case ARRIBA:   salida.avanzarArriba();
+		               DireccionHaciaMenorCaminoEntre(salida, llegada);
+		               salida.avanzarAbajo();
+		               break;
+		case ABAJO:    salida.avanzarAbajo();
+		               DireccionHaciaMenorCaminoEntre(salida, llegada);	
+		               salida.avanzarArriba();
+		               break;
+		case DERECHA:  salida.avanzarDerecha();
+		               DireccionHaciaMenorCaminoEntre(salida, llegada);
+		               salida.avanzarIzquierda();
+		               break;
+		case IZQUIERDA:salida.avanzarIzquierda();
+		               DireccionHaciaMenorCaminoEntre(salida, llegada); 
+		               salida.avanzarDerecha();
+		               break;
 		}
 	}
-
-	private void iteracionCaminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada, int numeroDePasadas,EnteroModificable menorCantidad){
+	
+	
+	
+	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
 		
-		if (escenario.sacarEnPosicion(salida).isPisablePorIA()){
-			if (salida.equals(llegada)){ 
-                  if(numeroDePasadas < menorCantidad.obtener()){
-                	  menorCantidad.modificar(numeroDePasadas);
-                  }
-			     }
-			else if(numeroDePasadas < menorCantidad.obtener()){
-				salida.avanzarArriba();
-				this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
-				salida.avanzarAbajo();
-				salida.avanzarAbajo();
-				this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
-				salida.avanzarArriba();
-				salida.avanzarDerecha();
-				this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
-				salida.avanzarIzquierda();
-				salida.avanzarIzquierda();
-				this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, menorCantidad);
-				salida.avanzarDerecha();}
+		if((escenario.sacarEnPosicion(salida).isPisablePorIA())&&(pasosEfectuados < pasosMejorCamino)){
+			pasosEfectuados++;
+		    this.iterarHacia(Direccion.ARRIBA,   salida, llegada);
+		    this.iterarHacia(Direccion.ABAJO,    salida, llegada);
+		    this.iterarHacia(Direccion.IZQUIERDA,salida, llegada);
+		    this.iterarHacia(Direccion.DERECHA,  salida, llegada);
+		    pasosEfectuados--;
+	        }
+		
+		if(salida.equals(llegada)){
+				if((pasosEfectuados < pasosMejorCamino)||(pasosEfectuados==NUM_PASOS_SIN_DEFINIR_AUN)){
+					pasosMejorCamino = pasosEfectuados; 
+					mejorDireccion = direccionInicialActual;
+                	}
+				}
+		
+		return mejorDireccion;
 	    }
-	}	
-
-	public Direccion caminoMasCorto(Escenario escenario, Posicion salida, Posicion llegada){
-		
-		//constantes
-		final Direccion INT_A_DIRECCION[] = {Direccion.ARRIBA, Direccion.ABAJO, Direccion.DERECHA, Direccion.IZQUIERDA};
-		final int MAX_DIRECCIONES = INT_A_DIRECCION.length;
-		final int SIN_DIRECCION_EN_INT = -1;
-		final int CANTIDAD_DE_PASOS_EXAGERADA = 999;
-		
-		//inicializacion
-		int numeroDePasadas = 0;
-		int mejorCantidad = CANTIDAD_DE_PASOS_EXAGERADA;
-		int mejorDireccionEnInt = SIN_DIRECCION_EN_INT;
-		EnteroModificable cantidad[] = new EnteroModificable[MAX_DIRECCIONES];
-		for(int i=0; i<MAX_DIRECCIONES;i++)
-			cantidad[i] = new EnteroModificable(CANTIDAD_DE_PASOS_EXAGERADA);
-		
-		//chequeo
-		if(!escenario.sacarEnPosicion(salida).isPisablePorIA())
-			throw new PosicionIlegalException();
-		
-		//iteraciones
-		salida.avanzarArriba();
-		this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[0]);
-		salida.avanzarAbajo();
-		salida.avanzarAbajo();
-		this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[1]);
-		salida.avanzarArriba();
-		salida.avanzarDerecha();
-		this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[2]);
-		salida.avanzarIzquierda();
-		salida.avanzarIzquierda();
-		this.iteracionCaminoMasCorto(escenario, salida ,llegada, numeroDePasadas+1, cantidad[3]);
-		salida.avanzarDerecha();
-		
-		//compara los 4 mejores caminos
-		for(int i=0; i<MAX_DIRECCIONES; i++){
-			if(mejorCantidad > cantidad[i].obtener()){
-			   mejorCantidad = cantidad[i].obtener();
-			   mejorDireccionEnInt = i;
-			   }
-			}
-		//otro chequeo
-		if(mejorDireccionEnInt == SIN_DIRECCION_EN_INT)
-			throw new CaminoImposibleException();
-		
-		//retorna la mejor de las 4 direcciones
-		return INT_A_DIRECCION[mejorDireccionEnInt];
-		}
 }
