@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Utilitario {//su nombre final sera Calculador, y tendra ciertas similitudes con un iterador.
 	
-	Escenario escenario;
-	ArrayList<Posicion> pasosMejorCamino;
-	ArrayList<Posicion> pasosEfectuados; 
-	Direccion direccionInicialActual;
-	Direccion mejorDireccion;
+	private Escenario escenario;
+	private ArrayList<Posicion> pasosMejorCamino;
+	private ArrayList<Posicion> pasosEfectuados; 
+	private Direccion direccionInicialActual;
+	private Direccion mejorDireccion;
 	
 	public Utilitario(Escenario elEscenarioQueMeDan){
 		pasosEfectuados  = new ArrayList<Posicion>();

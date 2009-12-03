@@ -13,7 +13,7 @@ public class ListaDeEscenarios {
 		this.nivelActual = 0;
 	}
 	
-	public void cargarEscenarios () throws IOException{
+	public void cargarEscenarios ()/* throws IOException*/{
 		
 			
 		Escenario escenario = new Escenario();
@@ -48,7 +48,7 @@ public class ListaDeEscenarios {
 			
 		}
 		
-	
+		listaDeEscenarios.add(escenario);
 		
 		
 	}
