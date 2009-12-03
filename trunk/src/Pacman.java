@@ -12,7 +12,9 @@ public class Pacman extends Jugador {
 		algunaCosa.actuar();
 	}
 
-
+	public Direccion Direccion(){
+		return direccion;
+	}
 
 	public void cambiarDireccion(Direccion direccion){
 		this.direccion = direccion;
