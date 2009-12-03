@@ -1,22 +1,25 @@
+import java.util.ArrayList;
+
 public class Utilitario {
 	//su nombre final sera Calculador, y tendra ciertas similitudes con un iterador.
 	
-	static final int NUM_PASOS_SIN_DEFINIR_AUN = -1;
 	
 	Escenario escenario;
-	int pasosEfectuados,pasosMejorCamino;
-	Direccion direccionInicialActual,mejorDireccion;
+	ArrayList<Posicion> pasosMejorCamino;
+	ArrayList<Posicion> pasosEfectuados; 
+	Direccion direccionInicialActual;
+	Direccion mejorDireccion;
 	
 	public Utilitario(Escenario elEscenarioQueMeDan){
-		pasosEfectuados = 0;
-		pasosMejorCamino = NUM_PASOS_SIN_DEFINIR_AUN;
-		this.escenario = elEscenarioQueMeDan;
+		pasosEfectuados  = new ArrayList<Posicion>();
+		pasosMejorCamino = new ArrayList<Posicion>();
+		escenario = elEscenarioQueMeDan;
 		direccionInicialActual = Direccion.NINGUNA;
+		mejorDireccion         = Direccion.NINGUNA;
 	}
 	
-	
 	private void iterarHacia(Direccion direccion, Posicion salida, Posicion llegada){
-		if(pasosEfectuados == 1)
+		if(pasosEfectuados.isEmpty())
 			direccionInicialActual = direccion;
 		
 		switch (direccion){
@@ -38,23 +41,35 @@ public class Utilitario {
 		               break;
 		}
 	}
+
+	
+	private void RemoverUltimoPaso(ArrayList<Posicion> lista){
+		pasosEfectuados.remove(pasosEfectuados.size()-1);
+	}
+	
+	private boolean OptimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Posicion pasoActual){
+		 return (  ( pasosEfectuados.size() < pasosMejorCamino.size())
+		         &&(!pasosEfectuados.contains(pasoActual)            ));
+	}
 	
 	
-	
+	@SuppressWarnings("unchecked")//por el casteo, que hinchapelota el eclipse
 	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
 		
-		if((escenario.sacarEnPosicion(salida).isPisablePorIA())&&(pasosEfectuados < pasosMejorCamino)){
-			pasosEfectuados++;
-		    this.iterarHacia(Direccion.ARRIBA,   salida, llegada);
-		    this.iterarHacia(Direccion.ABAJO,    salida, llegada);
-		    this.iterarHacia(Direccion.IZQUIERDA,salida, llegada);
-		    this.iterarHacia(Direccion.DERECHA,  salida, llegada);
-		    pasosEfectuados--;
+		if(escenario.sacarEnPosicion(salida).isPisablePorIA()){
+				if(OptimizacionesDeRecorridoSeCumplen(pasosEfectuados,pasosMejorCamino,salida)){
+					pasosEfectuados.add(salida);
+					iterarHacia(Direccion.ARRIBA,   salida, llegada);
+					iterarHacia(Direccion.ABAJO,    salida, llegada);
+					iterarHacia(Direccion.IZQUIERDA,salida, llegada);
+					iterarHacia(Direccion.DERECHA,  salida, llegada);
+					RemoverUltimoPaso(pasosEfectuados);
+					}
 	        }
 		
 		if(salida.equals(llegada)){
-				if((pasosEfectuados < pasosMejorCamino)||(pasosEfectuados==NUM_PASOS_SIN_DEFINIR_AUN)){
-					pasosMejorCamino = pasosEfectuados; 
+				if((pasosEfectuados.size() < pasosMejorCamino.size())||(pasosEfectuados.isEmpty())){
+					pasosMejorCamino = (ArrayList<Posicion>) pasosEfectuados.clone(); 
 					mejorDireccion = direccionInicialActual;
                 	}
 				}
