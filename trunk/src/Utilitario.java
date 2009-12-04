@@ -20,38 +20,37 @@ public class Utilitario {//su nombre final sera Calculador, y tendra ciertas sim
 		pasosEfectuados.remove(pasosEfectuados.size()-1);
 	}
 	
-	private boolean OptimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Posicion pasoActual){
-		 return (  ( pasosEfectuados.size() < pasosMejorCamino.size())
+	private boolean OptimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Punto pasoActual){
+		 return (  ( pasosEfectuados.size() > pasosMejorCamino.size())
 		         &&(!pasosEfectuados.contains(pasoActual)            ));
 	}
 
-	private void iterarHacia(Direccion direccion, Posicion salida, Posicion llegada){
+	private void iterarHacia(Direccion direccion, Posicion salida, Punto llegada){
 		if(pasosEfectuados.isEmpty())direccionInicialActual = direccion;
-		
+
 		switch (direccion){
-		case ARRIBA:   salida.avanzarArriba();
-		               DireccionHaciaMenorCaminoEntre(salida, llegada);
-		               salida.avanzarAbajo();
+		case ARRIBA:   DireccionHaciaMenorCaminoEntre(new Posicion(salida.getx(),salida.gety()-1), llegada);
 		               break;
-		case ABAJO:    salida.avanzarAbajo();
-		               DireccionHaciaMenorCaminoEntre(salida, llegada);	
-		               salida.avanzarArriba();
+		case ABAJO:    DireccionHaciaMenorCaminoEntre(new Posicion(salida.getx(),salida.gety()+1), llegada);
 		               break;
-		case DERECHA:  salida.avanzarDerecha();
-		               DireccionHaciaMenorCaminoEntre(salida, llegada);
-		               salida.avanzarIzquierda();
+		case DERECHA:  DireccionHaciaMenorCaminoEntre(new Posicion(salida.getx()+1,salida.gety()), llegada);
 		               break;
-		case IZQUIERDA:salida.avanzarIzquierda();
-		               DireccionHaciaMenorCaminoEntre(salida, llegada); 
-		               salida.avanzarDerecha();
+		case IZQUIERDA:DireccionHaciaMenorCaminoEntre(new Posicion(salida.getx()-1,salida.gety()), llegada);
 		               break;
 		}
 	}
 
-	@SuppressWarnings("unchecked")//por el casteo, que hinchapelota el eclipse
-	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
+
+	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Punto llegada){
+		if(salida.equals(llegada)){
+				if((pasosEfectuados.size() < pasosMejorCamino.size())||(pasosMejorCamino.isEmpty())){
+					pasosMejorCamino = (ArrayList<Posicion>) pasosEfectuados.clone(); 
+					mejorDireccion = direccionInicialActual;
+                	}
+				}
 		
-		if(escenario.sacarEnPosicion(salida).isPisablePorIA()){
+		else {if(escenario.sacarEnPosicion(salida).isPisablePorIA()){
+			    
 				if(OptimizacionesDeRecorridoSeCumplen(pasosEfectuados,pasosMejorCamino,salida)){
 					pasosEfectuados.add(salida);
 					iterarHacia(Direccion.ARRIBA,   salida, llegada);
@@ -60,13 +59,8 @@ public class Utilitario {//su nombre final sera Calculador, y tendra ciertas sim
 					iterarHacia(Direccion.DERECHA,  salida, llegada);
 					RemoverUltimoPaso(pasosEfectuados);
 					}
-				}
-		if(salida.equals(llegada)){
-				if((pasosEfectuados.size() < pasosMejorCamino.size())||(pasosEfectuados.isEmpty())){
-					pasosMejorCamino = (ArrayList<Posicion>) pasosEfectuados.clone(); 
-					mejorDireccion = direccionInicialActual;
-                	}
-				}
+				}}
+		
 		return mejorDireccion;
 	    }
 }
