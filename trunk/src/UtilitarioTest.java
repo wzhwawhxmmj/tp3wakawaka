@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 import junit.framework.TestCase;
 
 
@@ -21,7 +19,7 @@ public class UtilitarioTest extends TestCase {
 		Utilitario calculador = new Utilitario(escenario);
 		Direccion direccion = calculador.DireccionHaciaMenorCaminoEntre(salida, llegada);
 		
-		if(direccion == Direccion.NINGUNA)
+		if(direccion == Direccion.DERECHA)
 			assert(true);
 		else fail();
 		
