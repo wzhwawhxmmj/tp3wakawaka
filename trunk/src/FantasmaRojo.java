@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class FantasmaRojo extends Fantasma {
 
 	private float velocidadEnModoRapido;
@@ -11,26 +13,33 @@ public class FantasmaRojo extends Fantasma {
 		this.setVelocidad(this.velocidadEnModoRapido);
 	}
 	
-	/*
-	private boolean pasarLimite(){
+	private boolean pasarLimiteDePuntitosRestantes(){
 		
-		int limiteModoRapido = this.getEscenario().getPuntitosTotales() * (1/5);  
+		long limiteModoRapido = this.getEscenario().getPuntosTotales() * (1/5);  
+		long puntitosRestantes = this.getEscenario().getPuntosRestantes(); 
 		
-		if (this.getEscenario().getPuntitosRestantes() <= limiteModoRapido) {
+		if (puntitosRestantes <= limiteModoRapido)
 			return true;
-		}
+		else
+			return false;
+	
+	}
+	
+	private boolean comprobarEntorno(){
+		return true;
 		
 	}
-	*/
 	
-	public void estrategizar() {
+	public void estrategizar(){
+		Ueb piso;
 		
-		/*
-		if (this.pasarLimite) this.activarModoRapido();
+		if (this.pasarLimiteDePuntitosRestantes()) this.activarModoRapido();
 		
-		this.moverHacia(this.caminoMasCortoHasta(escenario.getPosicionPacman()));
+		if (this.getEscenario().getPosicionPacman().equals(this.getPosicion())){
+			
+		}
 		
-		*/		
+		
 	}
 
 	@Override

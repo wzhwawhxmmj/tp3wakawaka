@@ -7,14 +7,15 @@ public class Posicion extends Punto {
 	public Posicion(int x, int y) {
 		super(x, y);
 	}
-
-	public Posicion(Entidad entidad) {
-		super(entidad.getPosicion().getx(), entidad.getPosicion().gety());
+	
+	public int hashCode(){
+		return ((this.getx() * 1000) + this.gety());		
 	}
-
-	public boolean equals(Posicion posicion) {
-		if ((posicion.getx() == this.getx()) 
-				&& (posicion.gety() == this.gety())) return true;
+	
+	public boolean equals(Object posicion) {
+		Punto pos = (Punto) posicion;
+		if ((pos.getx() == this.getx()) && (pos.gety() == this.gety())) 
+			return true;
 		else 
 			return false;
 	}
@@ -30,12 +31,12 @@ public class Posicion extends Punto {
 	}
 
 	public void avanzarArriba() {
-		int avance = this.gety() + 1;
+		int avance = this.gety() - 1;
 		this.sety(avance);
 	}
 
 	public void avanzarAbajo() {
-		int avance = this.gety() - 1;
+		int avance = this.gety() + 1;
 		this.sety(avance);
 	}
 }
