@@ -17,36 +17,30 @@ public class ListaDeEscenarios {
 		
 			
 		Escenario escenario = new Escenario();
-		Posicion posicion = new Posicion(1,1);
 		
 		Pared pared = new Pared();		
 		Piso casillero = new Piso();		
 		
 		
-		casillero.ponerPunto(posicion);
+		//casillero.ponerPunto(posicion);
 		
-		escenario.ponerEnPosicion(posicion, pared);
-		
-		
-		
-		
-						
-		for(int i =0; i <24;i++){
+		//escenario.ponerEnPosicion(posicion, pared);
 			
-			for(int j =0; j <24;i++){
+						
+		for(int i = 0 ; i < 5 ; i++){
+			
+			for(int j = 0 ; j < 5 ; j++){
 					
-				posicion.setx(i);
-				posicion.sety(j);
-				if (((posicion.getx()>1)&&(posicion.getx()<24))&&
-				((posicion.gety()>1)&&(posicion.gety()<24)))
-				escenario.ponerEnPosicion(posicion,casillero);
+				Posicion posicion = new Posicion(i,j);
+				if ( ((i>0)&&(i<4)) && ((j>0)&&(j<4)) )
+					escenario.ponerEnPosicion(posicion,casillero);
 				else
-				escenario.ponerEnPosicion(posicion, pared);
-					
-				
+					escenario.ponerEnPosicion(posicion, pared);
 			}
 			
 		}
+		
+		escenario.ponerEnPosicion(new Posicion(2,2), new Pared());
 		
 		listaDeEscenarios.add(escenario);
 		
