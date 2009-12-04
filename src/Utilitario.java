@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Iterator;
+
 
 public class Utilitario {//su nombre final sera Calculador, y tendra ciertas similitudes con un iterador.
 	
@@ -18,54 +20,75 @@ public class Utilitario {//su nombre final sera Calculador, y tendra ciertas sim
 		mejorDireccion         = Direccion.NINGUNA;
 	}
 	
-	private void RemoverUltimoPaso(ArrayList<Posicion> lista){
+	private void removerUltimoPaso(ArrayList<Posicion> lista){
 		pasosEfectuados.remove(pasosEfectuados.size()-1);
 	}
 	
-	private boolean OptimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Punto pasoActual){
-		 return (    (   ( pasosEfectuados.size() > pasosMejorCamino.size() )
-				       ||( pasosMejorCamino.isEmpty()) ) 
-				   &&( !pasosEfectuados.contains(pasoActual)                  ));
+	private boolean esPisable(Posicion posicion){
+		Ueb casillero = escenario.sacarEnPosicion(posicion);
+		if(casillero ==null) return false;
+		else return casillero.isPisablePorIA();
 	}
-
-	private void iterarHacia(Direccion direccion, Posicion salida, Punto llegada){
+	
+	private Posicion moverPosicionHacia(Direccion direccion, Posicion posicion){
+		Posicion posicionNueva;
 		switch (direccion){
-		case ARRIBA:   DireccionHaciaMenorCaminoEntre(new Posicion(salida.getx(),salida.gety()-1), llegada);
+		case ARRIBA:   posicionNueva = new Posicion(posicion.getx()  ,posicion.gety()-1);
 		               break;
-		case ABAJO:    DireccionHaciaMenorCaminoEntre(new Posicion(salida.getx(),salida.gety()+1), llegada);
+		case ABAJO:    posicionNueva =  new Posicion(posicion.getx()  ,posicion.gety()+1);
 		               break;
-		case DERECHA:  DireccionHaciaMenorCaminoEntre(new Posicion(salida.getx()+1,salida.gety()), llegada);
+		case DERECHA:  posicionNueva =  new Posicion(posicion.getx()+1,posicion.gety()  );
 		               break;
-		case IZQUIERDA:DireccionHaciaMenorCaminoEntre(new Posicion(salida.getx()-1,salida.gety()), llegada);
+		case IZQUIERDA:posicionNueva =  new Posicion(posicion.getx()-1,posicion.gety()  );
 		               break;
+		default: posicionNueva = posicion;                
 		}
+		return posicionNueva;
 	}
 
+	private boolean optimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Punto pasoActual){
+		 return (    /*(   ( pasosEfectuados.size() > pasosMejorCamino.size() )
+				       ||( pasosMejorCamino.isEmpty()) )*/ 
+				   /*&&*/( !pasosEfectuados.contains(pasoActual)                  ));
+	}
+	
+	
+	private Posicion hacerLLegadaPisable(Posicion llegada, Direccion[] prioridadDeDirecciones){
+		if(esPisable(llegada))return llegada;
+		else {
+			Posicion llegadan = llegada;
+			for(int i=0;i<(prioridadDeDirecciones.length);i++){
+			       llegadan = moverPosicionHacia(prioridadDeDirecciones[i], llegada);
+			       if(esPisable(llegadan))break;
+				   }
+			return hacerLLegadaPisable(llegadan, prioridadDeDirecciones);
+			}
+		}
 
-	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Punto llegada, Direccion[] prioridadDeDirecciones){
+	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
+		//llegada = hacerLLegadaPisable(llegada,prioridadDeDirecciones);
+		
 		if(salida.equals(llegada)){
 				if((pasosEfectuados.size() < pasosMejorCamino.size())||(pasosMejorCamino.isEmpty())){
 					pasosMejorCamino = (ArrayList<Posicion>) pasosEfectuados.clone(); 
-					
 					mejorDireccion = direccionInicialActual;
                 	}
 				}
-		else {if(escenario.sacarEnPosicion(salida).isPisablePorIA()){
-				if(OptimizacionesDeRecorridoSeCumplen(pasosEfectuados,pasosMejorCamino,salida)){
+		else if(esPisable(salida)){
+				if(optimizacionesDeRecorridoSeCumplen(pasosEfectuados,pasosMejorCamino,salida)){
 					pasosEfectuados.add(salida);
 					for(int i=0;i<(prioridadDeDirecciones.length);i++){
-						if(pasosEfectuados.size()==1){direccionInicialActual = prioridadDeDirecciones[i];}
-						
-						iterarHacia(prioridadDeDirecciones[i], salida, llegada); 
+						if(pasosEfectuados.size()==1)direccionInicialActual = prioridadDeDirecciones[i];
+						DireccionHaciaMenorCaminoEntre(moverPosicionHacia(prioridadDeDirecciones[i],salida),llegada); 
 						}
-					RemoverUltimoPaso(pasosEfectuados);
+					removerUltimoPaso(pasosEfectuados);
 					}
-				}}
+				}
 		return mejorDireccion;
 	    }
 
 	
-	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Punto llegada){
+	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
 		return DireccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
 	}
 	
