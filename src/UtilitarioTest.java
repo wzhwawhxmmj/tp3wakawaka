@@ -13,12 +13,15 @@ public class UtilitarioTest extends TestCase {
 	
 	public void testAnda(){
 		Posicion salida = new Posicion(1,1); 
-		Posicion llegada = new Posicion(5,5);
+		Punto llegada = new Posicion(3,3);
 		Escenario escenario = armarEscenarioSimple();
+		
+		//if (escenario.sacarEnPosicion(new Posicion(1,1)) == null) System.out.println("hoa");
+		//System.out.println(escenario.sacarEnPosicion(new Posicion(1,1)).getClass().toString());
 		Utilitario calculador = new Utilitario(escenario);
 		Direccion direccion = calculador.DireccionHaciaMenorCaminoEntre(salida, llegada);
 		
-		if(direccion == Direccion.ABAJO)
+		if(direccion == Direccion.NINGUNA)
 			assert(true);
 		else fail();
 		
