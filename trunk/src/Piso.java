@@ -17,7 +17,12 @@ public class Piso extends Ueb {
 
 	
 	}
-	public void ponerPunto(Posicion p) {
+	
+	public void ponerNoJugador(NoJugador noJugador){
+		casillero.add(noJugador);
+	}
+	
+	/* public void ponerPunto(Posicion p) {
 		Puntito puntito = new Puntito(p,10);
 		casillero.add(puntito);
 
@@ -39,7 +44,7 @@ public class Piso extends Ueb {
 		fantasma.setPosicion(p);
 		casillero.add(fantasma);
 
-	}
+	} */
 	
 	public int cantidadDeComestibles(){
 		

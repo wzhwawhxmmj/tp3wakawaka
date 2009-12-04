@@ -5,18 +5,17 @@ public class Escenario {
 	private long puntosRestantes;
 	private long puntosTotales;
 	
-	private HashMap <Punto, Ueb>  tablero;
+	private HashMap <Posicion, Ueb>  tablero;
 	
 	
 	public Escenario() {
-		this.tablero = new HashMap <Punto, Ueb>();
+		this.tablero = new HashMap <Posicion, Ueb>();
 		this.setPuntosRestantes(2530);/*241*10 + 4 * 30*/
 		this.setPuntosTotales(2530);
 	}
-
-	public void ponerEnPosicion(Punto p,Ueb casillero) {
-
-		this.tablero.put(p, casillero);
+	
+	public void ponerEnPosicion(Posicion p, Ueb casillero) {
+		this.tablero.put(p, casillero);	
 	}
 
 	public Ueb sacarEnPosicion(Punto p) {
@@ -24,7 +23,6 @@ public class Escenario {
 		return  this.tablero.get(p);
 
 	}
-	
 	
 	public void setPuntosTotales(long puntosTotales) {
 		this.puntosTotales = puntosTotales;
