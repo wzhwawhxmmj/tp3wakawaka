@@ -25,19 +25,11 @@ public class FantasmaRojo extends Fantasma {
 	
 	}
 	
-	private boolean comprobarEntorno(){
-		return true;
-		
-	}
-	
 	public void estrategizar(){
-		Ueb piso;
-		
+			
 		if (this.pasarLimiteDePuntitosRestantes()) this.activarModoRapido();
 		
-		if (this.getEscenario().getPosicionPacman().equals(this.getPosicion())){
-			
-		}
+		//Aca va el algoritmo del camino mas corto.
 		
 		
 	}
