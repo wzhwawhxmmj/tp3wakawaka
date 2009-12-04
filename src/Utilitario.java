@@ -47,7 +47,7 @@ public class Utilitario {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 
 	private boolean optimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Punto pasoActual){
-		 return (    (   ( pasosEfectuados.size() > pasosMejorCamino.size() )
+		 return (    (   ( pasosEfectuados.size() < pasosMejorCamino.size() )
 				       ||( pasosMejorCamino.isEmpty()) )
 				   &&( !pasosEfectuados.contains(pasoActual)                  ));
 	}
