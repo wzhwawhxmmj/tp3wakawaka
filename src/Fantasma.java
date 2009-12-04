@@ -23,8 +23,14 @@ public abstract class Fantasma extends NoJugador {
 		return this.escenario;
 	}
 	
-	public void volverAzul() {
-		this.azul = true;
+	public void volverAzul(/*long tiempo*/) {
+		//try{
+			this.azul = true;
+			//this.wait(tiempo);
+		//}catch (InterruptedException e){
+		//}
+		
+		//this.azul = false;
 	}
 
 	public void volverNormal() {
@@ -34,6 +40,6 @@ public abstract class Fantasma extends NoJugador {
 	public boolean estaAzul() {
 		return this.azul;
 	}
-
+	
 	public abstract void estrategizar();
 }

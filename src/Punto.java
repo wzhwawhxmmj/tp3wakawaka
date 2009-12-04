@@ -23,4 +23,8 @@ public class Punto {
 		this.y = y;
 	}
 
+	public String toString() {
+		return "(" + this.getx() + "," + this.gety() + ")";
+	}
+
 }
