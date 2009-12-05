@@ -27,7 +27,7 @@ public class Pacman extends Jugador {
 		this.moverHacia(direccion);
 	}
 
-	public void getPuntajeAcumulado() {
+	public int getPuntajeAcumulado() {
 		return puntajeAcumulado;
 		
 	}
