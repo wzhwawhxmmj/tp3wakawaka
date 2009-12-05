@@ -13,11 +13,7 @@ http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Clases%20Entidad
 http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Clases%20Escenario.png
 
 ----
-=Relaciones=
 
-http://tp3wakawaka.googlecode.com/svn/trunk/Doc/Diagrama%20de%20Relaciones%20Basico.png
-
-----
 =Secuencia=
 
 ==Comer un Fantasma==
