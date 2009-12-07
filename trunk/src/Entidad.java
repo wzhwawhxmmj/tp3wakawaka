@@ -16,8 +16,8 @@ public abstract class Entidad {
 		return this.posicion;
 	}
 	
-	public Estado estaVivo() {
-		return this.estado;
+	public boolean estaVivo() {
+		return (this.estado == Estado.VIVO);
 	}
 
 	public void revivir() {

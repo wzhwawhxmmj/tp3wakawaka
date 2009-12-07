@@ -1,11 +1,10 @@
-import java.util.Random;
 
 public class FantasmaRojo extends Fantasma {
 
 	private float velocidadEnModoRapido;
 	
-	public FantasmaRojo(Escenario escenario, Posicion pos, float velocidad, int puntosAlSerComido) {
-		super(escenario, pos, velocidad, puntosAlSerComido);
+	public FantasmaRojo(Escenario escenario, Posicion posInicial, Posicion posModoSeparacion , float velocidad, int puntosAlSerComido) {
+		super(escenario, posInicial, posModoSeparacion, velocidad, puntosAlSerComido);
 		this.velocidadEnModoRapido = velocidad + velocidad * (1/5);
 	}
 
@@ -33,7 +32,7 @@ public class FantasmaRojo extends Fantasma {
 		
 		
 	}
-
+	
 	@Override
 	public void actuar() {
 		// TODO Auto-generated method stub
