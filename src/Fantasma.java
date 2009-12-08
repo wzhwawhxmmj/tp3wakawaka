@@ -155,11 +155,13 @@ public abstract class Fantasma extends NoJugador {
 
 	public void comportarse(){
 		if (this.modoSeparacion){
+			this.azul = false;
 			this.actuarModoSeparacion();
 			return;
 		}
 
 		if (this.azul){
+			this.modoSeparacion = false;
 			this.movimientoAlAzar();
 			return;
 		}
@@ -167,7 +169,9 @@ public abstract class Fantasma extends NoJugador {
 		if (!this.estaVivo()) {
 			this.retonarACasa();
 			this.azul = false;
+			if (this.getPosicion().equals(escenario.getPosicionCasa())) this.revivir();
 			return;
+		
 		}
 
 		this.estrategizar();
