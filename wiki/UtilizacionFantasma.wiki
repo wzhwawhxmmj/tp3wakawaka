@@ -15,7 +15,7 @@ Los fantasmas poseen un único método que debería llamar la clase que los haga
 _ fantasma.volverAzul(); _
 _ fantasma.volverNormal(); _
 
-Los fantasmas deambulan al azar por el escenario y, si mueren, regresan a la casa y se quedan encerrados ahí hasta que se vuelva al modo normal.
+Los fantasmas deambulan al azar por el escenario y, si mueren, regresan a la casa y se quedan encerrados ahí por un tiempo.
 
 === Modo Separación ===
 
