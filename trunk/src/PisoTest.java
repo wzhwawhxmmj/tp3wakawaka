@@ -5,12 +5,12 @@ public class PisoTest extends TestCase{
 	
 	public void Cargarpiso (){
 		
-		Piso piso = new Piso();
-		Ueb pildora=null;
+		Pildora pildora = new Pildora(new Posicion(1,2), 30);
+		Ueb ueb = null;
 		
-		piso.ponerNoJugador(pildora);
+		ueb.ponerNoJugador(pildora);
 		
-		assertEquals(piso.cantidadDeComestibles()==1, true);
+		assertEquals(ueb.cantidadDeComestibles()==1, true);
 		
 	}
 

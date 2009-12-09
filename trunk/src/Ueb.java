@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Ueb {
@@ -6,6 +7,12 @@ public abstract class Ueb {
 	private boolean pisablePorIA;
 	private boolean pisablePorJugador;
 	private List<NoJugador> casillero;
+	
+	public Ueb() {
+		this.casillero = new ArrayList<NoJugador>();
+	}
+
+	
 	
 	public void ponerNoJugador(NoJugador noJugador){
 		casillero.add(noJugador);
