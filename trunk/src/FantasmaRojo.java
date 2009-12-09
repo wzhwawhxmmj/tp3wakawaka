@@ -32,11 +32,5 @@ public class FantasmaRojo extends Fantasma {
 		
 		
 	}
-	
-	@Override
-	public void actuar() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
