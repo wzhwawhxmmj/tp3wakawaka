@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Iterator;
 
 public abstract class Fantasma extends NoJugador {
 
@@ -112,12 +113,31 @@ public abstract class Fantasma extends NoJugador {
 
 	public abstract void estrategizar();
 	
+	private void sacarFantasmaDePosicionOriginal(){
+		int i = -1;
+		
+		Iterator<NoJugador> it = this.escenario.sacarEnPosicion(this.getPosicion()).iterator();
+		
+		while(it.hasNext()){	
+			i++;
+			if (this == it.next()) {
+				this.escenario.sacarEnPosicion(this.getPosicion()).sacarComestible(i);
+				return;
+			}
+		}
+	}
+	
 	protected void moverHacia(Posicion posicion){
 		if (this.escenario.sacarEnPosicion(posicion).isPisablePorIA()){
+			this.sacarFantasmaDePosicionOriginal();
 			this.setPosicion(posicion);
 			this.escenario.sacarEnPosicion(posicion).ponerNoJugador(this);
 		}else
 			throw new PosicionIlegalException();
+	}
+	
+	protected void montarGuardia(Posicion salida, Posicion llegada){
+		//TODO montarGuardia
 	}
 	
 	protected void moverHacia(Direccion direccion){
@@ -179,7 +199,7 @@ public abstract class Fantasma extends NoJugador {
 	}
 
 	protected void retonarACasa() {
-		// TODO Auto-generated method stub
+		// TODO retornarACasa
 		
 	}
 	
