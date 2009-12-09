@@ -18,10 +18,10 @@ public class FantasmaRosa extends Fantasma {
 		int Xtotal,Ytotal;
 		int cantidad;
 		
-		iteradorCasilleros = escenario.getIterador();
+		iteradorCasilleros = escenario.iterator();
         while(iteradorCasilleros.hasNext()){
 		        casillero = iteradorCasilleros.next();	    
-			    iteradorCosas = casillero.getIterador();
+			    iteradorCosas = casillero.iterator();
 		        while(iteradorCosas.hasNext()){
 		        	NoJugadorActual = iteradorCosas.next();
 		        	Xtotal += NoJugadorActual.getPosicion().getx();
@@ -30,7 +30,7 @@ public class FantasmaRosa extends Fantasma {
 		            }
 			    }
 		
-		calculador = escenario.getCalculador();
+		calculador = escenario.calculador();
 		calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), new Posicion(Xtotal/cantidad, Ytotal/cantidad));
 		
 	}
