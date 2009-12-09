@@ -121,7 +121,8 @@ public class UtilitarioTest extends TestCase {
 	}
 	
 	public void testParedAlLado(){
-		//el punto mas cercano seria el (2,3)
+		//el punto mas cercano seria el (1,2)
+		//o sea que no avanzaria
 		Posicion salida = new Posicion(1,2); 
 		Posicion llegada = new Posicion(0,2);
 		
