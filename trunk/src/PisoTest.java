@@ -3,10 +3,10 @@ import junit.framework.TestCase;
 
 public class PisoTest extends TestCase{
 	
-	public void Cargarpiso (){
+	public void testCargarpiso (){
 		
 		Pildora pildora = new Pildora(new Posicion(1,2), 30);
-		Ueb ueb = null;
+		Ueb ueb = new Piso();
 		
 		ueb.ponerNoJugador(pildora);
 		
