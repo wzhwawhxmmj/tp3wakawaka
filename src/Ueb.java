@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public abstract class Ueb {
@@ -69,5 +70,10 @@ public abstract class Ueb {
 	public boolean isPisablePorIA() {
 		return pisablePorIA;
 	}
+	
+	public Iterator<NoJugador> iterator(){
+		return this.casillero.iterator();
+		}
+
 
 }

@@ -50,5 +50,9 @@ public class Escenario {
 	public Posicion getPosicionCasa() {
 		return posicionCasa;
 	}
+	
+	public Iterator<Posicion> iterator(){
+		return this.tablero.keySet().iterator();
+		}
 
 }
