@@ -4,6 +4,7 @@ public class Escenario {
 /* creando el escenario, los puntos valen 10 pts y las pildoras 30 pts*/
 	private long puntosRestantes;
 	private long puntosTotales;
+	private Posicion posicionCasa;
 	
 	private HashMap <Posicion, Ueb>  tablero;
 	
@@ -40,6 +41,14 @@ public class Escenario {
 		return puntosRestantes;
 		
 	
+	}
+
+	public void setPosicionCasa(Posicion posicionCasa) {
+		this.posicionCasa = posicionCasa;
+	}
+
+	public Posicion getPosicionCasa() {
+		return posicionCasa;
 	}
 
 }
