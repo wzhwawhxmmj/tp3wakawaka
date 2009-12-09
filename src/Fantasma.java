@@ -183,4 +183,8 @@ public abstract class Fantasma extends NoJugador {
 		
 	}
 	
+	public void actuar(){
+		this.morir();
+	}
+	
 }
