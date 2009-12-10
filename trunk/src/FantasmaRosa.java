@@ -14,7 +14,7 @@ public class FantasmaRosa extends Fantasma {
 		Iterator<Ueb> iteradorCasilleros;
 		NoJugador NoJugadorActual;
 		Ueb casillero;
-		Utilitario calculador;
+		Calculador calculador;
 		int Xtotal,Ytotal;
 		int cantidad;
 		

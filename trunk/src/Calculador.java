@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class Utilitario {//su nombre final sera Calculador, y tendra ciertas similitudes con un iterador.
+public class Calculador {//su nombre final sera Calculador, y tendra ciertas similitudes con un iterador.
 	
 	static final Direccion prioridadDeDireccionesPorDefecto[] = {Direccion.ARRIBA, Direccion.DERECHA, Direccion.ABAJO,  Direccion.IZQUIERDA};
 	
@@ -12,7 +12,7 @@ public class Utilitario {//su nombre final sera Calculador, y tendra ciertas sim
 	private Direccion direccionInicialActual;
 	private Direccion mejorDireccion;
 	
-	public Utilitario(Escenario elEscenarioQueMeDan){
+	public Calculador(Escenario elEscenarioQueMeDan){
 		pasosEfectuados  = new ArrayList<Posicion>();
 		pasosMejorCamino = new ArrayList<Posicion>();
 		escenario = elEscenarioQueMeDan;

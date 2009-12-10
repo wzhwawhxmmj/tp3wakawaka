@@ -1,13 +1,13 @@
 import junit.framework.TestCase;
 
 
-public class UtilitarioTest extends TestCase {
+public class CalculadorTest extends TestCase {
 
 	
 	public Direccion DireccionMenorCamino(Posicion salida, Posicion llegada){
 		ListaDeEscenarios lista = new ListaDeEscenarios(); 
 		lista.cargarEscenarios();
-		Utilitario calc = new Utilitario(lista.getEscenario(1)); 
+		Calculador calc = new Calculador(lista.getEscenario(1)); 
 		Direccion[] direcciones = new Direccion[4];
 		direcciones[0] = Direccion.ARRIBA;
 		direcciones[1] = Direccion.DERECHA;

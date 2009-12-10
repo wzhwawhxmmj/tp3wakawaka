@@ -57,8 +57,8 @@ public class Escenario {
 		}
 
 	
-	public Utilitario calculador(){
-			  return new Utilitario (this);
+	public Calculador calculador(){
+			  return new Calculador (this);
 			}
 		
 	}
