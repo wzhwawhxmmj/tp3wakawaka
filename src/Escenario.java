@@ -6,6 +6,7 @@ public class Escenario {
 	private long puntosTotales;
 	private Posicion posicionCasa;
 	
+	
 	private HashMap <Posicion, Ueb>  tablero;
 	
 	
@@ -55,4 +56,9 @@ public class Escenario {
 		return this.tablero.keySet().iterator();
 		}
 
-}
+	
+	public Utilitario calculador(){
+			  return new Utilitario (this);
+			}
+		
+	}
