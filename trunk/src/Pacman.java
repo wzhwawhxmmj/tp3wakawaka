@@ -2,13 +2,11 @@ public class Pacman extends Entidad {
 	
 	private int puntajeAcumulado;
 	private Direccion direccion;
-	private Posicion posicion;
 	private Escenario escenario;
 
 	public Pacman(Escenario escenario, Posicion posicion, int velocidad) {
 		super(posicion);
 		this.direccion = Direccion.NINGUNA;
-		this.posicion = posicion;
 		this.escenario = escenario;
 		puntajeAcumulado = 0;
 	}
