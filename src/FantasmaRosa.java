@@ -2,8 +2,8 @@ import java.util.Iterator;
 
 public class FantasmaRosa extends Fantasma {
 
-	public FantasmaRosa(Escenario escenario, Posicion pos, int velocidad) {
-		super(escenario, pos, velocidad);
+	public FantasmaRosa(Escenario escenario, Posicion posInicial, Posicion posModoSeparacion , float velocidad, int puntosAlSerComido) {
+		super(escenario, posInicial, posModoSeparacion, velocidad, puntosAlSerComido);
 	}
 	
 	@Override
@@ -11,27 +11,28 @@ public class FantasmaRosa extends Fantasma {
 		// TODO Auto-generated method stub
 		Escenario escenario = this.getEscenario();
 		Iterator<NoJugador> iteradorCosas;
-		Iterator<Ueb> iteradorCasilleros;
-		NoJugador NoJugadorActual;
-		Ueb casillero;
-		Calculador calculador;
-		int Xtotal,Ytotal;
-		int cantidad;
+		Iterator<Posicion> iteradorPosicionCasilleros;
+		NoJugador noJugadorActual;
+		Posicion posisionCasillero;  
+		int Xtotal = 0, Ytotal = 0;
+		int cantidad = 0;
 		
-		iteradorCasilleros = escenario.iterator();
-        while(iteradorCasilleros.hasNext()){
-		        casillero = iteradorCasilleros.next();	    
-			    iteradorCosas = casillero.iterator();
+		
+		iteradorPosicionCasilleros = escenario.iterator();
+        while(iteradorPosicionCasilleros.hasNext()){
+        	    posisionCasillero = iteradorPosicionCasilleros.next();
+			    iteradorCosas = escenario.sacarEnPosicion(posisionCasillero).iterator();
 		        while(iteradorCosas.hasNext()){
-		        	NoJugadorActual = iteradorCosas.next();
-		        	Xtotal += NoJugadorActual.getPosicion().getx();
-		            Ytotal += NoJugadorActual.getPosicion().getx();
-		            cantidad++;
+		        	noJugadorActual = iteradorCosas.next();
+		        	if(noJugadorActual.estaVivo()){
+		        		Xtotal += noJugadorActual.getPosicion().getx();
+		            	Ytotal += noJugadorActual.getPosicion().gety();
+		            	cantidad++;
+		            	}
 		            }
 			    }
 		
-		calculador = escenario.calculador();
-		calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), new Posicion(Xtotal/cantidad, Ytotal/cantidad));
+		escenario.calculador().DireccionHaciaMenorCaminoEntre(this.getPosicion(), new Posicion(Xtotal/cantidad, Ytotal/cantidad));
 		
 	}
 
