@@ -31,18 +31,8 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 	
 	private Posicion moverPosicionHacia(Direccion direccion, Posicion posicion){
-		Posicion posicionNueva;
-		switch (direccion){
-		case ARRIBA:   posicionNueva = new Posicion(posicion.getx()  ,posicion.gety()-1);
-		               break;
-		case ABAJO:    posicionNueva =  new Posicion(posicion.getx()  ,posicion.gety()+1);
-		               break;
-		case DERECHA:  posicionNueva =  new Posicion(posicion.getx()+1,posicion.gety()  );
-		               break;
-		case IZQUIERDA:posicionNueva =  new Posicion(posicion.getx()-1,posicion.gety()  );
-		               break;
-		default: posicionNueva = posicion;                
-		}
+		Posicion posicionNueva = posicion.clonar(); 
+		posicionNueva.moverHacia(direccion);
 		return posicionNueva;
 	}
 
@@ -56,12 +46,12 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	private Posicion hacerLLegadaPisable(Posicion llegada, Direccion[] prioridadDeDirecciones){
 		if(esPisable(llegada))return llegada;
 		else {
-			Posicion llegadan = llegada;
+			Posicion llegadaNueva = llegada;
 			for(int i=0;i<(prioridadDeDirecciones.length);i++){
-			       llegadan = moverPosicionHacia(prioridadDeDirecciones[i], llegada);
-			       if(esPisable(llegadan))break;
+			       llegadaNueva = moverPosicionHacia(prioridadDeDirecciones[i], llegada);
+			       if(esPisable(llegadaNueva))break;
 				   }
-			return hacerLLegadaPisable(llegadan, prioridadDeDirecciones);
+			return hacerLLegadaPisable(llegadaNueva, prioridadDeDirecciones);
 			}
 		}
 
