@@ -90,8 +90,6 @@ public class CalculadorTest extends TestCase {
 	}
 	
 	public void testParedEsquina(){
-		//segun mi algoritmo, no podria encontrar un piso mas cercano en este caso
-		//por lo tanto retornaria direccion NINGUNA
 		Posicion salida = new Posicion(1,1); 
 		Posicion llegada = new Posicion(4,4);
 		
