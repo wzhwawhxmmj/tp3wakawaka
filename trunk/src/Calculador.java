@@ -30,7 +30,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 		else return casillero.isPisablePorIA();
 	}
 	
-	private Posicion moverPosicionHacia(Direccion direccion, Posicion posicion){
+	private Posicion nuevaPosicionHacia(Direccion direccion, Posicion posicion){
 		Posicion posicionNueva = posicion.clonar(); 
 		posicionNueva.moverHacia(direccion);
 		return posicionNueva;
@@ -43,20 +43,20 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 	
 	
-	private Posicion hacerLLegadaPisable(Posicion llegada, Direccion[] prioridadDeDirecciones){
-		if(esPisable(llegada))return llegada;
+	private Posicion nuevaPosicionPisable(Posicion posicion, Direccion[] prioridadDeDirecciones){
+		if(esPisable(posicion))return posicion;
 		else {
-			Posicion llegadaNueva = llegada;
+			Posicion posicionNueva = posicion;
 			for(int i=0;i<(prioridadDeDirecciones.length);i++){
-			       llegadaNueva = moverPosicionHacia(prioridadDeDirecciones[i], llegada);
-			       if(esPisable(llegadaNueva))break;
+			       posicionNueva = nuevaPosicionHacia(prioridadDeDirecciones[i], posicion);
+			       if(esPisable(posicionNueva))break;
 				   }
-			return hacerLLegadaPisable(llegadaNueva, prioridadDeDirecciones);
+			return nuevaPosicionPisable(posicionNueva, prioridadDeDirecciones);
 			}
 		}
 
 	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
-		llegada = hacerLLegadaPisable(llegada,prioridadDeDirecciones);
+		llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
 		
 		if(salida.equals(llegada)){
 				if((pasosEfectuados.size() < pasosMejorCamino.size())||(pasosMejorCamino.isEmpty())){
@@ -69,7 +69,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 					pasosEfectuados.add(salida);
 					for(int i=0;i<(prioridadDeDirecciones.length);i++){
 						if(pasosEfectuados.size()==1)direccionInicialActual = prioridadDeDirecciones[i];
-						DireccionHaciaMenorCaminoEntre(moverPosicionHacia(prioridadDeDirecciones[i],salida),llegada); 
+						DireccionHaciaMenorCaminoEntre(nuevaPosicionHacia(prioridadDeDirecciones[i],salida),llegada); 
 						}
 					removerUltimoPaso(pasosEfectuados);
 					}
