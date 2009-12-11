@@ -20,6 +20,20 @@ public class Posicion extends Punto {
 			return false;
 	}
 
+	public Posicion clonar(){
+		return new Posicion(this.getx(),this.gety());
+	}
+	
+	public void moverHacia(Direccion direccion){
+		switch (direccion){
+			case ARRIBA: this.avanzarArriba();break;
+			case ABAJO: this.avanzarAbajo();break;
+			case DERECHA: this.avanzarDerecha();break;
+			case IZQUIERDA: this.avanzarIzquierda();break;
+		default: break;
+		}
+	}
+	
 	public void avanzarDerecha() {
 		int avance = this.getx() + 1;
 		this.setx(avance);
