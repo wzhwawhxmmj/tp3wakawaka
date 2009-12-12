@@ -37,6 +37,12 @@ public class Escenario {
 	public void setPuntosRestantes(long puntosRestantes) {
 		this.puntosRestantes = puntosRestantes;
 	}
+	/*agregué este método, no tiene sentido que pidamos los puntos
+	 * los restemos, y los volvamos a setear
+	 */
+	public void restarPuntos(long puntosARestar) {
+		this.puntosRestantes = this.puntosRestantes - puntosARestar;
+	}
 
 	public long getPuntosRestantes() {
 		return puntosRestantes;
