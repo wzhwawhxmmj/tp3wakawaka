@@ -138,7 +138,7 @@ public abstract class Fantasma extends NoJugador {
 	//Inicio: Metodos protegidos.
 	protected void movimientoAlAzar(){
 		Random r = new Random();
-		Posicion auxPos = this.copiar(this.getPosicion());
+		Posicion auxPos = this.getPosicion().clonar();
 
 		switch (r.nextInt(4)){
 			case 0: 
@@ -198,27 +198,19 @@ public abstract class Fantasma extends NoJugador {
 		switch (direccion){
 			case ARRIBA: 
 				auxPos.avanzarArriba(); 
-				try{
-					this.moverHacia(auxPos);
-				}catch (PosicionIlegalException e){}
+				this.moverHacia(auxPos);
 				break;
 			case ABAJO: 
 				auxPos.avanzarAbajo();
-				try{
-					this.moverHacia(auxPos);
-				}catch (PosicionIlegalException e){}
+				this.moverHacia(auxPos);
 				break;
 			case DERECHA: 
 				auxPos.avanzarDerecha();
-				try{
-					this.moverHacia(auxPos);
-				}catch (PosicionIlegalException e){}
+				this.moverHacia(auxPos);
 				break;
 			case IZQUIERDA: 
 				auxPos.avanzarIzquierda();
-				try{
-					this.moverHacia(auxPos);
-				}catch (PosicionIlegalException e){}
+				this.moverHacia(auxPos);
 				break;
 		default: break;
 		}
@@ -233,10 +225,6 @@ public abstract class Fantasma extends NoJugador {
 	
 	
 	//Inicio: Metodos privados.
-	private Posicion copiar(Posicion posicion){
-		return new Posicion(posicion.getx(), posicion.gety());
-	}
-	
 	private void sacarFantasmaDePosicionOriginal(){
 		int i = -1;
 		
