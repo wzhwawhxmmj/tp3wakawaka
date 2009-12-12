@@ -29,18 +29,10 @@ public abstract class Fantasma extends NoJugador {
 		this.escenario.sacarEnPosicion(posInicial).ponerNoJugador(this);
 	}
 
-	public void setVelocidad(float velocidad){
-		this.velocidad = velocidad;
-	}
+	//Inicio: Metodos de modos.
 	
-	public float getVelocidad(){
-		return this.velocidad;
-	}
 	
-	public Escenario getEscenario(){
-		return this.escenario;
-	}
-	
+	//		Inicio: Modo separacion.
 	public void activarModoSeparacion(){
 		this.modoSeparacion = true;
 	}
@@ -68,7 +60,82 @@ public abstract class Fantasma extends NoJugador {
 		}
 		
 	}
+	//		Fin: modo separacion.
+	
+	//		Inicio: modo azul.
+	public void volverAzul() {
+		if (!this.encerrado) this.azul = true;
+	}
 
+	public void volverNormal() {
+		this.azul = false;
+	}
+
+	public boolean estaAzul() {
+		return this.azul;
+	}
+	//		Fin: modo azul.
+	//Fin: metodos de modos.
+	
+	//Inicio: Metodos publicos
+	public void setVelocidad(float velocidad){
+		this.velocidad = velocidad;
+	}
+	
+	public float getVelocidad(){
+		return this.velocidad;
+	}
+	
+	public Escenario getEscenario(){
+		return this.escenario;
+	}
+	
+	public void comportarse(){
+		if (this.modoSeparacion && !this.encerrado && !this.azul){
+			this.actuarModoSeparacion();
+			return;
+		}
+
+		if (this.azul){
+			this.movimientoAlAzar();
+			return;
+		}
+
+		if (!this.estaVivo() && (!this.getPosicion().equals(escenario.getPosicionCasa()))) {
+			this.retonarACasa();
+			this.azul = false;
+			this.modoSeparacion = false;
+			this.encerrado = true;
+			return;
+		
+		}
+		
+		if ( (this.encerrado) && (this.getPosicion().equals(escenario.getPosicionCasa())) ){
+			try{
+				this.revivir();
+			}catch (EstadoInvalidoException e){
+				
+			}
+			this.montarGuardiaHorizontal();
+			this.contadorDeEncierro--;
+			if (this.contadorDeEncierro == 0){
+				this.encerrado = false;
+				this.contadorDeEncierro = 10;
+			}
+			return;
+		}
+			
+
+		this.estrategizar();
+		return;
+	}
+	
+	public void actuar(){
+		this.morir();
+	}
+	//Fin: Metodos publicos.
+	
+	//Inicio: Metodos protegidos.
 	protected void movimientoAlAzar(){
 		Random r = new Random();
 		Posicion auxPos = this.copiar(this.getPosicion());
@@ -102,37 +169,7 @@ public abstract class Fantasma extends NoJugador {
 		}
 	}
 	
-	private Posicion copiar(Posicion posicion){
-		return new Posicion(posicion.getx(), posicion.gety());
-	}
-	
-	public void volverAzul() {
-		if (!this.encerrado) this.azul = true;
-	}
-
-	public void volverNormal() {
-		this.azul = false;
-	}
-
-	public boolean estaAzul() {
-		return this.azul;
-	}
-
-	public abstract void estrategizar();
-	
-	private void sacarFantasmaDePosicionOriginal(){
-		int i = -1;
-		
-		Iterator<NoJugador> it = this.escenario.sacarEnPosicion(this.getPosicion()).iterator();
-		
-		while(it.hasNext()){	
-			i++;
-			if (this == it.next()) {
-				this.escenario.sacarEnPosicion(this.getPosicion()).sacarComestible(i);
-				return;
-			}
-		}
-	}
+	protected abstract void estrategizar();
 	
 	protected void moverHacia(Posicion posicion){
 		if (this.escenario.sacarEnPosicion(posicion).isPisablePorIA()){
@@ -187,56 +224,31 @@ public abstract class Fantasma extends NoJugador {
 		}
 	}
 
-	public void comportarse(){
-		if (this.modoSeparacion){
-			this.azul = false;
-			this.actuarModoSeparacion();
-			return;
-		}
-
-		if (this.azul){
-			this.modoSeparacion = false;
-			this.movimientoAlAzar();
-			return;
-		}
-
-		if (!this.estaVivo() && (!this.getPosicion().equals(escenario.getPosicionCasa()))) {
-			this.retonarACasa();
-			this.azul = false;
-			this.modoSeparacion = false;
-			this.encerrado = true;
-			return;
-		
-		}
-		
-		if ( (this.encerrado) && (this.getPosicion().equals(escenario.getPosicionCasa())) ){
-			try{
-				this.revivir();
-			}catch (EstadoInvalidoException e){
-				
-			}
-			this.montarGuardiaHorizontal();
-			this.contadorDeEncierro--;
-			if (this.contadorDeEncierro == 0){
-				this.encerrado = false;
-				this.contadorDeEncierro = 10;
-			}
-			return;
-		}
-			
-
-		this.estrategizar();
-		return;
-	}
-
 	protected void retonarACasa() {
 		Calculador calc = escenario.calculador();
 		
 		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), escenario.getPosicionCasa()));		
 	}
+	//Fin: Metodos protegidos.
 	
-	public void actuar(){
-		this.morir();
+	
+	//Inicio: Metodos privados.
+	private Posicion copiar(Posicion posicion){
+		return new Posicion(posicion.getx(), posicion.gety());
 	}
 	
+	private void sacarFantasmaDePosicionOriginal(){
+		int i = -1;
+		
+		Iterator<NoJugador> it = this.escenario.sacarEnPosicion(this.getPosicion()).iterator();
+		
+		while(it.hasNext()){	
+			i++;
+			if (this == it.next()) {
+				this.escenario.sacarEnPosicion(this.getPosicion()).sacarComestible(i);
+				return;
+			}
+		}
+	}
+	//Fin: Metodos privados.
 }
