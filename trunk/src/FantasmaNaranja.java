@@ -1,10 +1,14 @@
+/*Yo, Javier Sampietro, me encago del Fantasma Naranja*/
+
+
 public class FantasmaNaranja extends Fantasma {
 
-	public FantasmaNaranja(Escenario escenario, Posicion pos, int velocidad) {
-		super(escenario, pos, velocidad);
+	public FantasmaNaranja(Escenario escenario, Posicion posInicial, Posicion posModoSeparacion , float velocidad, int puntosAlSerComido) {
+		super(escenario, posInicial, posModoSeparacion, velocidad, puntosAlSerComido);
+	}
 	}
 
-	@Override
+
 	public void estrategizar() {
 		// TODO Auto-generated method stub
 		
