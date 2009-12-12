@@ -25,12 +25,10 @@ public class FantasmaRojo extends Fantasma {
 	}
 	
 	public void estrategizar(){
-			
+		Calculador calc = this.getEscenario().calculador();
 		if (this.pasarLimiteDePuntitosRestantes()) this.activarModoRapido();
 		
-		//Aca va el algoritmo del camino mas corto.
-		
-		
+		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPosicionPacman()));	
 	}
 
 }

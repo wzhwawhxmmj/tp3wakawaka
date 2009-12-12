@@ -10,6 +10,9 @@ public abstract class Fantasma extends NoJugador {
 	private boolean modoSeparacion;
 
 	private boolean llegoAPos;
+	private boolean encerrado;
+	private int contadorDeEncierro;
+	private Direccion dirGuardia;
 
 	public Fantasma(Escenario escenario, Posicion posInicial, Posicion posModoSeparacion ,float velocidad, int puntosAlSerComido) {
 		super(posInicial, puntosAlSerComido);
@@ -19,7 +22,10 @@ public abstract class Fantasma extends NoJugador {
 		this.modoSeparacion = false;
 
 		this.llegoAPos = false;
-
+		this.dirGuardia = Direccion.DERECHA;
+		this.encerrado = true;
+		this.contadorDeEncierro = 10;
+		
 		this.escenario.sacarEnPosicion(posInicial).ponerNoJugador(this);
 	}
 
@@ -49,9 +55,10 @@ public abstract class Fantasma extends NoJugador {
 	}
 	
 	private void actuarModoSeparacion(){
-
+		Calculador calc = escenario.calculador();
+		
 		if (!this.getPosicion().equals(this.posModoSeparacion)) {
-			//TODO Algoritmo del camino mas corto hasta posModoSeparacion
+			this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posModoSeparacion));
 			this.llegoAPos = true;
 			return;
 		}
@@ -100,7 +107,7 @@ public abstract class Fantasma extends NoJugador {
 	}
 	
 	public void volverAzul() {
-		this.azul = true;
+		if (!this.encerrado) this.azul = true;
 	}
 
 	public void volverNormal() {
@@ -136,13 +143,20 @@ public abstract class Fantasma extends NoJugador {
 			throw new PosicionIlegalException();
 	}
 	
-	protected void montarGuardia(Posicion salida, Posicion llegada){
-		//TODO montarGuardia
+	protected void montarGuardiaHorizontal(){
+		try{
+			this.moverHacia(this.dirGuardia);
+		}catch (PosicionIlegalException e){
+			if (this.dirGuardia == Direccion.DERECHA)
+				this.dirGuardia = Direccion.IZQUIERDA;
+			if (this.dirGuardia == Direccion.IZQUIERDA)
+				this.dirGuardia = Direccion.DERECHA;
+		}
 	}
 	
 	protected void moverHacia(Direccion direccion){
 		
-		Posicion auxPos = this.copiar(this.getPosicion());
+		Posicion auxPos = this.getPosicion().clonar();
 		
 		switch (direccion){
 			case ARRIBA: 
@@ -186,21 +200,39 @@ public abstract class Fantasma extends NoJugador {
 			return;
 		}
 
-		if (!this.estaVivo()) {
+		if (!this.estaVivo() && (!this.getPosicion().equals(escenario.getPosicionCasa()))) {
 			this.retonarACasa();
 			this.azul = false;
-			if (this.getPosicion().equals(escenario.getPosicionCasa())) this.revivir();
+			this.modoSeparacion = false;
+			this.encerrado = true;
 			return;
 		
 		}
+		
+		if ( (this.encerrado) && (this.getPosicion().equals(escenario.getPosicionCasa())) ){
+			try{
+				this.revivir();
+			}catch (EstadoInvalidoException e){
+				
+			}
+			this.montarGuardiaHorizontal();
+			this.contadorDeEncierro--;
+			if (this.contadorDeEncierro == 0){
+				this.encerrado = false;
+				this.contadorDeEncierro = 10;
+			}
+			return;
+		}
+			
 
 		this.estrategizar();
 		return;
 	}
 
 	protected void retonarACasa() {
-		// TODO retornarACasa
+		Calculador calc = escenario.calculador();
 		
+		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), escenario.getPosicionCasa()));		
 	}
 	
 	public void actuar(){
