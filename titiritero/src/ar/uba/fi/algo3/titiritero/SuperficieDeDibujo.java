@@ -6,8 +6,6 @@ package ar.uba.fi.algo3.titiritero;
  */
 public interface SuperficieDeDibujo {
 	public void limpiar();
-
 	public void actualizar();
-
 	public Object getBuffer();
 }

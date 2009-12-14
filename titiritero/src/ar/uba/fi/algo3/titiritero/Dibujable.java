@@ -8,9 +8,7 @@ package ar.uba.fi.algo3.titiritero;
 public interface Dibujable {
 
 	public void dibujar(SuperficieDeDibujo superfice);
-
 	public Posicionable getPosicionable();
-
 	public void setPosicionable(Posicionable posicionable);
 
-}
+}   

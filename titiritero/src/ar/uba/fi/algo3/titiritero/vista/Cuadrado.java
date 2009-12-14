@@ -13,16 +13,15 @@ public class Cuadrado extends Figura {
 	private int alto;
 	private int ancho;
 
-	public Cuadrado(int ancho, int alto) {
+	public Cuadrado(int ancho, int alto){
 		this.alto = alto;
 		this.ancho = ancho;
 		setColor(Color.GRAY);
 	}
-
+	
 	public void dibujar(SuperficieDeDibujo superfice) {
-		Graphics grafico = (Graphics) superfice.getBuffer();
+		Graphics grafico = (Graphics)superfice.getBuffer();
 		grafico.setColor(this.getColor());
-		grafico.fillRect(this.getPosicionable().getX(), this.getPosicionable()
-				.getY(), this.ancho, this.alto);
+		grafico.fillRect(this.getPosicionable().getX(), this.getPosicionable().getY(), this.ancho, this.alto);
 	}
 }
