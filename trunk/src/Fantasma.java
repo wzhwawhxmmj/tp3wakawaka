@@ -3,31 +3,39 @@ import java.util.Iterator;
 
 public abstract class Fantasma extends NoJugador {
 
+	private static final int tiempoDeEncierro = 10;
+	private static final int tiempoDeEstrategizacion = 50;
+	private static final int tiempoDeSeparacion = 50;
+	
 	private boolean azul;
 	private float velocidad;
 	private Posicion posModoSeparacion;
 	private boolean modoSeparacion;
 	private int duracionModoAzul;
-
+	
 	private boolean llegoAPos;
 	private boolean encerrado;
 	private int contadorDeEncierro;
 	private Direccion dirGuardia;
-	private int puntosAlSerComido;
+	private int temporizadorModoAzul;
+	private int temporizadorModoSeparacion;
+	private int temporizadorDeEstrategizacion;
 
-	public Fantasma(Escenario escenario, Posicion posModoSeparacion , int duracionModoAzul , float velocidad, int puntosAlSerComido) {
+	public Fantasma(Escenario escenario, Posicion posModoSeparacion , float duracionModoAzul , float velocidad, int puntosAlSerComido) {
 		super(escenario, escenario.getPosicionCasa(), puntosAlSerComido);
 		this.velocidad = velocidad;
 		this.azul = false;
 		this.posModoSeparacion = posModoSeparacion;
 		this.modoSeparacion = false;
-		this.duracionModoAzul = duracionModoAzul;
+		this.duracionModoAzul = (int) Math.ceil(duracionModoAzul);
 
-		this.puntosAlSerComido = puntosAlSerComido;
 		this.llegoAPos = false;
 		this.dirGuardia = Direccion.DERECHA;
 		this.encerrado = true;
-		this.contadorDeEncierro = 10;
+		this.contadorDeEncierro = tiempoDeEncierro;
+		this.temporizadorModoAzul = (int) Math.ceil(duracionModoAzul);
+		this.temporizadorDeEstrategizacion = tiempoDeEstrategizacion;
+		this.temporizadorModoSeparacion = tiempoDeSeparacion;
 		
 		this.getEscenario().sacarEnPosicion(escenario.getPosicionCasa()).ponerNoJugador(this);
 	}
@@ -67,7 +75,10 @@ public abstract class Fantasma extends NoJugador {
 	
 	//		Inicio: modo azul.
 	public void volverAzul() {
-		if (!this.encerrado) this.azul = true;
+		if (!this.encerrado && this.estaVivo()){
+			this.temporizadorModoAzul = this.duracionModoAzul;
+			this.azul = true;
+		}
 	}
 
 	public void volverNormal() {
@@ -80,14 +91,7 @@ public abstract class Fantasma extends NoJugador {
 	//		Fin: modo azul.
 	//Fin: metodos de modos.
 	
-	//Inicio: Metodos publicos
-	public int getPuntaje(){
-		if (this.azul = true)
-			return this.puntosAlSerComido;
-		else
-			return 0;
-	}
-	
+	//Inicio: Metodos publicos	
 	public void setVelocidad(float velocidad){
 		this.velocidad = velocidad;
 	}
@@ -100,17 +104,43 @@ public abstract class Fantasma extends NoJugador {
 		int velocidadTruncada = (int) Math.ceil(this.velocidad);
 		
 		for (int i = 0; i < velocidadTruncada ; i++) {
-			if (this.modoSeparacion && !this.encerrado && !this.azul){
+			if (!this.modoSeparacion)
+				this.temporizadorDeEstrategizacion--;
+			
+			if (this.temporizadorDeEstrategizacion == 0){
+				this.modoSeparacion = true;
+				this.temporizadorDeEstrategizacion = tiempoDeEstrategizacion;
+			}
+			
+			if (this.modoSeparacion)
+				this.temporizadorModoSeparacion--;
+			
+			if (this.temporizadorModoSeparacion == 0){
+				this.modoSeparacion = false;
+				this.temporizadorModoSeparacion = tiempoDeSeparacion;
+			}
+			
+			if (this.getPosicion().equals(this.getEscenario().getPacman().getPosicion())){
+				this.getEscenario().getPacman().comer(this);
+			}
+			
+			if (this.modoSeparacion && !this.encerrado && !this.azul && this.estaVivo()){
 				this.actuarModoSeparacion();
 			}
-
+			
 			if (this.azul){
+				this.temporizadorModoAzul--;
+				if (this.temporizadorModoAzul == 0){
+					this.azul = false;
+					this.temporizadorModoAzul = this.duracionModoAzul;
+				}
 				this.movimientoAlAzar();
 			}
 
 			if (!this.estaVivo() && (!this.getPosicion().equals(this.getEscenario().getPosicionCasa()))) {
-				this.retonarACasa();
+				this.temporizadorModoAzul = this.duracionModoAzul;
 				this.azul = false;
+				this.retonarACasa();
 				this.modoSeparacion = false;
 				this.encerrado = true;		
 			}
@@ -124,24 +154,30 @@ public abstract class Fantasma extends NoJugador {
 				this.contadorDeEncierro--;
 				if (this.contadorDeEncierro == 0){
 					this.encerrado = false;
-					this.contadorDeEncierro = 10;
+					this.contadorDeEncierro = tiempoDeEncierro;
 				}
 			}
 			
-			if (!this.encerrado && !this.azul && !this.modoSeparacion)
+			if (!this.encerrado && !this.azul && !this.modoSeparacion && this.estaVivo())
 				this.estrategizar();
 		}
 	}
 	
-	public void activar(){
-		if (this.azul)
-			this.morir();
-		else 
-			try{
-				this.getEscenario().getPacman().morir();
-			}catch (EstadoInvalidoException e){
-			}
-		
+	public long activar(){
+		if (this.estaVivo()){
+			
+			if (this.estaAzul()){
+				this.morir();
+				return this.getPuntaje();
+			}else 
+				try{
+					this.getEscenario().getPacman().morir();
+					return 0;
+				}catch (EstadoInvalidoException e){
+					return 0;
+					}
+		}
+		return 0;
 	}
 	//Fin: Metodos publicos.
 	
@@ -183,9 +219,13 @@ public abstract class Fantasma extends NoJugador {
 	
 	protected void moverHacia(Posicion posicion){
 		if (this.getEscenario().sacarEnPosicion(posicion).isPisablePorIA()){
-			this.sacarFantasmaDePosicionOriginal();
-			this.setPosicion(posicion);
-			this.getEscenario().sacarEnPosicion(posicion).ponerNoJugador(this);
+			
+			if(this.getEscenario().getPosicionCasa().equals(posicion) && !this.puedeEntrarACasa())
+				throw new PosicionIlegalException();
+			
+				this.sacarDePosicionOriginal();
+				this.setPosicion(posicion);
+				this.getEscenario().sacarEnPosicion(posicion).ponerNoJugador(this);
 		}else
 			throw new PosicionIlegalException();
 	}
@@ -235,7 +275,7 @@ public abstract class Fantasma extends NoJugador {
 	
 	
 	//Inicio: Metodos privados.
-	private void sacarFantasmaDePosicionOriginal(){
+	private void sacarDePosicionOriginal(){
 		int i = -1;
 		
 		Iterator<NoJugador> it = this.getEscenario().sacarEnPosicion(this.getPosicion()).iterator();
@@ -247,6 +287,16 @@ public abstract class Fantasma extends NoJugador {
 				return;
 			}
 		}
+	}
+	
+	private boolean puedeEntrarACasa(){
+		if (this.estaVivo()) {
+			if (!this.encerrado)
+				return false;
+			else
+				return true;
+		}else
+			return true;
 	}
 	//Fin: Metodos privados.
 }
