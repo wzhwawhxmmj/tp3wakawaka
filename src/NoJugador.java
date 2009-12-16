@@ -3,18 +3,18 @@ public abstract class NoJugador extends Entidad {
 
 	private int puntosAlSerComido;
 	
-	public NoJugador(Posicion posicion, int puntosAlSerComido) {
-		super(posicion);
+	public NoJugador(Escenario escenario, Posicion posicion, int puntosAlSerComido) {
+		super(escenario,posicion);
 		this.puntosAlSerComido = puntosAlSerComido;
 	}
 	
-	public void setPuntos(int cantidad){
+	protected void setPuntaje(int cantidad){
 		this.puntosAlSerComido = cantidad;
 	}
 	
-	public int getPuntos(){
+	public int getPuntaje(){
 		return this.puntosAlSerComido;
 	}
 
-	public abstract void actuar();
+	public abstract void activar();
 }

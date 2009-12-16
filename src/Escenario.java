@@ -1,10 +1,12 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Escenario {
-/* creando el escenario, los puntos valen 10 pts y las pildoras 30 pts*/
-	private long puntosRestantes;
-	private long puntosTotales;
+
+	private int puntosRestantes;
+	private int puntosTotales;
 	private Posicion posicionCasa;
+	private Pacman pacman;
 	
 	
 	private HashMap <Posicion, Ueb>  tablero;
@@ -12,42 +14,43 @@ public class Escenario {
 	
 	public Escenario() {
 		this.tablero = new HashMap <Posicion, Ueb>();
-		this.setPuntosRestantes(2530);/*241*10 + 4 * 30*/
-		this.setPuntosTotales(2530);
+		this.puntosRestantes = 0;
+		this.puntosTotales = 0;
+	}
+	
+	public void colocarPacman(Pacman pacman){
+		this.pacman = pacman;
+	}
+	
+	public Pacman getPacman(){
+		return this.pacman;
 	}
 	
 	public void ponerEnPosicion(Posicion p, Ueb casillero) {
-		this.tablero.put(p, casillero);	
+		this.tablero.put(p, casillero);
+		this.puntosRestantes++;
+		this.puntosTotales++;
 	}
 
 	public Ueb sacarEnPosicion(Punto p) {
 		/*Retorna un Ueb, puede ser pared, casa o piso (CASILLERO llamado asi por coco.)*/
-		return  this.tablero.get(p);
+		if (tablero.containsKey(p))
+			return this.tablero.get(p);
+		else
+			throw new PosicionIlegalException();
 
 	}
 	
-	public void setPuntosTotales(long puntosTotales) {
-		this.puntosTotales = puntosTotales;
-	}
-
-	public long getPuntosTotales() {
+	public int getPuntosTotales() {
 		return puntosTotales;
 	}
-
-	public void setPuntosRestantes(long puntosRestantes) {
-		this.puntosRestantes = puntosRestantes;
-	}
-	/*agregué este método, no tiene sentido que pidamos los puntos
-	 * los restemos, y los volvamos a setear
-	 */
-	public void restarPuntos(long puntosARestar) {
-		this.puntosRestantes = this.puntosRestantes - puntosARestar;
-	}
-
-	public long getPuntosRestantes() {
-		return puntosRestantes;
-		
 	
+	public void restarPuntos(int puntosARestar) {
+		this.puntosRestantes -= puntosARestar;
+	}
+
+	public int getPuntosRestantes() {
+		return puntosRestantes;
 	}
 
 	public void setPosicionCasa(Posicion posicionCasa) {
@@ -60,11 +63,11 @@ public class Escenario {
 	
 	public Iterator<Posicion> iterator(){
 		return this.tablero.keySet().iterator();
-		}
+	}
 
 	
 	public Calculador calculador(){
-			  return new Calculador (this);
-			}
-		
+		return new Calculador (this);
 	}
+		
+}

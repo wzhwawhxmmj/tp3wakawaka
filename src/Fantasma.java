@@ -4,29 +4,32 @@ import java.util.Iterator;
 public abstract class Fantasma extends NoJugador {
 
 	private boolean azul;
-	private Escenario escenario;
 	private float velocidad;
 	private Posicion posModoSeparacion;
 	private boolean modoSeparacion;
+	private int duracionModoAzul;
 
 	private boolean llegoAPos;
 	private boolean encerrado;
 	private int contadorDeEncierro;
 	private Direccion dirGuardia;
+	private int puntosAlSerComido;
 
-	public Fantasma(Escenario escenario, Posicion posInicial, Posicion posModoSeparacion ,float velocidad, int puntosAlSerComido) {
-		super(posInicial, puntosAlSerComido);
+	public Fantasma(Escenario escenario, Posicion posModoSeparacion , int duracionModoAzul , float velocidad, int puntosAlSerComido) {
+		super(escenario, escenario.getPosicionCasa(), puntosAlSerComido);
 		this.velocidad = velocidad;
 		this.azul = false;
 		this.posModoSeparacion = posModoSeparacion;
 		this.modoSeparacion = false;
+		this.duracionModoAzul = duracionModoAzul;
 
+		this.puntosAlSerComido = puntosAlSerComido;
 		this.llegoAPos = false;
 		this.dirGuardia = Direccion.DERECHA;
 		this.encerrado = true;
 		this.contadorDeEncierro = 10;
 		
-		this.escenario.sacarEnPosicion(posInicial).ponerNoJugador(this);
+		this.getEscenario().sacarEnPosicion(escenario.getPosicionCasa()).ponerNoJugador(this);
 	}
 
 	//Inicio: Metodos de modos.
@@ -47,7 +50,7 @@ public abstract class Fantasma extends NoJugador {
 	}
 	
 	private void actuarModoSeparacion(){
-		Calculador calc = escenario.calculador();
+		Calculador calc = this.getEscenario().calculador();
 		
 		if (!this.getPosicion().equals(this.posModoSeparacion)) {
 			this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posModoSeparacion));
@@ -78,6 +81,13 @@ public abstract class Fantasma extends NoJugador {
 	//Fin: metodos de modos.
 	
 	//Inicio: Metodos publicos
+	public int getPuntaje(){
+		if (this.azul = true)
+			return this.puntosAlSerComido;
+		else
+			return 0;
+	}
+	
 	public void setVelocidad(float velocidad){
 		this.velocidad = velocidad;
 	}
@@ -86,56 +96,56 @@ public abstract class Fantasma extends NoJugador {
 		return this.velocidad;
 	}
 	
-	public Escenario getEscenario(){
-		return this.escenario;
-	}
-	
-	public void comportarse(){
-		if (this.modoSeparacion && !this.encerrado && !this.azul){
-			this.actuarModoSeparacion();
-			return;
-		}
-
-		if (this.azul){
-			this.movimientoAlAzar();
-			return;
-		}
-
-		if (!this.estaVivo() && (!this.getPosicion().equals(escenario.getPosicionCasa()))) {
-			this.retonarACasa();
-			this.azul = false;
-			this.modoSeparacion = false;
-			this.encerrado = true;
-			return;
+	public void vivir(){
+		int velocidadTruncada = (int) Math.ceil(this.velocidad);
 		
-		}
+		for (int i = 0; i < velocidadTruncada ; i++) {
+			if (this.modoSeparacion && !this.encerrado && !this.azul){
+				this.actuarModoSeparacion();
+			}
+
+			if (this.azul){
+				this.movimientoAlAzar();
+			}
+
+			if (!this.estaVivo() && (!this.getPosicion().equals(this.getEscenario().getPosicionCasa()))) {
+				this.retonarACasa();
+				this.azul = false;
+				this.modoSeparacion = false;
+				this.encerrado = true;		
+			}
 		
-		if ( (this.encerrado) && (this.getPosicion().equals(escenario.getPosicionCasa())) ){
-			try{
-				this.revivir();
-			}catch (EstadoInvalidoException e){
-				
+			if ( (this.encerrado) && (this.getPosicion().equals(this.getEscenario().getPosicionCasa())) ){
+				try{
+					this.revivir();
+				}catch (EstadoInvalidoException e){
+					}
+				this.montarGuardiaHorizontal();
+				this.contadorDeEncierro--;
+				if (this.contadorDeEncierro == 0){
+					this.encerrado = false;
+					this.contadorDeEncierro = 10;
+				}
 			}
-			this.montarGuardiaHorizontal();
-			this.contadorDeEncierro--;
-			if (this.contadorDeEncierro == 0){
-				this.encerrado = false;
-				this.contadorDeEncierro = 10;
-			}
-			return;
-		}
 			
-
-		this.estrategizar();
-		return;
+			if (!this.encerrado && !this.azul && !this.modoSeparacion)
+				this.estrategizar();
+		}
 	}
 	
-	public void actuar(){
-		this.morir();
+	public void activar(){
+		if (this.azul)
+			this.morir();
+		else 
+			try{
+				this.getEscenario().getPacman().morir();
+			}catch (EstadoInvalidoException e){
+			}
+		
 	}
 	//Fin: Metodos publicos.
 	
-	//Inicio: Metodos protegidos.
+	//Inicio: Metodos protegidos.	
 	protected void movimientoAlAzar(){
 		Random r = new Random();
 		Posicion auxPos = this.getPosicion().clonar();
@@ -172,10 +182,10 @@ public abstract class Fantasma extends NoJugador {
 	protected abstract void estrategizar();
 	
 	protected void moverHacia(Posicion posicion){
-		if (this.escenario.sacarEnPosicion(posicion).isPisablePorIA()){
+		if (this.getEscenario().sacarEnPosicion(posicion).isPisablePorIA()){
 			this.sacarFantasmaDePosicionOriginal();
 			this.setPosicion(posicion);
-			this.escenario.sacarEnPosicion(posicion).ponerNoJugador(this);
+			this.getEscenario().sacarEnPosicion(posicion).ponerNoJugador(this);
 		}else
 			throw new PosicionIlegalException();
 	}
@@ -217,9 +227,9 @@ public abstract class Fantasma extends NoJugador {
 	}
 
 	protected void retonarACasa() {
-		Calculador calc = escenario.calculador();
+		Calculador calc = this.getEscenario().calculador();
 		
-		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), escenario.getPosicionCasa()));		
+		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPosicionCasa()));		
 	}
 	//Fin: Metodos protegidos.
 	
@@ -228,12 +238,12 @@ public abstract class Fantasma extends NoJugador {
 	private void sacarFantasmaDePosicionOriginal(){
 		int i = -1;
 		
-		Iterator<NoJugador> it = this.escenario.sacarEnPosicion(this.getPosicion()).iterator();
+		Iterator<NoJugador> it = this.getEscenario().sacarEnPosicion(this.getPosicion()).iterator();
 		
 		while(it.hasNext()){	
 			i++;
 			if (this == it.next()) {
-				this.escenario.sacarEnPosicion(this.getPosicion()).sacarComestible(i);
+				this.getEscenario().sacarEnPosicion(this.getPosicion()).sacarComestible(i);
 				return;
 			}
 		}

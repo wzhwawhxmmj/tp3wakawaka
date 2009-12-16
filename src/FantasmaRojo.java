@@ -3,8 +3,8 @@ public class FantasmaRojo extends Fantasma {
 
 	private float velocidadEnModoRapido;
 	
-	public FantasmaRojo(Escenario escenario, Posicion posInicial, Posicion posModoSeparacion , float velocidad, int puntosAlSerComido) {
-		super(escenario, posInicial, posModoSeparacion, velocidad, puntosAlSerComido);
+	public FantasmaRojo(Escenario escenario, Posicion posModoSeparacion, int duracionModoAzul, float velocidad, int puntosAlSerComido) {
+		super(escenario, posModoSeparacion, duracionModoAzul, velocidad, puntosAlSerComido);
 		this.velocidadEnModoRapido = velocidad + velocidad * (1/5);
 	}
 
@@ -28,7 +28,7 @@ public class FantasmaRojo extends Fantasma {
 		Calculador calc = this.getEscenario().calculador();
 		if (this.pasarLimiteDePuntitosRestantes()) this.activarModoRapido();
 		
-		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPosicionPacman()));	
+		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPacman().getPosicion()));	
 	}
 
 }

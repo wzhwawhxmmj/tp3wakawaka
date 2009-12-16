@@ -2,10 +2,12 @@ public abstract class Entidad {
 
 	private Estado estado;
 	private Posicion posicion;
+	private Escenario escenario;
 
-	public Entidad(Posicion posicion) {
+	public Entidad(Escenario escenario, Posicion posicion) {
 		this.posicion = posicion;
 		this.estado = Estado.VIVO;
+		this.escenario = escenario;
 	}
 
 	public void setPosicion(Posicion posicion){
@@ -30,5 +32,13 @@ public abstract class Entidad {
 	public void morir() {
 		if(this.estado == Estado.VIVO) this.estado = Estado.MUERTO;
 		else throw new EstadoInvalidoException();
+	}
+
+	protected Escenario getEscenario() {
+		return escenario;
+	}
+	
+	protected void setEscenario(Escenario escenario){
+		this.escenario = escenario;
 	}
 }
