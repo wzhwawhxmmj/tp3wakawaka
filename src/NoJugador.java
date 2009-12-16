@@ -12,9 +12,9 @@ public abstract class NoJugador extends Entidad {
 		this.puntosAlSerComido = cantidad;
 	}
 	
-	public int getPuntaje(){
+	public int getPuntaje() {
 		return this.puntosAlSerComido;
 	}
 
-	public abstract void activar();
+	public abstract long activar();
 }
