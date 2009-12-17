@@ -1,3 +1,5 @@
+package logica;
+
 public class Pared extends Ueb {
 
 	public Pared() {

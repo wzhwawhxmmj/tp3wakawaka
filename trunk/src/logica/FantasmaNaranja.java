@@ -1,3 +1,5 @@
+package logica;
+
 /*Yo, Javier Sampietro, me encago del Fantasma Naranja*/
 import java.util.*;
 

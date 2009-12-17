@@ -1,3 +1,4 @@
+package logica;
 
 public abstract class NoJugador extends Entidad {
 
