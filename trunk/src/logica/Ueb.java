@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class Ueb {
+public abstract class Ueb implements ar.uba.fi.algo3.titiritero.Posicionable {
 
 	private boolean pisablePorIA;
 	private boolean pisablePorJugador;
 	private List<NoJugador> casillero;
+	private Posicion posicion;
 	
 	public Ueb() {
 		this.casillero = new ArrayList<NoJugador>();
+	}
+	
+	public void setPosicion(Posicion posicion){
+		this.posicion = posicion;
 	}
 	
 	public void ponerNoJugador(NoJugador noJugador){
@@ -66,4 +71,18 @@ public abstract class Ueb {
 	public Iterator<NoJugador> iterator(){
 		return this.casillero.iterator();
 	}
+
+	@Override
+	public int getX() {
+		// TODO Auto-generated method stub
+		return this.posicion.getx();
+	}
+
+	@Override
+	public int getY() {
+		// TODO Auto-generated method stub
+		return this.posicion.gety();
+	}
+	
+	
 }
