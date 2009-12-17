@@ -2,24 +2,25 @@
 public class Pildora extends NoJugador{
 
 	
-	private long puntaje;
+	private Juego juego;
 	private boolean comido;
 	
-	public Pildora(Posicion posicion, int puntosAlSerComido) {
-		super(posicion, puntosAlSerComido);
-		// TODO Auto-generated constructor stub
+	
+	public Pildora(Escenario escenario, Posicion posicion, int puntosAlSerComido, Juego juegoActual ) {
+		super(escenario, posicion, puntosAlSerComido );
+		this.juego = juegoActual;
 	}
 	
 
-	public void setPuntaje(long puntaje) {
-		this.puntaje = puntaje;
+	public int getPuntaje() {
+		return this.getPuntaje();
 	}
-
-	public long getPuntaje() {
-		return puntaje;
-	}
-	public void actuar(){
+	
+	public long activar(){
+		this.juego.ponerFantasmasAzules();
 		this.setComido(true);
+		return this.getPuntaje();
+		
 	}
 
 	public void setComido(boolean comido) {
