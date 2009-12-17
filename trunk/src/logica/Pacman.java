@@ -1,6 +1,6 @@
 package logica;
 
-public class Pacman extends Entidad implements ar.uba.fi.algo3.titiritero.Posicionable {
+public class Pacman extends Entidad implements ar.uba.fi.algo3.titiritero.Posicionable,ar.uba.fi.algo3.titiritero.ObjetoVivo {
 	
 	private int puntajeAcumulado;
 	private Direccion direccion;
