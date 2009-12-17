@@ -1,7 +1,7 @@
 public class FantasmaCeleste extends Fantasma {
 
-	public FantasmaCeleste(Escenario escenario, Posicion pos, int velocidad) {
-		super(escenario, pos, velocidad);
+	public FantasmaCeleste(Escenario escenario, Posicion posModoSeparacion, float duracionModoAzul, float velocidad, int puntosAlSerComido) { 
+		super(escenario, posModoSeparacion, duracionModoAzul, velocidad, puntosAlSerComido);
 	}
 
 	@Override
