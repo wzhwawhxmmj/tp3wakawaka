@@ -48,7 +48,6 @@ public class Escenario {
 	
 	public void colocarPacman(Pacman pacman){
 		this.pacman = pacman;
-		this.pacman.setPosicion(this.posicionInicialPacman);
 	}
 	
 	public Pacman getPacman(){
@@ -72,6 +71,11 @@ public class Escenario {
 	
 	public int getPuntosTotales() {
 		return puntosTotales;
+	}
+	
+	public void setPuntosTotales(int puntosTotales){
+		this.puntosTotales = puntosTotales;
+		this.puntosRestantes = puntosTotales;
 	}
 	
 	public void restarPuntos(int puntosARestar) {
