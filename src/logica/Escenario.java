@@ -80,10 +80,6 @@ public class Escenario {
 		this.puntosRestantes = puntosTotales;
 	}
 	
-	public void setPuntosRestantes(int puntosRestantes){
-		this.puntosRestantes = puntosRestantes;
-	}
-	
 	public void restarPuntos(int puntosARestar) {
 		this.puntosRestantes -= puntosARestar;
 	}
