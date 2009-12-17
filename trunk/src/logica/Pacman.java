@@ -14,8 +14,7 @@ public class Pacman extends Entidad implements ar.uba.fi.algo3.titiritero.Posici
 	}
 
 	public void comer(NoJugador algunaCosa) {
-		algunaCosa.activar();
-		puntajeAcumulado += algunaCosa.getPuntaje();
+		puntajeAcumulado += algunaCosa.activar();
 	}
 
 	public Direccion Direccion(){
