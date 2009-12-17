@@ -1,6 +1,6 @@
 package logica;
 
-public class Pildora extends NoJugador{
+public class Pildora extends NoJugador implements ar.uba.fi.algo3.titiritero.Posicionable{
 
 	
 	private Juego juego;
@@ -30,5 +30,13 @@ public class Pildora extends NoJugador{
 
 	public boolean isComido() {
 		return comido;
+	}
+	
+	public int getX() {
+		return this.getPosicion().getx();
+	}
+	
+	public int getY() {
+		return this.getPosicion().gety();
 	}
 }
