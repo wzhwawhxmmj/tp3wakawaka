@@ -3,26 +3,21 @@ public class Puntito extends NoJugador {
 	
 	
 
-		private long puntaje;
 		private boolean comido;
 		
 		
-		public Puntito(Posicion posicion, int puntosAlSerComido) {
-			super(posicion, puntosAlSerComido);
-			// TODO Auto-generated constructor stub
+		public Puntito(Escenario escenario, Posicion posicion, int puntosAlSerComido) {
+			super(escenario, posicion, puntosAlSerComido);
 		}
 		
 
-		public void setPuntaje(long puntaje) {
-			this.puntaje = puntaje;
-		}
+		
+	
 
-		public long getPuntaje() {
-			return puntaje;
-		}
-
-		public void actuar(){
+		public long activar(){
 			this.setComido(true);
+			this.getEscenario().restarPuntos(1);
+			return  this.getPuntaje();
 		}
 
 		public void setComido(boolean comido) {
