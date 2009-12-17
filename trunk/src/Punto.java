@@ -26,5 +26,9 @@ public class Punto {
 	public String toString() {
 		return "(" + this.getx() + "," + this.gety() + ")";
 	}
+	
+	public double distanciaA(Punto punto){
+		return Math.sqrt((this.getx()-punto.getx())^2 + (this.gety()-punto.gety())^2); 
+	}
 
 }
