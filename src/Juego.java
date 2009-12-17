@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 
 public class Juego {
 	
@@ -20,6 +22,7 @@ public class Juego {
 		this.listaDeEscenarios = new ListaDeEscenarios();
 		this.pacman = null;
 		this.escenarioActual = null;
+	
 	}	
 	
 
@@ -27,11 +30,15 @@ public class Juego {
 	private void inicializarFantasmas(Escenario escenario){
 		
 		float velocidadActual = (float) (1 + (0.2 * (this.nivelActual - 1)));
+		int duracionModoAzulActual =  (40 -  (this.nivelActual - 1));
+		int puntosAlSerComidoActual =  (100 + (10*(this.nivelActual - 1)));
+		Iterator<Posicion> iteradorPuntosDeSeparacion = escenario.iteradorPuntosDeSeparacion();
+	
 		
-		arrayDeFantasmas[0] = new FantasmaRojo(escenario, escenario.getPosicionCasa(), velocidadActual);
-		arrayDeFantasmas[1] = new FantasmaCeleste(escenario, escenario.getPosicionCasa(), velocidadActual);
-		arrayDeFantasmas[2] = new FantasmaRosa(escenario, escenario.getPosicionCasa(), velocidadActual);
-		arrayDeFantasmas[3] = new FantasmaNaranja(escenario, escenario.getPosicionCasa(), velocidadActual);
+		arrayDeFantasmas[0] = new FantasmaRojo(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
+		arrayDeFantasmas[0] = new FantasmaNaranja(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
+		arrayDeFantasmas[0] = new FantasmaCeleste(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
+		arrayDeFantasmas[0] = new FantasmaRosa(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
 	}
 	
 	
@@ -48,7 +55,7 @@ public class Juego {
 	public void jugar(){
 		while ((listaDeEscenarios.tieneSiguiente())&& (this.vidas != 0)){
 			this.inicializarNivel(this.nivelActual);
-			while ((this.escenarioActual.hayPuntos()) && (this.vidas != 0)){
+			while (((this.escenarioActual.getPuntosRestantes())!= 0) && (this.vidas != 0)){
 				/*Si no lo estoy pensando mal, acá va todo lo que es el titiritero
 				 *y esas yerbas, Este sería el método príncipal, falta discutir
 				 *Como termina el juego. 
@@ -57,10 +64,15 @@ public class Juego {
 		}
 	}
 
-	public int getPuntajePacman(){
-		this.puntaje = this.pacman.getPuntaje();
-		this.pacman.clearPuntaje();
+	public void ActualizarPuntajeJugador(){
+		this.puntaje = this.pacman.getPuntajeAcumulado();
 		
+	}
+	
+	public void ponerFantasmasAzules(){
+		for (int i=0; i<4; i++){
+			this.arrayDeFantasmas[i].volverAzul();
+		}
 	}
 
 }
