@@ -48,7 +48,7 @@ public class Juego {
 		
 		this.escenarioActual = escenario;
 		this.inicializarFantasmas (escenario);
-		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman());
+		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman(),2 );
 		
 	}
 	
