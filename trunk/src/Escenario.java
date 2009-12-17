@@ -15,6 +15,7 @@ public class Escenario {
 	
 	public Escenario() {
 		this.tablero = new HashMap <Posicion, Ueb>();
+		this.posicionesDeSeparacion = new ArrayList<Posicion>();
 		this.puntosRestantes = 0;
 		this.puntosTotales = 0;
 	}

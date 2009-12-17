@@ -4,8 +4,8 @@ import java.util.Iterator;
 public abstract class Fantasma extends NoJugador {
 
 	private static final int tiempoDeEncierro = 1;
-	private static final int tiempoDeEstrategizacion = 5;
-	private static final int tiempoDeSeparacion = 2;
+	private static final int tiempoDeEstrategizacion = 100;
+	private static final int tiempoDeSeparacion = 50;
 	
 	private boolean azul;
 	private float velocidad;
@@ -110,7 +110,11 @@ public abstract class Fantasma extends NoJugador {
 		for (int i = 1; i <= velocidadTruncada ; i++) {
 			
 			if ((!this.encerrado) && !this.azul && !this.modoSeparacion && this.estaVivo()){
+				try{	
 					this.estrategizar();
+				}catch(PosicionIlegalException e){
+					this.movimientoAlAzar();
+				}
 			}
 			
 			if (this.temporizadorDeEstrategizacion == 0){
@@ -134,7 +138,11 @@ public abstract class Fantasma extends NoJugador {
 			}
 			
 			if (this.modoSeparacion && !this.encerrado && !this.azul && this.estaVivo()){
-				this.actuarModoSeparacion();
+				try{
+					this.actuarModoSeparacion();
+				}catch(PosicionIlegalException e){
+					this.movimientoAlAzar();
+				}
 			}
 
 			if (!this.estaVivo() && !this.retornoACasa) {
