@@ -12,14 +12,10 @@ public abstract class Ueb {
 	public Ueb() {
 		this.casillero = new ArrayList<NoJugador>();
 	}
-
-	
 	
 	public void ponerNoJugador(NoJugador noJugador){
 		casillero.add(noJugador);
 	}
-	
-	
 	
 	public int cantidadDeComestibles(){
 		
@@ -36,8 +32,6 @@ public abstract class Ueb {
 		comestible = casillero.get(i);
 		casillero.remove(i);
 		return comestible;
-	
-		
 	}
 	
 	public NoJugador consultarComestible(int i){
@@ -51,9 +45,6 @@ public abstract class Ueb {
 	
 		casillero.clear();
 	}
-	
-	
-	
 
 	public void setPisablePorJugador(boolean pisablePorJugador) {
 		this.pisablePorJugador = pisablePorJugador;
@@ -73,7 +64,5 @@ public abstract class Ueb {
 	
 	public Iterator<NoJugador> iterator(){
 		return this.casillero.iterator();
-		}
-
-
+	}
 }

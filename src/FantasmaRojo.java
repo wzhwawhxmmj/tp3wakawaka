@@ -3,7 +3,7 @@ public class FantasmaRojo extends Fantasma {
 
 	private float velocidadEnModoRapido;
 	
-	public FantasmaRojo(Escenario escenario, Posicion posModoSeparacion, int duracionModoAzul, float velocidad, int puntosAlSerComido) {
+	public FantasmaRojo(Escenario escenario, Posicion posModoSeparacion, float duracionModoAzul, float velocidad, int puntosAlSerComido) {
 		super(escenario, posModoSeparacion, duracionModoAzul, velocidad, puntosAlSerComido);
 		this.velocidadEnModoRapido = velocidad + velocidad * (1/5);
 	}
