@@ -19,12 +19,7 @@ public class ListaDeEscenarios {
 		Escenario escenario = new Escenario();
 		
 		Pared pared = new Pared();		
-		Piso casillero = new Piso();		
-		
-		
-		//casillero.ponerPunto(posicion);
-		
-		//escenario.ponerEnPosicion(posicion, pared);
+		Piso casillero = new Piso();
 			
 						
 		for(int i = 0 ; i < 5 ; i++){
