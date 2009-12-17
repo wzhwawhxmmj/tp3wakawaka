@@ -28,7 +28,7 @@ public class ListaDeEscenarios {
 		NoJugador noJugadorAPoner;
 		Escenario escenarioACargar = new Escenario();
 		Posicion posicionActual;
-
+		int cantidadDePuntos = 0;
 		
 		while (filaMapa != null){
 			while (columna < filaMapa.length()){
@@ -46,6 +46,7 @@ public class ListaDeEscenarios {
 					noJugadorAPoner = new Puntito(escenarioACargar,posicionActual,10);
 					uebAPoner.ponerNoJugador(noJugadorAPoner);
 					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					cantidadDePuntos++;
 					break;
 				
 				case 'P':
@@ -53,11 +54,13 @@ public class ListaDeEscenarios {
 					noJugadorAPoner = new Pildora(escenarioACargar,posicionActual,40, juego);
 					uebAPoner.ponerNoJugador(noJugadorAPoner);
 					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					cantidadDePuntos++;
 					break;
 					
 				case 'C':
 					uebAPoner = new Casa();
 					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.setPosicionCasa(posicionActual);
 					break;
 					
 				case '#':
@@ -65,8 +68,26 @@ public class ListaDeEscenarios {
 					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
 					break;
 				
+				case 'E':
+					uebAPoner = new Piso();
+					noJugadorAPoner = new Puntito(escenarioACargar,posicionActual,10);
+					uebAPoner.ponerNoJugador(noJugadorAPoner);
+					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.agregarPuntoDeSeparacion(posicionActual);
+		
+					
+					break;
+				
+				case 'I':
+					uebAPoner = new Piso();
+					noJugadorAPoner = new Puntito(escenarioACargar,posicionActual,10);
+					uebAPoner.ponerNoJugador(noJugadorAPoner);
+					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.setPosicionInicialPacman(posicionActual);
+					
+					break;	
+				
 				}
-				System.out.println(escenarioACargar.sacarEnPosicion(posicionActual).toString());
 				columna ++;
 			}
 			fila ++;
@@ -74,7 +95,7 @@ public class ListaDeEscenarios {
 			columna=0;
 			uebAPoner= null;
 		}
-	
+	escenarioACargar.setPuntosTotales(cantidadDePuntos);
 	this.agregarEscenario(escenarioACargar);	
 	}
 		
