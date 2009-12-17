@@ -96,7 +96,6 @@ public class ListaDeEscenarios {
 			uebAPoner= null;
 		}
 	escenarioACargar.setPuntosTotales(cantidadDePuntos);
-	escenarioACargar.setPuntosRestantes(cantidadDePuntos);
 	this.agregarEscenario(escenarioACargar);	
 	}
 		
