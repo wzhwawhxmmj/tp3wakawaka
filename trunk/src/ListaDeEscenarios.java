@@ -24,51 +24,58 @@ public class ListaDeEscenarios {
 		String filaMapa = bufferMapa.readLine();
 		int columna = 0;
 		int fila =0;
-		Ueb uebAPoner;
+		Ueb uebAPoner = null;
 		NoJugador noJugadorAPoner;
-		Escenario EscenarioACargar = new Escenario();
+		Escenario escenarioACargar = new Escenario();
 		Posicion posicionActual;
+
 		
 		while (filaMapa != null){
 			while (columna < filaMapa.length()){
 				posicionActual= new Posicion (columna, fila);
+
 				switch (filaMapa.charAt(columna)){
 				
-				case 0:
+				case '0':
 					uebAPoner = new Piso();
-					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
 					break;
 					
-				case 1:
+				case '1':
 					uebAPoner = new Piso();
-					noJugadorAPoner = new Puntito(EscenarioACargar,posicionActual,10);
+					noJugadorAPoner = new Puntito(escenarioACargar,posicionActual,10);
 					uebAPoner.ponerNoJugador(noJugadorAPoner);
-					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
 					break;
 				
 				case 'P':
 					uebAPoner = new Piso();
-					noJugadorAPoner = new Pildora(EscenarioACargar,posicionActual,40, juego);
+					noJugadorAPoner = new Pildora(escenarioACargar,posicionActual,40, juego);
 					uebAPoner.ponerNoJugador(noJugadorAPoner);
-					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
 					break;
 					
 				case 'C':
 					uebAPoner = new Casa();
-					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
 					break;
 					
 				case '#':
 					uebAPoner = new Pared();
-					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
 					break;
 				
 				}
+				System.out.println(escenarioACargar.sacarEnPosicion(posicionActual).toString());
 				columna ++;
 			}
 			fila ++;
+			filaMapa = bufferMapa.readLine();
+			columna=0;
+			uebAPoner= null;
 		}
-	this.agregarEscenario(EscenarioACargar);	
+	
+	this.agregarEscenario(escenarioACargar);	
 	}
 		
 			
