@@ -1,3 +1,5 @@
+package logica;
+
 import junit.framework.TestCase;
 
 

@@ -1,3 +1,5 @@
+package logica;
+
 import java.util.Random;
 import java.util.Iterator;
 

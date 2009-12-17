@@ -1,3 +1,5 @@
+package logica;
+
 import java.util.Iterator;
 
 public class FantasmaRosa extends Fantasma {

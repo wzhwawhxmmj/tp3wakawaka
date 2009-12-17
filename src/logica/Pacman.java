@@ -1,3 +1,5 @@
+package logica;
+
 public class Pacman extends Entidad {
 	
 	private int puntajeAcumulado;
