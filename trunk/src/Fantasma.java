@@ -271,6 +271,11 @@ public abstract class Fantasma extends NoJugador {
 		
 		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPosicionCasa()));		
 	}
+	
+	protected Posicion getPosicionModoSeparacion(){
+		return this.posModoSeparacion;
+	}
+	
 	//Fin: Metodos protegidos.
 	
 	
