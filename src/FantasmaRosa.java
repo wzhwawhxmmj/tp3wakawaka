@@ -2,8 +2,8 @@ import java.util.Iterator;
 
 public class FantasmaRosa extends Fantasma {
 
-	public FantasmaRosa(Escenario escenario, Posicion posInicial, Posicion posModoSeparacion , float velocidad, int puntosAlSerComido) {
-		super(escenario, posInicial, posModoSeparacion, velocidad, puntosAlSerComido);
+	public FantasmaRosa(Escenario escenario, Posicion posModoSeparacion, float duracionModoAzul, float velocidad, int puntosAlSerComido) {
+		super(escenario, posModoSeparacion, duracionModoAzul, velocidad, puntosAlSerComido);
 	}
 	
 	@Override
@@ -32,14 +32,9 @@ public class FantasmaRosa extends Fantasma {
 		            }
 			    }
 		
-		escenario.calculador().DireccionHaciaMenorCaminoEntre(this.getPosicion(), new Posicion(Xtotal/cantidad, Ytotal/cantidad));
+		this.moverHacia(escenario.calculador().DireccionHaciaMenorCaminoEntre(this.getPosicion(), new Posicion(Xtotal/cantidad, Ytotal/cantidad)));
 		
 	}
 
-	@Override
-	public void actuar() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

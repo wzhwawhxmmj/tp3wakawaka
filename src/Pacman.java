@@ -5,15 +5,15 @@ public class Pacman extends Entidad {
 	private Escenario escenario;
 
 	public Pacman(Escenario escenario, Posicion posicion, int velocidad) {
-		super(posicion);
+		super(escenario, posicion);
 		this.direccion = Direccion.NINGUNA;
 		this.escenario = escenario;
 		puntajeAcumulado = 0;
 	}
 
 	public void comer(NoJugador algunaCosa) {
-		algunaCosa.actuar();
-		puntajeAcumulado += algunaCosa.getPuntos();
+		algunaCosa.activar();
+		puntajeAcumulado += algunaCosa.getPuntaje();
 	}
 
 	public Direccion Direccion(){
