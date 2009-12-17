@@ -6,7 +6,7 @@ public class FantasmaNaranja extends Fantasma {
 	boolean arrasando;
 	int casillasArrasadas;
 	
-	public FantasmaNaranja(Escenario escenario, Posicion posModoSeparacion , float duracionModoAzul, float velocidad, int puntosAlSerComido) {
+	public FantasmaNaranja(Escenario escenario, Posicion posModoSeparacion , int duracionModoAzul, float velocidad, int puntosAlSerComido) {
 
 		super(escenario, posModoSeparacion , duracionModoAzul , velocidad, puntosAlSerComido);
 		this.arrasando = false;
