@@ -1,4 +1,8 @@
 
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -13,33 +17,65 @@ public class ListaDeEscenarios {
 		this.nivelActual = 0;
 	}
 	
-	public void cargarEscenarios ()/* throws IOException*/{
+	public void cargarEscenario (String archivoEscenario, Juego juego) throws IOException {
 		
-			
-		Escenario escenario = new Escenario();
+		FileReader fileMapa = new FileReader(archivoEscenario);
+		BufferedReader bufferMapa = new BufferedReader(fileMapa); 
+		String filaMapa = bufferMapa.readLine();
+		int columna = 0;
+		int fila =0;
+		Ueb uebAPoner;
+		NoJugador noJugadorAPoner;
+		Escenario EscenarioACargar = new Escenario();
+		Posicion posicionActual;
 		
-		Pared pared = new Pared();		
-		Piso casillero = new Piso();
-			
-						
-		for(int i = 0 ; i < 5 ; i++){
-			
-			for(int j = 0 ; j < 5 ; j++){
+		while (filaMapa != null){
+			while (columna < filaMapa.length()){
+				posicionActual= new Posicion (columna, fila);
+				switch (filaMapa.charAt(columna)){
+				
+				case 0:
+					uebAPoner = new Piso();
+					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					break;
 					
-				Posicion posicion = new Posicion(i,j);
-				if ( ((i>0)&&(i<4)) && ((j>0)&&(j<4)) )
-					escenario.ponerEnPosicion(posicion,casillero);
-				else
-					escenario.ponerEnPosicion(posicion, pared);
+				case 1:
+					uebAPoner = new Piso();
+					noJugadorAPoner = new Puntito(EscenarioACargar,posicionActual,10);
+					uebAPoner.ponerNoJugador(noJugadorAPoner);
+					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					break;
+				
+				case 'P':
+					uebAPoner = new Piso();
+					noJugadorAPoner = new Pildora(EscenarioACargar,posicionActual,40, juego);
+					uebAPoner.ponerNoJugador(noJugadorAPoner);
+					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					break;
+					
+				case 'C':
+					uebAPoner = new Casa();
+					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					break;
+					
+				case '#':
+					uebAPoner = new Pared();
+					EscenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					break;
+				
+				}
+				columna ++;
 			}
-			
+			fila ++;
 		}
+	this.agregarEscenario(EscenarioACargar);	
+	}
 		
-		escenario.ponerEnPosicion(new Posicion(2,2), new Pared());
+			
 		
-		listaDeEscenarios.add(escenario);
-		
-		
+	
+	private void agregarEscenario(Escenario escenario){
+		this.listaDeEscenarios.add(escenario);
 	}
 	
 	public Escenario getEscenario(int nivel){
