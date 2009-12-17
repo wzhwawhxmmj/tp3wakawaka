@@ -7,28 +7,57 @@ public class PacmanTest extends TestCase{
 		lista.cargarEscenarios();
 		return lista.getEscenario(1); 
 		}
+
+    public void testSeMovioDerecha(){
+        Posicion pos = new Posicion(1,1);
+        Pacman waka = new Pacman(escenarioSimple(), pos, 1);
+        waka.cambiarDireccion(Direccion.DERECHA);
+        waka.vivir();
+        if(waka.getPosicion().equals(new Posicion(2,1))){
+                assert (true);
+                }
+        else fail();
+ }
+
 	
-	public void testSeMovioDerecha(){
+	public void testSeMovioVueltita(){
 		Posicion pos = new Posicion(1,1);
 		Pacman waka = new Pacman(escenarioSimple(), pos, 1);
-		waka.cambiarDireccion(Direccion.DERECHA);
-		waka.vivir();
-		if(waka.getPosicion().equals(new Posicion(2,1))){
+		for(int i=0;i<555;i++)
+		{
+			waka.cambiarDireccion(Direccion.DERECHA);
+			waka.vivir();
+			waka.vivir();
+			waka.cambiarDireccion(Direccion.ABAJO);
+			waka.vivir();
+			waka.vivir();
+			waka.cambiarDireccion(Direccion.IZQUIERDA);
+			waka.vivir();
+			waka.vivir();
+			waka.cambiarDireccion(Direccion.ARRIBA);
+			waka.vivir();
+			waka.vivir();
+		}
+		if(waka.getPosicion().equals(new Posicion(1,1))){
 			assert (true);
 			}
 		else fail();
 	 }
 
+
+	
 	public void testSeMovioPared(){
 		Posicion pos = new Posicion(1,1);
 		Pacman waka = new Pacman(escenarioSimple(), pos, 1);
-		waka.cambiarDireccion(Direccion.ARRIBA);
+		waka.cambiarDireccion(Direccion.IZQUIERDA);
 		waka.vivir();
 		if(waka.getPosicion().equals(new Posicion(1,1))){
 			assert (true);
 			}
 		else fail();
 	 }
+	
+	
 	
 	public void testSeMovioAbajoyChoco(){
 		Posicion pos = new Posicion(1,1);
