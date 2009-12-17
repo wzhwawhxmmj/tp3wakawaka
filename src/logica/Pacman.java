@@ -1,6 +1,6 @@
 package logica;
 
-public class Pacman extends Entidad {
+public class Pacman extends Entidad implements ar.uba.fi.algo3.titiritero.Posicionable {
 	
 	private int puntajeAcumulado;
 	private Direccion direccion;
@@ -41,6 +41,18 @@ public class Pacman extends Entidad {
 		if(escenario.sacarEnPosicion(posicionTemporal).isPisablePorJugador())
 			this.setPosicion(posicionTemporal);
 
+	}
+
+	@Override
+	public int getX() {
+		// TODO Auto-generated method stub
+		return this.getPosicion().getx();
+	}
+
+	@Override
+	public int getY() {
+		// TODO Auto-generated method stub
+		return this.getPosicion().gety();
 	}
 	
 }

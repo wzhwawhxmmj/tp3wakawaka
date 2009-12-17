@@ -3,7 +3,7 @@ package logica;
 import java.util.Random;
 import java.util.Iterator;
 
-public abstract class Fantasma extends NoJugador {
+public abstract class Fantasma extends NoJugador implements ar.uba.fi.algo3.titiritero.Posicionable {
 
 	private static final int tiempoDeEncierro = 1;
 	private static final int tiempoDeEstrategizacion = 100;
@@ -335,4 +335,16 @@ public abstract class Fantasma extends NoJugador {
 			return true;
 	}
 	//Fin: Metodos privados.
+
+	@Override
+	public int getX() {
+		// TODO Auto-generated method stub
+		return this.getPosicion().getx();
+	}
+
+	@Override
+	public int getY() {
+		// TODO Auto-generated method stub
+		return this.getPosicion().gety();
+	}
 }

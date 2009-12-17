@@ -59,8 +59,7 @@ public class Escenario {
 	
 	public void ponerEnPosicion(Posicion p, Ueb casillero) {
 		this.tablero.put(p, casillero);
-		this.puntosRestantes++;
-		this.puntosTotales++;
+		casillero.setPosicion(p);
 	}
 
 	public Ueb sacarEnPosicion(Punto p) {
