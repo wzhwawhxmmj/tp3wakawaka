@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Escenario {
@@ -6,9 +7,9 @@ public class Escenario {
 	private int puntosRestantes;
 	private int puntosTotales;
 	private Posicion posicionCasa;
+	private Posicion posicionInicialPacman;
 	private Pacman pacman;
-	
-	
+	private ArrayList<Posicion> posicionesDeSeparacion;
 	private HashMap <Posicion, Ueb>  tablero;
 	
 	
@@ -18,8 +19,36 @@ public class Escenario {
 		this.puntosTotales = 0;
 	}
 	
+	public void agregarPuntoDeSeparacion(Posicion posicion){
+		this.posicionesDeSeparacion.add(posicion);
+	}
+	
+	public void setPosicionInicialPacman(Posicion posicion){
+		if (this.tablero.containsKey(posicion)){
+			this.posicionInicialPacman = posicion;
+		}else throw new PosicionIlegalException();
+	}
+	
+	public Posicion getPosicionInicialPacman(){
+		return this.posicionInicialPacman;
+	}
+
+	
+	public Posicion obtenerPuntoDeSeparacion(int i){
+		return this.posicionesDeSeparacion.get(i);
+	}
+	
+	public Posicion removerPuntoDeSeparacion(int i){
+		return this.posicionesDeSeparacion.remove(i);
+	}
+	
+	public Iterator<Posicion> iteradorPuntosDeSeparacion(){
+		return this.posicionesDeSeparacion.iterator();
+	}
+	
 	public void colocarPacman(Pacman pacman){
 		this.pacman = pacman;
+		this.pacman.setPosicion(this.posicionInicialPacman);
 	}
 	
 	public Pacman getPacman(){
