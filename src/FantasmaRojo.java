@@ -5,7 +5,7 @@ public class FantasmaRojo extends Fantasma {
 	
 	public FantasmaRojo(Escenario escenario, Posicion posModoSeparacion, float duracionModoAzul, float velocidad, int puntosAlSerComido) {
 		super(escenario, posModoSeparacion, duracionModoAzul, velocidad, puntosAlSerComido);
-		this.velocidadEnModoRapido = velocidad + velocidad * (1/5);
+		this.velocidadEnModoRapido = velocidad + velocidad * 0.5f;
 	}
 
 	private void activarModoRapido(){
@@ -14,14 +14,13 @@ public class FantasmaRojo extends Fantasma {
 	
 	private boolean pasarLimiteDePuntitosRestantes(){
 		
-		long limiteModoRapido = this.getEscenario().getPuntosTotales() * (1/5);  
-		long puntitosRestantes = this.getEscenario().getPuntosRestantes(); 
+		int limiteModoRapido = (int) ((this.getEscenario().getPuntosTotales()) * (0.5f));  
+		int puntitosRestantes = this.getEscenario().getPuntosRestantes(); 
 		
 		if (puntitosRestantes <= limiteModoRapido)
 			return true;
 		else
-			return false;
-	
+			return false;	
 	}
 	
 	public void estrategizar(){

@@ -3,9 +3,9 @@ import java.util.Iterator;
 
 public abstract class Fantasma extends NoJugador {
 
-	private static final int tiempoDeEncierro = 10;
-	private static final int tiempoDeEstrategizacion = 50;
-	private static final int tiempoDeSeparacion = 50;
+	private static final int tiempoDeEncierro = 1;
+	private static final int tiempoDeEstrategizacion = 5;
+	private static final int tiempoDeSeparacion = 2;
 	
 	private boolean azul;
 	private float velocidad;
@@ -20,6 +20,7 @@ public abstract class Fantasma extends NoJugador {
 	private int temporizadorModoAzul;
 	private int temporizadorModoSeparacion;
 	private int temporizadorDeEstrategizacion;
+	private boolean retornoACasa;
 
 	public Fantasma(Escenario escenario, Posicion posModoSeparacion , float duracionModoAzul , float velocidad, int puntosAlSerComido) {
 		super(escenario, escenario.getPosicionCasa(), puntosAlSerComido);
@@ -32,6 +33,7 @@ public abstract class Fantasma extends NoJugador {
 		this.llegoAPos = false;
 		this.dirGuardia = Direccion.DERECHA;
 		this.encerrado = true;
+		this.retornoACasa = true;
 		this.contadorDeEncierro = tiempoDeEncierro;
 		this.temporizadorModoAzul = (int) Math.ceil(duracionModoAzul);
 		this.temporizadorDeEstrategizacion = tiempoDeEstrategizacion;
@@ -44,14 +46,14 @@ public abstract class Fantasma extends NoJugador {
 	
 	
 	//		Inicio: Modo separacion.
-	public void activarModoSeparacion(){
+	/* public void activarModoSeparacion(){
 		this.modoSeparacion = true;
 	}
 	
 	public void desactivarModoSeparacion(){
 		this.modoSeparacion = false;
 		this.llegoAPos = false;
-	}
+	} */
 	
 	public boolean estaEnModoSeparacion(){
 		return this.modoSeparacion;
@@ -102,23 +104,30 @@ public abstract class Fantasma extends NoJugador {
 	
 	public void vivir(){
 		int velocidadTruncada = (int) Math.ceil(this.velocidad);
-		
-		for (int i = 0; i < velocidadTruncada ; i++) {
-			if (!this.modoSeparacion)
-				this.temporizadorDeEstrategizacion--;
+
+		/*System.out.println("Modo Separacion: " + this.modoSeparacion + " Temporizador: " + this.temporizadorModoSeparacion);
+		System.out.println("Modo Estrategizar: " + !this.modoSeparacion + " Temporizador: " + this.temporizadorDeEstrategizacion);*/
+		for (int i = 1; i <= velocidadTruncada ; i++) {
+			
+			if ((!this.encerrado) && !this.azul && !this.modoSeparacion && this.estaVivo()){
+					this.estrategizar();
+			}
 			
 			if (this.temporizadorDeEstrategizacion == 0){
 				this.modoSeparacion = true;
 				this.temporizadorDeEstrategizacion = tiempoDeEstrategizacion;
 			}
 			
-			if (this.modoSeparacion)
-				this.temporizadorModoSeparacion--;
+			if (!this.modoSeparacion)
+				this.temporizadorDeEstrategizacion--;
 			
 			if (this.temporizadorModoSeparacion == 0){
 				this.modoSeparacion = false;
 				this.temporizadorModoSeparacion = tiempoDeSeparacion;
 			}
+			
+			if (this.modoSeparacion)
+				this.temporizadorModoSeparacion--;
 			
 			if (this.getPosicion().equals(this.getEscenario().getPacman().getPosicion())){
 				this.getEscenario().getPacman().comer(this);
@@ -126,6 +135,31 @@ public abstract class Fantasma extends NoJugador {
 			
 			if (this.modoSeparacion && !this.encerrado && !this.azul && this.estaVivo()){
 				this.actuarModoSeparacion();
+			}
+
+			if (!this.estaVivo() && !this.retornoACasa) {
+				this.temporizadorModoAzul = this.duracionModoAzul;
+				this.azul = false;
+				this.modoSeparacion = false;
+				this.encerrado = true;
+				if (!this.getPosicion().equals(this.getEscenario().getPosicionCasa()))
+					this.retonarACasa();
+				else
+					this.retornoACasa = true;
+			}
+		
+			if (this.encerrado && this.retornoACasa ){
+				try{
+					this.revivir();
+				}catch (EstadoInvalidoException e){}
+				
+				this.montarGuardiaHorizontal();
+				if (this.contadorDeEncierro == 0){
+					this.encerrado = false;
+					this.retornoACasa = false;
+					this.contadorDeEncierro = tiempoDeEncierro;
+				}
+				this.contadorDeEncierro--;
 			}
 			
 			if (this.azul){
@@ -136,30 +170,6 @@ public abstract class Fantasma extends NoJugador {
 				}
 				this.movimientoAlAzar();
 			}
-
-			if (!this.estaVivo() && (!this.getPosicion().equals(this.getEscenario().getPosicionCasa()))) {
-				this.temporizadorModoAzul = this.duracionModoAzul;
-				this.azul = false;
-				this.retonarACasa();
-				this.modoSeparacion = false;
-				this.encerrado = true;		
-			}
-		
-			if ( (this.encerrado) && (this.getPosicion().equals(this.getEscenario().getPosicionCasa())) ){
-				try{
-					this.revivir();
-				}catch (EstadoInvalidoException e){
-					}
-				this.montarGuardiaHorizontal();
-				this.contadorDeEncierro--;
-				if (this.contadorDeEncierro == 0){
-					this.encerrado = false;
-					this.contadorDeEncierro = tiempoDeEncierro;
-				}
-			}
-			
-			if (!this.encerrado && !this.azul && !this.modoSeparacion && this.estaVivo())
-				this.estrategizar();
 		}
 	}
 	
@@ -168,6 +178,8 @@ public abstract class Fantasma extends NoJugador {
 			
 			if (this.estaAzul()){
 				this.morir();
+				this.retornoACasa = false;
+				this.azul = false;
 				return this.getPuntaje();
 			}else 
 				try{
@@ -187,29 +199,37 @@ public abstract class Fantasma extends NoJugador {
 		Posicion auxPos = this.getPosicion().clonar();
 
 		switch (r.nextInt(4)){
-			case 0: 
-				auxPos.avanzarArriba(); 
+			case 0:  
 				try{
+					auxPos.avanzarArriba();
 					this.moverHacia(auxPos);
-				}catch (PosicionIlegalException e){}
+				}catch (PosicionIlegalException e){
+					this.movimientoAlAzar();
+				}
 				break;
 			case 1: 
-				auxPos.avanzarAbajo();
 				try{
+					auxPos.avanzarAbajo();
 					this.moverHacia(auxPos);
-				}catch (PosicionIlegalException e){}
+				}catch (PosicionIlegalException e){
+					this.movimientoAlAzar();
+				}
 				break;
 			case 2: 
-				auxPos.avanzarDerecha();
 				try{
+					auxPos.avanzarDerecha();
 					this.moverHacia(auxPos);
-				}catch (PosicionIlegalException e){}
+				}catch (PosicionIlegalException e){
+					this.movimientoAlAzar();
+				}
 				break;
 			case 3: 
-				auxPos.avanzarIzquierda();
 				try{
+					auxPos.avanzarIzquierda();
 					this.moverHacia(auxPos);
-				}catch (PosicionIlegalException e){}
+				}catch (PosicionIlegalException e){
+					this.movimientoAlAzar();
+				}
 				break;
 		default: break;
 		}
@@ -236,8 +256,9 @@ public abstract class Fantasma extends NoJugador {
 		}catch (PosicionIlegalException e){
 			if (this.dirGuardia == Direccion.DERECHA)
 				this.dirGuardia = Direccion.IZQUIERDA;
-			if (this.dirGuardia == Direccion.IZQUIERDA)
+			else
 				this.dirGuardia = Direccion.DERECHA;
+			this.moverHacia(this.dirGuardia);
 		}
 	}
 	
@@ -247,8 +268,8 @@ public abstract class Fantasma extends NoJugador {
 		
 		switch (direccion){
 			case ARRIBA: 
-				auxPos.avanzarArriba(); 
-				this.moverHacia(auxPos);
+					auxPos.avanzarArriba(); 
+					this.moverHacia(auxPos);
 				break;
 			case ABAJO: 
 				auxPos.avanzarAbajo();
