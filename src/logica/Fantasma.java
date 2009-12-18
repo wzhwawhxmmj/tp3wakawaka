@@ -3,7 +3,11 @@ package logica;
 import java.util.Random;
 import java.util.Iterator;
 
-public abstract class Fantasma extends NoJugador implements ar.uba.fi.algo3.titiritero.Posicionable, ar.uba.fi.algo3.titiritero.ObjetoVivo {
+import ar.uba.fi.algo3.titiritero.ObjetoVivo;
+import ar.uba.fi.algo3.titiritero.Posicionable;
+
+
+public abstract class Fantasma extends NoJugador implements Posicionable, ObjetoVivo {
 
 	private static final int tiempoDeEncierro = 1;
 	private static final int tiempoDeEstrategizacion = 100;
