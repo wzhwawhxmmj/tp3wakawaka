@@ -14,12 +14,16 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	private Direccion direccionInicialActual;
 	private Direccion mejorDireccion;
 	
-	public Calculador(Escenario elEscenarioQueMeDan){
+	public void Inicializar(){
 		pasosEfectuados  = new ArrayList<Posicion>();
 		pasosMejorCamino = new ArrayList<Posicion>();
-		escenario = elEscenarioQueMeDan;
 		direccionInicialActual = Direccion.NINGUNA;
-		mejorDireccion         = Direccion.NINGUNA;
+		mejorDireccion         = Direccion.NINGUNA;	
+	}
+	
+	public Calculador(Escenario elEscenarioQueMeDan){
+		Inicializar();
+		escenario = elEscenarioQueMeDan;
 	}
 	
 	private void removerUltimoPaso(ArrayList<Posicion> lista){
@@ -76,7 +80,10 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 					removerUltimoPaso(pasosEfectuados);
 					}
 				}
-		return mejorDireccion;
+		
+		Direccion direccionARetornar = mejorDireccion;
+		Inicializar();	
+		return direccionARetornar;
 	    }
 
 	
