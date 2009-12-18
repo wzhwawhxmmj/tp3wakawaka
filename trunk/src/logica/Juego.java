@@ -1,6 +1,11 @@
 package logica;
 
+import java.awt.Color;
 import java.util.Iterator;
+
+import vista.*;
+
+import ar.uba.fi.algo3.titiritero.ControladorJuego;
 
 
 public class Juego {
@@ -14,6 +19,9 @@ public class Juego {
 	private int nivelActual;
 	//A verificar 
 	//Private bool frutaComida;
+	ControladorJuego controladorJuego;
+	
+	
 	
 	public Juego (){
 		
@@ -41,6 +49,32 @@ public class Juego {
 		arrayDeFantasmas[0] = new FantasmaNaranja(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
 		arrayDeFantasmas[0] = new FantasmaVerde(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
 		arrayDeFantasmas[0] = new FantasmaRosa(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
+	}
+	
+	
+	private void prepaparVista(){
+		controladorJuego = new ControladorJuego();
+		controladorJuego.agregarObjetoVivo(pacman);
+		VistaPacman vistaPacman = new VistaPacman();
+		controladorJuego.agregarDibujable(vistaPacman);
+		
+		VistaFantasma vistasFantasma[] = new VistaFantasma[arrayDeFantasmas.length];
+		final Color coloresFantasma[] = {Color.RED,Color.ORANGE,Color.GREEN,Color.PINK};
+		for(int i=0;i<arrayDeFantasmas.length;i++)
+	     	{ 
+			controladorJuego.agregarObjetoVivo(arrayDeFantasmas[i]);
+		    vistasFantasma[i] = new VistaFantasma(coloresFantasma[i]);
+		    controladorJuego.agregarDibujable(vistasFantasma[i]);
+	     	}
+			
+		VistaPiso vistasPiso[] = new VistaPiso[99];
+		VistaPared vistasPared[] = new VistaPared[99];
+		VistaCasa vistasCasa[] = new VistaCasa[10];
+		VistaPildora[] Vistaspildora = new VistaPildora[4];
+		VistaPuntito[] VistasPunto = new VistaPuntito[99];
+
+		//como detecto donde poner cada uno? 
+		//Yo diria que Lista de Escenarios por cada cosa llame un metodo en juego
 	}
 	
 	
