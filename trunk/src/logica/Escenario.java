@@ -57,13 +57,12 @@ public class Escenario {
 		return this.pacman;
 	}
 	
-	public void ponerEnPosicion(Posicion p, Ueb casillero) {
+	public void addUeb(Posicion p, Ueb casillero) {
 		this.tablero.put(p, casillero);
 		casillero.setPosicion(p);
 	}
 
-	public Ueb sacarEnPosicion(Punto p) {
-		/*Retorna un Ueb, puede ser pared, casa o piso (CASILLERO llamado asi por coco.)*/
+	public Ueb getUeb(Punto p) {
 		if (tablero.containsKey(p))
 			return this.tablero.get(p);
 		else

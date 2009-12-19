@@ -31,7 +31,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 	
 	private boolean esPisable(Posicion posicion){
-		Ueb casillero = escenario.sacarEnPosicion(posicion);
+		Ueb casillero = escenario.getUeb(posicion);
 		if(casillero ==null) return false;
 		else return casillero.isPisablePorIA();
 	}

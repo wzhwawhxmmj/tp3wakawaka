@@ -11,9 +11,9 @@ public class EscenarioTest extends TestCase{
 		Posicion posicion = new Posicion(1,1);
 		Piso casillero = new Piso();
 		
-		escenario.ponerEnPosicion(posicion, casillero);
+		escenario.addUeb(posicion, casillero);
 		
-		assertEquals(escenario.sacarEnPosicion(posicion),casillero);
+		assertEquals(escenario.getUeb(posicion),casillero);
 		
 	}
 	

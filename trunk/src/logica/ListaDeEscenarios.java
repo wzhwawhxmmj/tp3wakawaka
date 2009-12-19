@@ -38,41 +38,41 @@ public class ListaDeEscenarios {
 				
 				case '0':
 					uebAPoner = new Piso();
-					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					break;
 					
 				case '1':
 					uebAPoner = new Piso();
 					noJugadorAPoner = new Puntito(escenarioACargar,posicionActual,10);
-					uebAPoner.ponerNoJugador(noJugadorAPoner);
-					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					uebAPoner.addNoJugador(noJugadorAPoner);
+					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					cantidadDePuntos++;
 					break;
 				
 				case 'P':
 					uebAPoner = new Piso();
 					noJugadorAPoner = new Pildora(escenarioACargar,posicionActual,40, juego);
-					uebAPoner.ponerNoJugador(noJugadorAPoner);
-					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					uebAPoner.addNoJugador(noJugadorAPoner);
+					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					cantidadDePuntos++;
 					break;
 					
 				case 'C':
 					uebAPoner = new Casa();
-					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.setPosicionCasa(posicionActual);
 					break;
 					
 				case '#':
 					uebAPoner = new Pared();
-					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					break;
 				
 				case 'E':
 					uebAPoner = new Piso();
 					noJugadorAPoner = new Puntito(escenarioACargar,posicionActual,10);
-					uebAPoner.ponerNoJugador(noJugadorAPoner);
-					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					uebAPoner.addNoJugador(noJugadorAPoner);
+					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.agregarPuntoDeSeparacion(posicionActual);
 		
 					
@@ -81,8 +81,8 @@ public class ListaDeEscenarios {
 				case 'I':
 					uebAPoner = new Piso();
 					noJugadorAPoner = new Puntito(escenarioACargar,posicionActual,10);
-					uebAPoner.ponerNoJugador(noJugadorAPoner);
-					escenarioACargar.ponerEnPosicion(posicionActual,uebAPoner);
+					uebAPoner.addNoJugador(noJugadorAPoner);
+					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.setPosicionInicialPacman(posicionActual);
 					
 					break;	

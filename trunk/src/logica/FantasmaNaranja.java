@@ -45,10 +45,10 @@ public class FantasmaNaranja extends Fantasma {
 		}
 		else{	
 			this.movimientoAlAzar();
-			casilleroActual = this.getEscenario().sacarEnPosicion(this.getPosicion());
+			casilleroActual = this.getEscenario().getUeb(this.getPosicion());
 			iteradorCasillero = casilleroActual.iterator();
 			while(iteradorCasillero.hasNext()){
-				comestible = casilleroActual.sacarComestible(0);
+				comestible = casilleroActual.removeNoJugador(0);
 				comestible.activar();
 			}
 			this.casillasArrasadas = this.casillasArrasadas + 1;
@@ -62,7 +62,7 @@ public class FantasmaNaranja extends Fantasma {
 		Posicion posicionPivote = this.getPosicionModoSeparacion();
 		Posicion posicionActual = this.getPosicion();
 		
-		if(posicionActual.distanciaA(posicionPivote)< posicionActual.distanciaA(posicionPacman)){
+		if(posicionActual.distanciaHasta(posicionPivote)< posicionActual.distanciaHasta(posicionPacman)){
 			this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPivote));
 		}
 		else{

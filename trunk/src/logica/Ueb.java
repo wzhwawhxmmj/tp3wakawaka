@@ -19,16 +19,16 @@ public abstract class Ueb implements ar.uba.fi.algo3.titiritero.Posicionable {
 		this.posicion = posicion;
 	}
 	
-	public void ponerNoJugador(NoJugador noJugador){
+	public void addNoJugador(NoJugador noJugador){
 		casillero.add(noJugador);
 	}
 	
-	public int cantidadDeComestibles(){
+	public int getCantidadDeComestibles(){
 		
 		return casillero.size();
 	}
 	
-	public NoJugador sacarComestible(int i){
+	public NoJugador removeNoJugador(int i){
 		/*Lo usaremos para vaciar la lista cuando el pacman pase
 		 * por aqui.
 		 */
@@ -40,7 +40,7 @@ public abstract class Ueb implements ar.uba.fi.algo3.titiritero.Posicionable {
 		return comestible;
 	}
 	
-	public NoJugador consultarComestible(int i){
+	public NoJugador getNoJugador(int i){
 	/* devuelve una el comestible en la en i sin borrarlo de
 	 * de la lista	
 	 */
@@ -48,7 +48,6 @@ public abstract class Ueb implements ar.uba.fi.algo3.titiritero.Posicionable {
 	}
 	
 	public void vaciarCasillero(){
-	
 		casillero.clear();
 	}
 

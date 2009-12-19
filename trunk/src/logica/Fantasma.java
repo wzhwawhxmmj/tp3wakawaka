@@ -45,21 +45,10 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 		this.temporizadorDeEstrategizacion = tiempoDeEstrategizacion;
 		this.temporizadorModoSeparacion = tiempoDeSeparacion;
 		
-		this.getEscenario().sacarEnPosicion(escenario.getPosicionCasa()).ponerNoJugador(this);
+		this.getEscenario().getUeb(escenario.getPosicionCasa()).addNoJugador(this);
 	}
 
 	//Inicio: Metodos de modos.
-	
-	
-	//		Inicio: Modo separacion.
-	/* public void activarModoSeparacion(){
-		this.modoSeparacion = true;
-	}
-	
-	public void desactivarModoSeparacion(){
-		this.modoSeparacion = false;
-		this.llegoAPos = false;
-	} */
 	
 	public boolean estaEnModoSeparacion(){
 		return this.modoSeparacion;
@@ -67,6 +56,9 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 	
 	private void actuarModoSeparacion(){
 		Calculador calc = this.getEscenario().calculador();
+		
+		if (this.posModoSeparacion == null)
+			throw new PosicionIlegalException();
 		
 		if (!this.getPosicion().equals(this.posModoSeparacion)) {
 			this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posModoSeparacion));
@@ -111,8 +103,6 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 	public void vivir(){
 		int velocidadTruncada = (int) Math.ceil(this.velocidad);
 
-		/*System.out.println("Modo Separacion: " + this.modoSeparacion + " Temporizador: " + this.temporizadorModoSeparacion);
-		System.out.println("Modo Estrategizar: " + !this.modoSeparacion + " Temporizador: " + this.temporizadorDeEstrategizacion);*/
 		for (int i = 1; i <= velocidadTruncada ; i++) {
 			
 			if ((!this.encerrado) && !this.azul && !this.modoSeparacion && this.estaVivo()){
@@ -133,6 +123,7 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 			
 			if (this.temporizadorModoSeparacion == 0){
 				this.modoSeparacion = false;
+				this.llegoAPos = false;
 				this.temporizadorModoSeparacion = tiempoDeSeparacion;
 			}
 			
@@ -154,7 +145,10 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 			if (!this.estaVivo() && !this.retornoACasa) {
 				this.temporizadorModoAzul = this.duracionModoAzul;
 				this.azul = false;
+				
 				this.modoSeparacion = false;
+				this.llegoAPos = false;
+				
 				this.encerrado = true;
 				if (!this.getPosicion().equals(this.getEscenario().getPosicionCasa()))
 					this.retonarACasa();
@@ -252,14 +246,14 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 	protected abstract void estrategizar();
 	
 	protected void moverHacia(Posicion posicion){
-		if (this.getEscenario().sacarEnPosicion(posicion).isPisablePorIA()){
+		if (this.getEscenario().getUeb(posicion).isPisablePorIA()){
 			
 			if(this.getEscenario().getPosicionCasa().equals(posicion) && !this.puedeEntrarACasa())
 				throw new PosicionIlegalException();
 			
 				this.sacarDePosicionOriginal();
 				this.setPosicion(posicion);
-				this.getEscenario().sacarEnPosicion(posicion).ponerNoJugador(this);
+				this.getEscenario().getUeb(posicion).addNoJugador(this);
 		}else
 			throw new PosicionIlegalException();
 	}
@@ -318,12 +312,12 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 	private void sacarDePosicionOriginal(){
 		int i = -1;
 		
-		Iterator<NoJugador> it = this.getEscenario().sacarEnPosicion(this.getPosicion()).iterator();
+		Iterator<NoJugador> it = this.getEscenario().getUeb(this.getPosicion()).iterator();
 		
 		while(it.hasNext()){	
 			i++;
 			if (this == it.next()) {
-				this.getEscenario().sacarEnPosicion(this.getPosicion()).sacarComestible(i);
+				this.getEscenario().getUeb(this.getPosicion()).removeNoJugador(i);
 				return;
 			}
 		}

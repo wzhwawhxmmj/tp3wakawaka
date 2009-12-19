@@ -7,47 +7,47 @@ public class PisoTest extends TestCase{
 	
 	public void testCargarpiso (){
 		
-		Pildora pildora = new Pildora(new Posicion(1,2), 30);
+		Pildora pildora = new Pildora(null, new Posicion(1,2), 30, null);
 		Ueb ueb = new Piso();
 		
-		ueb.ponerNoJugador(pildora);
+		ueb.addNoJugador(pildora);
 		
-		assertEquals(ueb.cantidadDeComestibles()==1, true);
+		assertEquals(ueb.getCantidadDeComestibles()==1, true);
 		
 	}
 	
 	public void testCargarPildoraAlPiso(){
-		Pildora pildora = new Pildora(new Posicion(1,2), 30);
+		Pildora pildora = new Pildora(null, new Posicion(1,2), 30, null);
 		Ueb ueb = new Piso();
 		
-		ueb.ponerNoJugador(pildora);
+		ueb.addNoJugador(pildora);
 		
-		assertEquals(ueb.sacarComestible(0).equals(pildora), true);
+		assertEquals(ueb.removeNoJugador(0).equals(pildora), true);
 		
 	}
 	
 	public void testCargarDosObjetosAlPiso(){
-		Pildora pildora = new Pildora(new Posicion(1,2), 30);
-		Fruta fruta = new Fruta ( new Posicion (1,2),100);
+		Pildora pildora = new Pildora(null, new Posicion(1,2), 30, null);
+		Fruta fruta = new Fruta (null, new Posicion (1,2),100);
 		Ueb ueb = new Piso();
 		
-		ueb.ponerNoJugador(pildora);
-		ueb.ponerNoJugador(fruta);
+		ueb.addNoJugador(pildora);
+		ueb.addNoJugador(fruta);
 		
-		assertEquals(ueb.cantidadDeComestibles()==2, true);
+		assertEquals(ueb.getCantidadDeComestibles()==2, true);
 	}
 	
 	public void testPisovacio(){
-		Pildora pildora = new Pildora(new Posicion(1,2), 30);
-		Fruta fruta = new Fruta ( new Posicion (1,2),100);
+		Pildora pildora = new Pildora(null, new Posicion(1,2), 30, null);
+		Fruta fruta = new Fruta (null, new Posicion (1,2),100);
 		Ueb ueb = new Piso();
 		
-		ueb.ponerNoJugador(pildora);
-		ueb.ponerNoJugador(fruta);
+		ueb.addNoJugador(pildora);
+		ueb.addNoJugador(fruta);
 		
 		ueb.vaciarCasillero();
 		
-		assertEquals(ueb.cantidadDeComestibles()==0, true);
+		assertEquals(ueb.getCantidadDeComestibles()==0, true);
 		
 	}
 
