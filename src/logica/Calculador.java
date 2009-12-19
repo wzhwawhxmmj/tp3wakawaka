@@ -31,9 +31,13 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 	
 	private boolean esPisable(Posicion posicion){
+		try{
 		Ueb casillero = escenario.getUeb(posicion);
-		if(casillero ==null) return false;
-		else return casillero.isPisablePorIA();
+		return casillero.isPisablePorIA();
+		}
+		catch (PosicionIlegalException e){
+		return false;
+		}
 	}
 	
 	private Posicion nuevaPosicionHacia(Direccion direccion, Posicion posicion){
@@ -62,7 +66,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 		}
 
 	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
-		llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
+		//llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
 		
 		if(salida.equals(llegada)){
 				if((pasosEfectuados.size() < pasosMejorCamino.size())||(pasosMejorCamino.isEmpty())){

@@ -1,14 +1,18 @@
 package logica;
 
+import java.io.IOException;
 import junit.framework.TestCase;
 
 
 public class CalculadorTest extends TestCase {
-
 	
 	public Direccion DireccionMenorCamino(Posicion salida, Posicion llegada){
 		ListaDeEscenarios lista = new ListaDeEscenarios(); 
-		lista.cargarEscenarios();
+			try {
+				lista.cargarEscenario("mapaSimple.txt",null);
+			} catch (IOException e) {
+				return Direccion.NINGUNA;
+			}
 		Calculador calc = new Calculador(lista.getEscenario(1)); 
 		Direccion[] direcciones = new Direccion[4];
 		direcciones[0] = Direccion.ARRIBA;
@@ -16,7 +20,6 @@ public class CalculadorTest extends TestCase {
 		direcciones[2] = Direccion.ABAJO;
 		direcciones[3] = Direccion.IZQUIERDA;
 		return calc.DireccionHaciaMenorCaminoEntre(salida, llegada, direcciones);
-		 
 		}
 
 	
