@@ -4,7 +4,23 @@ import junit.framework.TestCase;
 
 public class FantasmaTest extends TestCase {
 	
-	public Escenario mapaSimple(){
+	/* mapaSimple()
+	 * Crea el siguiente mapa
+	 * P P P P P
+	 * P C _ S P
+	 * P _ P _ P
+	 * P _ _ J P
+	 * P P P P P
+	 * 
+	 * referencia:
+	 * P: pared
+	 * p: _
+	 * C: casa
+	 * E: punto de separacion
+	 * J: jugador/pacman
+	 */
+	
+	private Escenario mapaSimple(){
 		Escenario e = new Escenario();
 		
 		for (int i = 0 ; i < 5 ; i++){
@@ -19,29 +35,122 @@ public class FantasmaTest extends TestCase {
 		}
 		
 		e.addUeb(new Posicion(2,2), new Pared());
-		e.setPuntosTotales(8);		
-		
-		/*for (int a = 0 ; a < 5 ; a++){
-			for (int b = 0 ; b < 5 ; b++){
-				System.out.print(" " + e.getUeb(new Posicion(a,b)).getClass());
-			}
-			System.out.println("\n");
-		}*/
+		e.setPuntosTotales(8);
+		e.agregarPuntoDeSeparacion(new Posicion(3,1));
+		e.setPosicionCasa(new Posicion(1,1));
 		
 		return e;
 	}
 	
-	public void test() {
+	/*P P P P P
+	 *P C _ S P 
+	 *P P P P P
+	 */
+	
+	private Escenario mapaDeContencion(){
+		Escenario e = new Escenario();
+		
+		for (int i = 0 ; i < 3 ; i++)
+			for (int j = 0 ; j < 5 ; j++)
+				e.addUeb(new Posicion(i,j), new Pared());
+
+		e.addUeb(new Posicion(1,1), new Casa());
+		e.addUeb(new Posicion(1,2), new Piso());
+		e.addUeb(new Posicion(1,3), new Piso());
+
+		e.setPosicionCasa(new Posicion(1,1));
+		e.agregarPuntoDeSeparacion(new Posicion(1,3));
+
+		return e;
+	}
+	
+	public void testDejarLaCasa() {
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(1,3),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(1,3));
+		escenario.colocarPacman(pacman);
+		
+		pacman.comer(escenario.getUeb(pacman.getPosicion()).getNoJugador(0));
+		
+		// Monta guardia dentro de toda la iteracion.
+		for (int i = 0 ; i < 4 ; i++){
+			for (int j = 0 ; j < 4 ; j++ )
+				f.vivir();
+		
+			assertEquals(new Posicion(1,1), f.getPosicion());
+		}
+		
+		//Esta en modo Estrategizar, como el metodo esta vacio, no hace nada.
+		f.vivir();
+		f.vivir();
+		f.vivir();
+		assertEquals(new Posicion(2,1), f.getPosicion());
+	}
+	
+	public void testModoSeparacion(){
 		Escenario escenario = this.mapaSimple();
 		Pacman pacman = new Pacman(escenario,new Posicion(3,3),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,3));
 		escenario.colocarPacman(pacman);
 		
 		pacman.comer(escenario.getUeb(pacman.getPosicion()).getNoJugador(0));
 		
+		//Primero abandono el modo encerrado en casa.
+		for (int i = 0 ; i < 4 ; i++){
+			for (int j = 0 ; j < 4 ; j++ )
+				f.vivir();
+		
+			assertEquals(new Posicion(1,1), f.getPosicion());
+		}
+		//Dio 16 pasos y esta fuera de la casa.
+		
+		//Ahora se encuentra a 100 - 16 = 84 pasos de abandonar
+		//el modo estrategizar para pasar al modo separacion
+		//que dura 50 pasos
+		
+		for (int j = 0 ; j < 84 ; j++)
+			f.vivir();
+		
+		//Entra en modo Separacion, esta en (2,1)
+		//y el punto de separacion es en el (3,1)
+		f.vivir();
+		assertEquals(new Posicion(3,1),f.getPosicion());
+		
+		//Ahora que llego al punto de separacion
+		//empieza a moverse al azar
+		//Por lo que el siguiente vivir lo llevara a
+		//(2,1) o (3,2)
+		f.vivir();
+		if ((new Posicion(2,1).equals(f.getPosicion())))
+			assertEquals(new Posicion(2,1),f.getPosicion());
+		else
+			assertEquals(new Posicion(3,2),f.getPosicion());
+	}
+	
+	public void testCambioAModoEstrategizar(){
+		Escenario escenario = this.mapaDeContencion();
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		Pacman p = new Pacman(escenario,new Posicion(1,3),1);
+		
+		escenario.setPosicionInicialPacman(new Posicion(1,3));
+		escenario.colocarPacman(p);
 		
 		
+		f.estaVivo();
+		
+		assertEquals(new Posicion(2,1),f.getPosicion());
+		
+		//for (int i = 0 ; i < 100 ; i++)
+			//f.estaVivo();
+		
+		
+		
+		//assertTrue(f.estaEnModoSeparacion());
+		//no se quiere mover.
 		
 	}
 

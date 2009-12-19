@@ -9,7 +9,7 @@ import ar.uba.fi.algo3.titiritero.Posicionable;
 
 public abstract class Fantasma extends NoJugador implements Posicionable, ObjetoVivo {
 
-	private static final int tiempoDeEncierro = 1;
+	private static final int tiempoDeEncierro = 16;
 	private static final int tiempoDeEstrategizacion = 100;
 	private static final int tiempoDeSeparacion = 50;
 	
