@@ -12,11 +12,11 @@ public class Escenario {
 	private Posicion posicionInicialPacman;
 	private Pacman pacman;
 	private ArrayList<Posicion> posicionesDeSeparacion;
-	private HashMap <Punto, Ueb>  tablero;
+	private HashMap <Posicion, Ueb>  tablero;
 	
 	
 	public Escenario() {
-		this.tablero = new HashMap <Punto, Ueb>();
+		this.tablero = new HashMap <Posicion, Ueb>();
 		this.posicionesDeSeparacion = new ArrayList<Posicion>();
 		this.puntosRestantes = 0;
 		this.puntosTotales = 0;
@@ -62,7 +62,7 @@ public class Escenario {
 		casillero.setPosicion(p);
 	}
 
-	public Ueb getUeb(Punto p) {
+	public Ueb getUeb(Posicion p) {
 		if (tablero.containsKey(p))
 			return this.tablero.get(p);
 		else
@@ -95,7 +95,7 @@ public class Escenario {
 		return posicionCasa;
 	}
 	
-	public Iterator<Punto> iterator(){
+	public Iterator<Posicion> iterator(){
 		return this.tablero.keySet().iterator();
 	}
 

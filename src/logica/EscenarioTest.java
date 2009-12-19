@@ -28,7 +28,7 @@ public class EscenarioTest extends TestCase{
 	}
 
 	public void testEsPisable(){
-		Punto punto = new Punto(1,1); 
+		Posicion punto = new Posicion(1,1); 
 		ListaDeEscenarios lista = new ListaDeEscenarios();
 		
 		try {

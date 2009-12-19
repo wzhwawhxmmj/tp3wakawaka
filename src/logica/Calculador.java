@@ -46,7 +46,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 		return posicionNueva;
 	}
 
-	private boolean optimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Punto pasoActual){
+	private boolean optimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Posicion pasoActual){
 		 return (    (   ( pasosEfectuados.size() < pasosMejorCamino.size() )
 				       ||( pasosMejorCamino.isEmpty()) )
 				   &&( !pasosEfectuados.contains(pasoActual)                  ));

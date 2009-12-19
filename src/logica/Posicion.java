@@ -15,7 +15,7 @@ public class Posicion extends Punto {
 	}
 	
 	public boolean equals(Object posicion) {
-		Punto pos = (Punto) posicion;
+		Posicion pos = (Posicion) posicion;
 		if ((pos.getx() == this.getx()) && (pos.gety() == this.gety())) 
 			return true;
 		else 
