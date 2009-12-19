@@ -13,16 +13,14 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	private ArrayList<Posicion> pasosEfectuados; 
 	private Direccion direccionInicialActual;
 	private Direccion mejorDireccion;
+	private boolean primerIteracion;
 	
-	public void Inicializar(){
+
+	public Calculador(Escenario elEscenarioQueMeDan){
 		pasosEfectuados  = new ArrayList<Posicion>();
 		pasosMejorCamino = new ArrayList<Posicion>();
 		direccionInicialActual = Direccion.NINGUNA;
 		mejorDireccion         = Direccion.NINGUNA;	
-	}
-	
-	public Calculador(Escenario elEscenarioQueMeDan){
-		Inicializar();
 		escenario = elEscenarioQueMeDan;
 	}
 	
@@ -66,7 +64,17 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 		}
 
 	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
-		//llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
+	Calculador c = new Calculador(escenario);
+	return c.CalcularDireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDirecciones);
+	}
+	
+	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
+		return CalcularDireccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
+	}
+	
+	
+	private Direccion CalcularDireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
+		llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
 		
 		if(salida.equals(llegada)){
 				if((pasosEfectuados.size() < pasosMejorCamino.size())||(pasosMejorCamino.isEmpty())){
@@ -79,20 +87,16 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 					pasosEfectuados.add(salida);
 					for(int i=0;i<(prioridadDeDirecciones.length);i++){
 						if(pasosEfectuados.size()==1)direccionInicialActual = prioridadDeDirecciones[i];
-						DireccionHaciaMenorCaminoEntre(nuevaPosicionHacia(prioridadDeDirecciones[i],salida),llegada); 
+						CalcularDireccionHaciaMenorCaminoEntre(nuevaPosicionHacia(prioridadDeDirecciones[i],salida),llegada,prioridadDeDirecciones); 
 						}
 					removerUltimoPaso(pasosEfectuados);
 					}
 				}
 		
-		Direccion direccionARetornar = mejorDireccion;
-		Inicializar();	
-		return direccionARetornar;
+		return mejorDireccion;
 	    }
 
 	
-	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
-		return DireccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
-	}
+
 	
 }	
