@@ -1,5 +1,7 @@
 package logica;
 
+import java.io.IOException;
+
 import junit.framework.TestCase;
 
 
@@ -25,4 +27,17 @@ public class EscenarioTest extends TestCase{
 		assertEquals (escenario.getPuntosTotales()== 1000, true);
 	}
 
+	public void testEsPisable(){
+		Punto punto = new Punto(1,1); 
+		ListaDeEscenarios lista = new ListaDeEscenarios();
+		
+		try {
+			lista.cargarEscenario("mapaSimple.txt",null);
+		} catch (IOException e) {
+			fail();
+		}
+		Ueb casillero = lista.getEscenario(1).getUeb(punto);
+		assert casillero.isPisablePorIA();
+}
+	
 }
