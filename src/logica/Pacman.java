@@ -40,7 +40,7 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	public void moverHacia(Direccion unaDireccion) {
 		Posicion posicionTemporal = this.getPosicion().clonar();
 		posicionTemporal.moverHacia(unaDireccion);
-		if(escenario.sacarEnPosicion(posicionTemporal).isPisablePorJugador())
+		if(escenario.getUeb(posicionTemporal).isPisablePorJugador())
 			this.setPosicion(posicionTemporal);
 
 	}

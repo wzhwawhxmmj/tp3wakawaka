@@ -23,7 +23,7 @@ public class FantasmaRosa extends Fantasma {
 		iteradorPosicionCasilleros = escenario.iterator();
         while(iteradorPosicionCasilleros.hasNext()){
         	    posisionCasillero = iteradorPosicionCasilleros.next();
-			    iteradorCosas = escenario.sacarEnPosicion(posisionCasillero).iterator();
+			    iteradorCosas = escenario.getUeb(posisionCasillero).iterator();
 		        while(iteradorCosas.hasNext()){
 		        	noJugadorActual = iteradorCosas.next();
 		        	if(noJugadorActual.estaVivo()){

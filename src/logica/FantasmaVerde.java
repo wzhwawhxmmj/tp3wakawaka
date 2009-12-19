@@ -16,7 +16,7 @@ public class FantasmaVerde extends Fantasma {
 	
 	private boolean posicionValida(Posicion posicion) {
 		if (this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()) >= 2 )
-			if (this.getEscenario().sacarEnPosicion(posicion).isPisablePorIA())
+			if (this.getEscenario().getUeb(posicion).isPisablePorIA())
 				return true;
 		
 		return false;
@@ -72,10 +72,9 @@ public class FantasmaVerde extends Fantasma {
 	}
 	
 	public void estrategizar() {
-		this.temporizadorHastaSalto--;
 		this.actuarTonto();
 		this.saltar();
-		
+		this.temporizadorHastaSalto--;
 	}
 
 }
