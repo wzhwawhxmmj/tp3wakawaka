@@ -26,11 +26,14 @@ public class Punto {
 	}
 
 	public String toString() {
-		return "(" + this.getx() + "," + this.gety() + ")";
+		return "(" + this.x + "," + this.y + ")";
 	}
 	
-	public double distanciaA(Punto punto){
-		return Math.sqrt((this.getx()-punto.getx())^2 + (this.gety()-punto.gety())^2); 
+	public double distanciaHasta(Punto a){		
+		double x = Math.pow(this.x - a.x, 2);
+		double y = Math.pow(this.y - a.y, 2);
+		
+		return Math.pow(x + y, 0.5);
 	}
 
 }
