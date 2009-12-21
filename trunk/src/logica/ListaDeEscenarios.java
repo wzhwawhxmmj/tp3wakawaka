@@ -72,8 +72,8 @@ public class ListaDeEscenarios {
 					cantidadDePuntos++;
 					vistaPiso = new VistaPiso ();
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
-					vistaPuntito = new VistaPuntito ();
-					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPuntito,this.juego);
+					vistaPuntito = new VistaPuntito (noJugadorAPoner);
+					this.juego.getControlador().agregarDibujable(vistaPuntito);
 					break;
 				
 				case 'P':
@@ -84,8 +84,8 @@ public class ListaDeEscenarios {
 					cantidadDePuntos++;
 					vistaPiso = new VistaPiso ();
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
-					vistaPildora = new VistaPildora ();
-					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPildora,this.juego);
+					vistaPildora = new VistaPildora (noJugadorAPoner);
+					juego.getControlador().agregarDibujable(vistaPildora);
 					break;
 					
 				case 'C':
@@ -112,8 +112,8 @@ public class ListaDeEscenarios {
 					cantidadDePuntos++;
 					vistaPiso = new VistaPiso ();
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
-					vistaPuntito = new VistaPuntito ();
-					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPuntito,this.juego);
+					vistaPuntito = new VistaPuntito (noJugadorAPoner);
+					juego.getControlador().agregarDibujable(vistaPuntito);
 					break;
 				
 				case 'I':
@@ -125,8 +125,8 @@ public class ListaDeEscenarios {
 					cantidadDePuntos++;
 					vistaPiso = new VistaPiso ();
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
-					vistaPuntito = new VistaPuntito ();
-					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPuntito,this.juego);
+					vistaPuntito = new VistaPuntito (noJugadorAPoner);
+					juego.getControlador().agregarDibujable(vistaPuntito);
 					break;	
 				
 				}

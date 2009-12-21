@@ -76,8 +76,7 @@ public class Juego implements ObjetoVivo{
 		for(int i=0;i<1;i++)
 		{ 
 			this.controladorJuego.agregarObjetoVivo(arrayDeFantasmas[i]);
-		    vistasFantasma[i] = new VistaFantasma(coloresFantasma[i]);
-		    vistasFantasma[i].setPosicionable(this.arrayDeFantasmas[i]);
+		    vistasFantasma[i] = new VistaFantasma(coloresFantasma[i],arrayDeFantasmas[i] );
 		    this.controladorJuego.agregarDibujable(vistasFantasma[i]);
 	     	}
 		}
@@ -111,6 +110,7 @@ public class Juego implements ObjetoVivo{
 
 	
 	public void vivir (){
+		System.err.println(this.puntaje);
 		if ((this.escenarioActual.getPuntosRestantes()!= 0)&& (this.vidas > 0)){
 			this.ActualizarPuntajeJugador();
 			if (!this.pacman.estaVivo()){
@@ -145,6 +145,7 @@ public class Juego implements ObjetoVivo{
 	public void ponerFantasmasAzules(){
 		for (int i=0; i<4; i++){
 			this.arrayDeFantasmas[i].volverAzul();
+			
 		}
 	}
 	
