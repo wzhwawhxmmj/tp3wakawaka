@@ -78,6 +78,8 @@ public class Escenario {
 	}
 	
 	public void restarPuntos(int puntosARestar) {
+		if (puntosARestar > this.puntosRestantes)
+			throw new EstadoInvalidoException();
 		this.puntosRestantes -= puntosARestar;
 	}
 
