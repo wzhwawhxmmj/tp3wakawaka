@@ -1,8 +1,14 @@
 package logica;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.Iterator;
+
+import controlador.ManejoPorTeclado;
+
+//import controlador.ManejoPorTeclado;
 
 import vista.*;
 
@@ -23,8 +29,8 @@ public class Juego implements ObjetoVivo{
 	private int nivelActual;
 	ControladorJuego controladorJuego;
 	Ventana superficieDeDibujo;
-	
-	
+	//ManejoPorTeclado teclado;
+
 	
 	public Juego (String archivoTextoConEscenarios) throws IOException{
 		
@@ -36,8 +42,9 @@ public class Juego implements ObjetoVivo{
 		this.pacman = null;
 		this.escenarioActual = null;
 		this.controladorJuego = new ControladorJuego();
-		this.superficieDeDibujo = new Ventana (500,500,this.controladorJuego);
-		
+		this.superficieDeDibujo = new Ventana (325,350,this.controladorJuego);
+		//this.teclado = new ManejoPorTeclado (this.pacman);
+
 	}	
 	
 
@@ -65,8 +72,9 @@ public class Juego implements ObjetoVivo{
 		
 		VistaFantasma vistasFantasma[] = new VistaFantasma[arrayDeFantasmas.length];
 		final Color coloresFantasma[] = {Color.RED,Color.ORANGE,Color.GREEN,Color.PINK};
-		for(int i=0;i<arrayDeFantasmas.length;i++)
-	     	{ 
+		//for(int i=0;i<arrayDeFantasmas.length;i++)
+		for(int i=0;i<1;i++)
+		{ 
 			this.controladorJuego.agregarObjetoVivo(arrayDeFantasmas[i]);
 		    vistasFantasma[i] = new VistaFantasma(coloresFantasma[i]);
 		    vistasFantasma[i].setPosicionable(this.arrayDeFantasmas[i]);
@@ -87,13 +95,14 @@ public class Juego implements ObjetoVivo{
 		this.inicializarFantasmas (escenario);
 		this.agregarObjetosVivosAlControlador();
 		this.controladorJuego.agregarObjetoVivo(this);
-		this.controladorJuego.setIntervaloSimulacion(50);
+		this.controladorJuego.setIntervaloSimulacion(200);
+		this.superficieDeDibujo.addKeyListener((KeyListener) new ManejoPorTeclado(this.pacman));
+
 	}
 	
 	public void jugar() throws IOException{
 		while ((listaDeEscenarios.tieneSiguiente())&& (this.vidas != 0)){
 			this.inicializarNivel(this.nivelActual);
-			System.err.println("inicializé todo pillo");
 			while (((this.escenarioActual.getPuntosRestantes())!= 0) && (this.vidas != 0)){
 				this.controladorJuego.comenzarJuego();
 			}
@@ -102,7 +111,7 @@ public class Juego implements ObjetoVivo{
 
 	
 	public void vivir (){
-		/*if ((this.escenarioActual.getPuntosRestantes()!= 0)&& (this.vidas > 0)){
+		if ((this.escenarioActual.getPuntosRestantes()!= 0)&& (this.vidas > 0)){
 			this.ActualizarPuntajeJugador();
 			if (!this.pacman.estaVivo()){
 				this.RutinaCuandoElPacmanMuere();
@@ -111,15 +120,18 @@ public class Juego implements ObjetoVivo{
 		else{
 			this.controladorJuego.detenerJuego();
 		}
-		*/
+		
 	}
 	
 	private void RutinaCuandoElPacmanMuere() {
+		
 		this.vidas = this.vidas -1;
-		this.pacman.setPosicion(this.escenarioActual.getPosicionInicialPacman());
-		for (int i= 0; i<this.arrayDeFantasmas.length; i++){
-			this.arrayDeFantasmas[i].setPosicion(this.escenarioActual.getPosicionCasa());
+		for (int i=0; i<4; i++){
+			this.arrayDeFantasmas[i].reset();
 		}
+		this.pacman.setPosicion(this.escenarioActual.getPosicionInicialPacman());
+		this.pacman.revivir();
+		
 		
 	}
 
