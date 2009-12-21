@@ -44,7 +44,7 @@ public class FantasmaRojoTest extends TestCase {
 	
 	public void testEstrategizar() {
 		Escenario e = this.mapaSimple();
-		Pacman p = new Pacman(e,new Posicion(2,2),2);
+		Pacman p = new Pacman(e,new Posicion(2,2));
 		e.colocarPacman(p);
 		Fantasma f = new FantasmaRojo(e,new Posicion(3,2),10f,25f,200);
 		e.restarPuntos(7);
@@ -56,7 +56,7 @@ public class FantasmaRojoTest extends TestCase {
 	public void testSeguirAPacman() {
 		Escenario e = this.mapaSimple();
 		e.setPosicionInicialPacman(new Posicion(3,3));
-		Pacman p = new Pacman(e,new Posicion(3,3),2);
+		Pacman p = new Pacman(e,new Posicion(3,3));
 		e.colocarPacman(p);
 		Fantasma f = new FantasmaRojo(e,new Posicion(3,2),10f,1f,200);
 		

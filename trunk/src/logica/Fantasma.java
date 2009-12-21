@@ -291,7 +291,7 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 	}
 
 	protected void retonarACasa() {
-		Calculador calc = this.getEscenario().calculador();
+		Calculador calc = this.getEscenario().calculador(); 
 		
 		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPosicionCasa()));		
 	}
