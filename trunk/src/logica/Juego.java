@@ -73,8 +73,7 @@ public class Juego implements ObjetoVivo{
 		
 		VistaFantasma vistasFantasma[] = new VistaFantasma[arrayDeFantasmas.length];
 		final Color coloresFantasma[] = {Color.RED,Color.ORANGE,Color.GREEN,Color.PINK};
-		//for(int i=0;i<arrayDeFantasmas.length;i++)
-		for(int i=0;i<1;i++)
+		for(int i=0;i<arrayDeFantasmas.length;i++)
 		{ 
 			this.controladorJuego.agregarObjetoVivo(arrayDeFantasmas[i]);
 		    vistasFantasma[i] = new VistaFantasma(coloresFantasma[i],arrayDeFantasmas[i] );
@@ -88,7 +87,7 @@ public class Juego implements ObjetoVivo{
 		this.superficieDeDibujo.setVisible(true);
 		this.controladorJuego.setSuperficieDeDibujo(this.superficieDeDibujo);
 		Escenario escenario = listaDeEscenarios.getEscenario(nivel);
-		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman(),2 );
+		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman());
 		escenario.colocarPacman(this.pacman);
 		this.controladorJuego.setSuperficieDeDibujo(this.superficieDeDibujo);
 		this.escenarioActual = escenario;
