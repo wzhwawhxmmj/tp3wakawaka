@@ -36,31 +36,9 @@ public class FantasmaTest extends TestCase {
 		
 		e.addUeb(new Posicion(2,2), new Pared());
 		e.setPuntosTotales(8);
-		e.agregarPuntoDeSeparacion(new Posicion(3,1));
+		e.agregarPuntoDeSeparacion(new Posicion(3,2));
 		e.setPosicionCasa(new Posicion(1,1));
 		
-		return e;
-	}
-	
-	/*P P P P P
-	 *P C _ S P 
-	 *P P P P P
-	 */
-	
-	private Escenario mapaDeContencion(){
-		Escenario e = new Escenario();
-		
-		for (int i = 0 ; i < 3 ; i++)
-			for (int j = 0 ; j < 5 ; j++)
-				e.addUeb(new Posicion(i,j), new Pared());
-
-		e.addUeb(new Posicion(1,1), new Casa());
-		e.addUeb(new Posicion(1,2), new Piso());
-		e.addUeb(new Posicion(1,3), new Piso());
-
-		e.setPosicionCasa(new Posicion(1,1));
-		e.agregarPuntoDeSeparacion(new Posicion(1,3));
-
 		return e;
 	}
 	
@@ -103,7 +81,7 @@ public class FantasmaTest extends TestCase {
 		for (int i = 0 ; i < 4 ; i++){
 			for (int j = 0 ; j < 4 ; j++ )
 				f.vivir();
-		
+				
 			assertEquals(new Posicion(1,1), f.getPosicion());
 		}
 		//Dio 16 pasos y esta fuera de la casa.
@@ -132,26 +110,217 @@ public class FantasmaTest extends TestCase {
 	}
 	
 	public void testCambioAModoEstrategizar(){
-		Escenario escenario = this.mapaDeContencion();
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,3),1);
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
-		Pacman p = new Pacman(escenario,new Posicion(1,3),1);
 		
-		escenario.setPosicionInicialPacman(new Posicion(1,3));
-		escenario.colocarPacman(p);
+		escenario.setPosicionInicialPacman(new Posicion(3,3));
+		escenario.colocarPacman(pacman);
 		
+		pacman.comer(escenario.getUeb(pacman.getPosicion()).getNoJugador(0));
 		
-		f.estaVivo();
+		for (int i = 0 ; i < 101 ; i++)
+			f.vivir();
+				
+		assertTrue(f.estaEnModoSeparacion());
+		
+		for (int i = 0 ; i < 50 ; i++)
+			f.vivir();
+			
+		assertFalse(f.estaEnModoSeparacion());
+	}
+	
+	public void testActivarModoAzulEncerrado(){
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,2));
+		escenario.colocarPacman(pacman);
+		
+		pacman.comer(escenario.getUeb(pacman.getPosicion()).getNoJugador(0));
+		
+		f.volverAzul();
+		assertFalse(f.estaAzul());
+	}
+	
+	public void testActivarModoAzulEstrategizando(){
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,2));
+		escenario.colocarPacman(pacman);
+		
+		pacman.comer(escenario.getUeb(pacman.getPosicion()).getNoJugador(0));
+		
+		for (int i = 0 ; i < 17 ; i++)
+			f.vivir();
+		
+		f.volverAzul();
+		
+		assertTrue(f.estaAzul());
+	}
+	
+	public void testActivarModoAzulSeparacion(){
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,2));
+		escenario.colocarPacman(pacman);
+		
+		pacman.comer(escenario.getUeb(pacman.getPosicion()).getNoJugador(0));
+		
+		for (int i = 0 ; i < 17 ; i++)
+			f.vivir();
+		
+		for (int i = 0 ; i < 84 ; i++)
+			f.vivir();
+		
+		f.volverAzul();
+		
+		assertTrue(f.estaAzul());
+	
+	}
+	
+	public void testActivarModoAzulenModoAzul(){
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,2));
+		escenario.colocarPacman(pacman);
+		
+		pacman.comer(escenario.getUeb(pacman.getPosicion()).getNoJugador(0));
+		
+		for (int i = 0 ; i < 17 ; i++)
+			f.vivir();
+		
+		f.volverAzul();
+		f.volverAzul();
+		
+		assertTrue(f.estaAzul());
+	}
+	
+	public void testDesactivarModoAzulATiempo() {
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,3),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),2f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,3));
+		escenario.colocarPacman(pacman);
+		
+		pacman.comer(escenario.getUeb(pacman.getPosicion()).getNoJugador(0));
+		
+		for (int i = 0 ; i < 17 ; i++)
+			f.vivir();
+		
+		f.volverAzul();
+		
+		f.vivir();
+		f.vivir();
+		
+		assertFalse(f.estaAzul());		
+	}
+	
+	public void testVelocidadDeMovimiento() {
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,2f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,2));
+		escenario.colocarPacman(pacman);
+		
+		f.vivir();
+		
+		assertEquals(new Posicion(3,1),f.getPosicion());
+	}
+	
+	public void testAumentoDeVelocidadDeMovimiento() {
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,2));
+		escenario.colocarPacman(pacman);
+		
+		f.vivir();
+		
+		f.setVelocidad(3f);
 		
 		assertEquals(new Posicion(2,1),f.getPosicion());
-		
-		//for (int i = 0 ; i < 100 ; i++)
-			//f.estaVivo();
-		
-		
-		
-		//assertTrue(f.estaEnModoSeparacion());
-		//no se quiere mover.
-		
 	}
+	
+	public void testInteractuarConPacmanNoAzul() {
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,2));
+		escenario.colocarPacman(pacman);
+		
+		for (int i = 0 ; i < 101 ; i++)
+			f.vivir();
+		
+		f.vivir();
+		
+		assertFalse(pacman.estaVivo());
+	}
+	
+	public void testInteractuarConPacmanAzul() {
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,2));
+		escenario.colocarPacman(pacman);
+		
+		for (int i = 0 ; i < 101 ; i++)
+			f.vivir();
+		
+		f.volverAzul();
+		
+		//Le cierro el paso para que el movimiento al azar
+		//del estado azul lo haga siempre en la direccion del pacman
+		escenario.addUeb(new Posicion(2,1), new Pared());
+				
+		f.vivir();
+		
+		assertTrue(pacman.estaVivo());
+		assertFalse(f.estaAzul());
+		assertFalse(f.estaVivo());
+	}
+	
+	public void testRetornarACasaLuegoDeMorir() {
+		Escenario escenario = this.mapaSimple();
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
+		
+		escenario.setPosicionInicialPacman(new Posicion(3,2));
+		escenario.colocarPacman(pacman);
+		
+		for (int i = 0 ; i < 101 ; i++)
+			f.vivir();
+		
+		f.volverAzul();
+		
+		//Le cierro el paso para que el movimiento al azar
+		//del estado azul lo haga siempre en la direccion del pacman
+		escenario.addUeb(new Posicion(2,1), new Pared());
+				
+		f.vivir();
+		
+		escenario.addUeb(new Posicion(2,1), new Piso());
 
+		f.vivir();
+		f.vivir();
+		f.vivir();
+		
+		assertEquals(escenario.getPosicionCasa(), f.getPosicion());
+		
+		f.vivir();
+		
+		assertTrue(f.estaVivo());
+	}
 }

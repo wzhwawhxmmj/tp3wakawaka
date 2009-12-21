@@ -113,28 +113,24 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 				}
 			}
 			
-			if (this.temporizadorDeEstrategizacion == 0){
+			if (this.temporizadorDeEstrategizacion == 0) {
 				this.modoSeparacion = true;
 				this.temporizadorDeEstrategizacion = tiempoDeEstrategizacion;
 			}
 			
-			if (!this.modoSeparacion)
+			if (!this.modoSeparacion && !this.azul)
 				this.temporizadorDeEstrategizacion--;
 			
-			if (this.temporizadorModoSeparacion == 0){
+			if (this.temporizadorModoSeparacion == 0) {
 				this.modoSeparacion = false;
 				this.llegoAPos = false;
 				this.temporizadorModoSeparacion = tiempoDeSeparacion;
 			}
 			
-			if (this.modoSeparacion)
+			if (this.modoSeparacion && !this.azul)
 				this.temporizadorModoSeparacion--;
 			
-			if (this.getPosicion().equals(this.getEscenario().getPacman().getPosicion())){
-				this.getEscenario().getPacman().comer(this);
-			}
-			
-			if (this.modoSeparacion && !this.encerrado && !this.azul && this.estaVivo()){
+			if (this.modoSeparacion && !this.encerrado && !this.azul && this.estaVivo()) {
 				try{
 					this.actuarModoSeparacion();
 				}catch(PosicionIlegalException e){
@@ -144,23 +140,22 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 
 			if (!this.estaVivo() && !this.retornoACasa) {
 				this.temporizadorModoAzul = this.duracionModoAzul;
-				this.azul = false;
 				
+				this.azul = false;
 				this.modoSeparacion = false;
 				this.llegoAPos = false;
 				
 				this.encerrado = true;
+				
 				if (!this.getPosicion().equals(this.getEscenario().getPosicionCasa()))
 					this.retonarACasa();
-				else
+				else {
 					this.retornoACasa = true;
+					this.revivir();
+				}
 			}
 		
-			if (this.encerrado && this.retornoACasa ){
-				try{
-					this.revivir();
-				}catch (EstadoInvalidoException e){}
-				
+			if (this.encerrado && this.retornoACasa) {				
 				this.montarGuardiaHorizontal();
 				if (this.contadorDeEncierro == 0){
 					this.encerrado = false;
@@ -170,7 +165,7 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 				this.contadorDeEncierro--;
 			}
 			
-			if (this.azul){
+			if (this.azul) {
 				this.temporizadorModoAzul--;
 				if (this.temporizadorModoAzul == 0){
 					this.azul = false;
@@ -178,6 +173,9 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 				}
 				this.movimientoAlAzar();
 			}
+			
+			if (this.getPosicion().equals(this.getEscenario().getPacman().getPosicion()))
+				this.getEscenario().getPacman().comer(this);
 		}
 	}
 	
@@ -195,7 +193,7 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 					return 0;
 				}catch (EstadoInvalidoException e){
 					return 0;
-					}
+				}
 		}
 		return 0;
 	}
@@ -334,15 +332,11 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 	}
 	//Fin: Metodos privados.
 
-	@Override
 	public int getX() {
-		// TODO Auto-generated method stub
 		return this.getPosicion().getx();
 	}
-
-	@Override
+	
 	public int getY() {
-		// TODO Auto-generated method stub
 		return this.getPosicion().gety();
 	}
 }
