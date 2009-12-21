@@ -35,7 +35,6 @@ public class ListaDeEscenarios {
 	}
 
 	private Escenario cargarEscenario (String archivoEscenario) throws IOException {
-		
 		FileReader fileMapa = new FileReader(archivoEscenario);
 		BufferedReader bufferMapa = new BufferedReader(fileMapa); 
 		String filaMapa = bufferMapa.readLine();
@@ -56,7 +55,6 @@ public class ListaDeEscenarios {
 		while (filaMapa != null){
 			while (columna < filaMapa.length()){
 				posicionActual= new Posicion (columna, fila);
-
 				switch (filaMapa.charAt(columna)){
 				
 				case '0':

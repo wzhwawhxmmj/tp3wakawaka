@@ -1,6 +1,6 @@
 package logica;
 
-public class Puntito extends NoJugador {
+public class Puntito extends NoJugador implements ar.uba.fi.algo3.titiritero.Posicionable {
 	
 	
 
@@ -28,4 +28,5 @@ public class Puntito extends NoJugador {
 		public boolean isComido() {
 			return comido;
 		}
+		
 }

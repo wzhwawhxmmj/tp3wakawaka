@@ -23,7 +23,8 @@ public abstract class Ueb implements ar.uba.fi.algo3.titiritero.Posicionable {
 		casillero.add(noJugador);
 	}
 	
-	public int getCantidadDeComestibles(){		
+	public int getCantidadDeComestibles(){
+		
 		return casillero.size();
 	}
 	
@@ -73,13 +74,13 @@ public abstract class Ueb implements ar.uba.fi.algo3.titiritero.Posicionable {
 	@Override
 	public int getX() {
 		// TODO Auto-generated method stub
-		return this.posicion.getx();
+		return this.posicion.getx()*10;
 	}
 
 	@Override
 	public int getY() {
 		// TODO Auto-generated method stub
-		return this.posicion.gety();
+		return this.posicion.gety()*10;
 	}
 	
 	

@@ -1,8 +1,9 @@
 package logica;
 
 import ar.uba.fi.algo3.titiritero.ObjetoVivo;
+import ar.uba.fi.algo3.titiritero.Posicionable;
 
-public class Pacman extends Entidad implements ObjetoVivo {
+public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	
 	private int puntajeAcumulado;
 	private Direccion direccion;
@@ -28,7 +29,7 @@ public class Pacman extends Entidad implements ObjetoVivo {
 	}
 	
 	public void vivir() {
-		this.moverHacia(direccion);
+		//this.moverHacia(direccion);
 	}
 
 	public int getPuntajeAcumulado() {
@@ -43,4 +44,6 @@ public class Pacman extends Entidad implements ObjetoVivo {
 			this.setPosicion(posicionTemporal);
 
 	}
+
+
 }

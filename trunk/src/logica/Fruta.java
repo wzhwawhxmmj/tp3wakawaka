@@ -1,6 +1,6 @@
 package logica;
 
-public class Fruta extends NoJugador {
+public class Fruta extends NoJugador implements ar.uba.fi.algo3.titiritero.Posicionable{
 
 	
 		private boolean comido;
@@ -23,4 +23,5 @@ public class Fruta extends NoJugador {
 			this.getEscenario().restarPuntos(1);
 			return this.getPuntaje();
 		}
+	
 }
