@@ -9,14 +9,14 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	
 	private int puntajeAcumulado;
 	private Direccion direccion;
-	private Escenario escenario;
-	
+	private Escenario escenario;	
 
-	public Pacman(Escenario escenario, Posicion posicion, int velocidad) {
+	public Pacman(Escenario escenario, Posicion posicion) {
 		super(escenario, posicion);
 		this.direccion = Direccion.DERECHA;
 		this.escenario = escenario;
-		puntajeAcumulado = 0;
+		this.puntajeAcumulado = 0;
+		
 	}
 
 	public void comer(NoJugador algunaCosa) {
@@ -44,10 +44,10 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	
 	public void vivir() {
 		this.moverHacia(this.direccion);
-
-		Iterator<NoJugador> i = this.getEscenario().getUeb(this.getPosicion()).iterator();
-		while (i.hasNext())
-			this.comer(i.next());
+			
+		Iterator<NoJugador> it = this.getEscenario().getUeb(this.getPosicion()).iterator();
+		while (it.hasNext())
+			this.comer(it.next());	
 	}
 
 	public int getPuntajeAcumulado() {
