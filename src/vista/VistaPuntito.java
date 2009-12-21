@@ -1,13 +1,38 @@
 package vista;
 
 import java.awt.Color;
+import java.awt.Graphics;
+
+import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
+
+import logica.NoJugador;
+import logica.Pildora;
+import logica.Puntito;
 
 public class VistaPuntito extends ar.uba.fi.algo3.titiritero.vista.Circulo {
-	 
-	        public VistaPuntito() {
-	                super(6);
-	                setColor(Color.YELLOW);
-	        }
+
+	private int radio;
+	private Puntito puntito;
+	
+	public VistaPuntito(NoJugador unPuntito) {
+		super(6);
+	    this.radio = 6;
+	    this.puntito= (Puntito) unPuntito;
+	    this.setPosicionable(this.puntito);
+	    setColor(Color.YELLOW);
+	    }
+	
+	public void dibujar(SuperficieDeDibujo superfice) {
+		Graphics grafico = (Graphics)superfice.getBuffer();
+		if(!this.puntito.isComido())
+			this.setColor(Color.YELLOW);
+		else
+			this.setColor(Color.GRAY);
+		grafico.setColor(this.getColor());
+		grafico.fillOval(getPosicionable().getX() , getPosicionable().getY(),this.radio,this.radio);
+
+	}
+	
 
 
 }
