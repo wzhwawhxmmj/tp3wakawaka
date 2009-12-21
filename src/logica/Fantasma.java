@@ -123,7 +123,7 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 
 			if (!this.estaVivo() && !this.retornoACasa) {
 				this.temporizadorModoAzul = this.duracionModoAzul;
-				System.out.println(this.getPosicion());
+
 				this.azul = false;
 				this.modoSeparacion = false;
 				this.llegoAPos = false;
