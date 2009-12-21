@@ -87,6 +87,6 @@ public class FantasmaVerdeTest extends TestCase {
 			f.vivir();
 		}
 		
-		assertEquals(new Posicion(94,1),f.getPosicion());
+		assertEquals(new Posicion(97,1),f.getPosicion());
 	}
 }

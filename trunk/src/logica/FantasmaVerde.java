@@ -14,27 +14,42 @@ public class FantasmaVerde extends Fantasma {
 	}
 	
 	private boolean posicionValida(Posicion posicion) {
+		try {
+			this.getEscenario().getUeb(posicion);
+		}catch (PosicionIlegalException e) {
+			return false;
+		}
+		
 		return (this.getEscenario().getUeb(posicion).isPisablePorIA() && !posicion.equals(this.getEscenario().getPosicionCasa()));
 	}
 	
 	private Posicion posicionCercanaAPacman(){
-		Posicion comparacionConPacman;
+		Posicion posicion;
+				
+		posicion = this.getEscenario().getPacman().getPosicion().clonar();
+		posicion.avanzarAbajo();
+		posicion.avanzarAbajo();
+		if (this.posicionValida(posicion))
+			return posicion;
+				
+		posicion = this.getEscenario().getPacman().getPosicion().clonar();
+		posicion.avanzarDerecha();
+		posicion.avanzarDerecha();
+		if (this.posicionValida(posicion))
+			return posicion;
+				
+		posicion = this.getEscenario().getPacman().getPosicion().clonar();
+		posicion.avanzarArriba();
+		posicion.avanzarArriba();
+		if (this.posicionValida(posicion))
+			return posicion;
 		
-		for (int i = -5 ; i <= 5 ; i++) {
-			if ((i < -3) || (i > 3)) {
-				comparacionConPacman = new Posicion(this.getEscenario().getPacman().getPosicion().getx() + i,this.getEscenario().getPacman().getPosicion().gety());
-				if (this.posicionValida(comparacionConPacman))
-						return comparacionConPacman;
-			}
-		}
-		
-		for (int j = -5 ; j <= 5 ; j++) {
-			if ( (j < -3) || (j > 3)) {
-				comparacionConPacman = new Posicion(this.getEscenario().getPacman().getPosicion().getx(), this.getEscenario().getPacman().getPosicion().gety() + j);
-				if (this.posicionValida(comparacionConPacman))
-					return comparacionConPacman;
-			}
-		}
+		posicion = this.getEscenario().getPacman().getPosicion().clonar();
+		posicion.avanzarIzquierda();
+		posicion.avanzarIzquierda();
+		if (this.posicionValida(posicion))
+			return posicion;
+				
 		return this.getPosicion();
 	}
 	
@@ -68,7 +83,7 @@ public class FantasmaVerde extends Fantasma {
 		if (this.temporizadorHastaSalto <= cero)
 			this.resetContador();
 		
-		this.temporizadorHastaSalto--;		
+		this.temporizadorHastaSalto--;
 	}
 
 }
