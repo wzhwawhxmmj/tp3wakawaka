@@ -10,6 +10,7 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	private int puntajeAcumulado;
 	private Direccion direccion;
 	private Escenario escenario;
+	
 
 	public Pacman(Escenario escenario, Posicion posicion, int velocidad) {
 		super(escenario, posicion);
@@ -26,12 +27,24 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 		return direccion;
 	}
 	
-	public void cambiarDireccion(Direccion direccion){
-		this.direccion = direccion;
+	private boolean direccionValida(Direccion direccion){
+		Posicion posicionTemporal = this.getPosicion().clonar();
+		posicionTemporal.moverHacia(direccion);
+		if(escenario.getUeb(posicionTemporal).isPisablePorJugador())
+			return true;
+		return false;
 	}
 	
+	public void cambiarDireccion(Direccion direccion){		
+			
+		if (direccionValida(direccion))
+			this.direccion = direccion;
+	}
+	
+	
 	public void vivir() {
-		this.moverHacia(direccion);
+		this.moverHacia(this.direccion);
+
 		Iterator<NoJugador> i = this.getEscenario().getUeb(this.getPosicion()).iterator();
 		while (i.hasNext())
 			this.comer(i.next());
@@ -42,12 +55,11 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	}
 
 
-	public void moverHacia(Direccion unaDireccion) {
+	private void moverHacia(Direccion unaDireccion) {
 		Posicion posicionTemporal = this.getPosicion().clonar();
 		posicionTemporal.moverHacia(unaDireccion);
 		if(escenario.getUeb(posicionTemporal).isPisablePorJugador())
 			this.setPosicion(posicionTemporal);
-
 	}
 
 
