@@ -11,11 +11,10 @@ public class Puntito extends NoJugador implements ar.uba.fi.algo3.titiritero.Pos
 			super(escenario, posicion, puntosAlSerComido);
 		}
 		
-
-		
-	
-
 		public long activar(){
+			if (this.comido) {
+				return 0;
+			}
 			this.setComido(true);
 			this.getEscenario().restarPuntos(1);
 			return  this.getPuntaje();
