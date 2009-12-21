@@ -1,23 +1,42 @@
 package logica;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import vista.*;
+
+import ar.uba.fi.algo3.titiritero.Dibujable;
+import ar.uba.fi.algo3.titiritero.Posicionable;
+
 public class ListaDeEscenarios {
 
-	private LinkedList<Escenario> listaDeEscenarios;
+	private LinkedList<String> listaDeEscenarios;
 	private int nivelActual;
+	private Juego juego;
 	
-	
-	public ListaDeEscenarios (){
-		this.listaDeEscenarios = new LinkedList<Escenario>();
+	public ListaDeEscenarios (String archivoLista, Juego juegoActual) throws IOException{
+		this.listaDeEscenarios = new LinkedList<String>();
+		this.juego = juegoActual;
 		this.nivelActual = 0;
+		
+		FileReader fileListaDeEscenarios = new FileReader(archivoLista);
+		BufferedReader bufferListaDeEscenarios = new BufferedReader(fileListaDeEscenarios);
+		this.cargarlistaDeEscenarios (bufferListaDeEscenarios);
 	}
 	
-	public void cargarEscenario (String archivoEscenario, Juego juego) throws IOException {
+	private void cargarlistaDeEscenarios( BufferedReader buffer) throws IOException {
+		String unEscenario = buffer.readLine();
+		while (unEscenario != null){
+			this.listaDeEscenarios.add(unEscenario);
+			unEscenario = buffer.readLine();
+		}
+	}
+
+	private Escenario cargarEscenario (String archivoEscenario) throws IOException {
 		
 		FileReader fileMapa = new FileReader(archivoEscenario);
 		BufferedReader bufferMapa = new BufferedReader(fileMapa); 
@@ -29,6 +48,12 @@ public class ListaDeEscenarios {
 		Escenario escenarioACargar = new Escenario();
 		Posicion posicionActual;
 		int cantidadDePuntos = 0;
+		VistaPiso vistaPiso;
+		VistaPuntito vistaPuntito;
+		VistaPildora vistaPildora;
+		VistaCasa vistaCasa;
+		VistaPared vistaPared;
+		
 		
 		while (filaMapa != null){
 			while (columna < filaMapa.length()){
@@ -39,6 +64,8 @@ public class ListaDeEscenarios {
 				case '0':
 					uebAPoner = new Piso();
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
+					vistaPiso = new VistaPiso ();
+					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
 					break;
 					
 				case '1':
@@ -47,25 +74,37 @@ public class ListaDeEscenarios {
 					uebAPoner.addNoJugador(noJugadorAPoner);
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					cantidadDePuntos++;
+					vistaPiso = new VistaPiso ();
+					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
+					vistaPuntito = new VistaPuntito ();
+					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPuntito,this.juego);
 					break;
 				
 				case 'P':
 					uebAPoner = new Piso();
-					noJugadorAPoner = new Pildora(escenarioACargar,posicionActual,40, juego);
+					noJugadorAPoner = new Pildora(escenarioACargar,posicionActual,40,this.juego);
 					uebAPoner.addNoJugador(noJugadorAPoner);
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					cantidadDePuntos++;
+					vistaPiso = new VistaPiso ();
+					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
+					vistaPildora = new VistaPildora ();
+					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPuntito,this.juego);
 					break;
 					
 				case 'C':
 					uebAPoner = new Casa();
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.setPosicionCasa(posicionActual);
+					vistaCasa = new VistaCasa ();
+					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
 					break;
 					
 				case '#':
 					uebAPoner = new Pared();
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
+					vistaPared = new VistaPared ();
+					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
 					break;
 				
 				case 'E':
@@ -74,8 +113,11 @@ public class ListaDeEscenarios {
 					uebAPoner.addNoJugador(noJugadorAPoner);
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.agregarPuntoDeSeparacion(posicionActual);
-		
-					
+					cantidadDePuntos++;
+					vistaPiso = new VistaPiso ();
+					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
+					vistaPuntito = new VistaPuntito ();
+					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPuntito,this.juego);
 					break;
 				
 				case 'I':
@@ -84,7 +126,11 @@ public class ListaDeEscenarios {
 					uebAPoner.addNoJugador(noJugadorAPoner);
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.setPosicionInicialPacman(posicionActual);
-					
+					cantidadDePuntos++;
+					vistaPiso = new VistaPiso ();
+					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
+					vistaPuntito = new VistaPuntito ();
+					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPuntito,this.juego);
 					break;	
 				
 				}
@@ -96,19 +142,24 @@ public class ListaDeEscenarios {
 			uebAPoner= null;
 		}
 	escenarioACargar.setPuntosTotales(cantidadDePuntos);
-	this.agregarEscenario(escenarioACargar);	
+		return escenarioACargar;	
 	}
 		
 			
 		
 	
-	private void agregarEscenario(Escenario escenario){
-		this.listaDeEscenarios.add(escenario);
+	private void cargarListaDeVistaDeControlador(Posicionable posicionable, Dibujable dibujable,
+			Juego juego) {
+		dibujable.setPosicionable(posicionable);
+		juego.getControlador().agregarDibujable(dibujable);
+		
 	}
+
+
 	
-	public Escenario getEscenario(int nivel){
+	public Escenario getEscenario(int nivel) throws IOException{
 		this.nivelActual = nivel;
-		return this.listaDeEscenarios.get(nivel-1);
+		return this.cargarEscenario(this.listaDeEscenarios.get(nivel-1));
 	}
 
 	
@@ -122,4 +173,7 @@ public class ListaDeEscenarios {
 		}
 		
 	}
+	
+
+
 }
