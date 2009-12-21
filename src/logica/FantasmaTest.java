@@ -45,7 +45,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testDejarLaCasa() {
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(1,3),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(1,3));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(1,3));
@@ -70,7 +70,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testModoSeparacion(){
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,3),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,3));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,3));
@@ -115,7 +115,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testCambioAModoEstrategizar(){
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,3),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,3));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,3));
@@ -136,7 +136,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testActivarModoAzulEncerrado(){
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,2));
@@ -150,7 +150,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testActivarModoAzulEstrategizando(){
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,2));
@@ -168,7 +168,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testActivarModoAzulSeparacion(){
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,2));
@@ -190,7 +190,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testActivarModoAzulenModoAzul(){
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,2));
@@ -209,7 +209,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testDesactivarModoAzulPorTiempo() {
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,3),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,3));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),2f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,3));
@@ -230,7 +230,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testVelocidadDeMovimiento() {
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,2f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,2));
@@ -243,7 +243,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testAumentoDeVelocidadDeMovimiento() {
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,2));
@@ -258,7 +258,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testInteractuarConPacmanNoAzul() {
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,2));
@@ -274,7 +274,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testInteractuarConPacmanAzul() {
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,2));
@@ -298,7 +298,7 @@ public class FantasmaTest extends TestCase {
 	
 	public void testRetornarACasaLuegoDeMorir() {
 		Escenario escenario = this.mapaSimple();
-		Pacman pacman = new Pacman(escenario,new Posicion(3,2),1);
+		Pacman pacman = new Pacman(escenario,new Posicion(3,2));
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),100f,1f,200);
 		
 		escenario.setPosicionInicialPacman(new Posicion(3,2));

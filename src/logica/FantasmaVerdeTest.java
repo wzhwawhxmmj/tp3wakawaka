@@ -64,7 +64,7 @@ public class FantasmaVerdeTest extends TestCase {
 	
 	public void testActuarTonto(){
 		Escenario e = this.mapaSimple();
-		Pacman p = new Pacman(e,new Posicion(3,3),1);
+		Pacman p = new Pacman(e,new Posicion(3,3));
 		e.colocarPacman(p);
 		Fantasma f = new FantasmaVerde(e,new Posicion(3,2),15f,1f,200);
 		
@@ -81,7 +81,7 @@ public class FantasmaVerdeTest extends TestCase {
 	
 	public void testSalto() {
 		Escenario e = mapaGrande();
-		Pacman p = new Pacman(e,new Posicion(99,99),1);
+		Pacman p = new Pacman(e,new Posicion(99,99));
 		e.colocarPacman(p);
 		Fantasma f = new FantasmaVerde(e,new Posicion(10,10),1f,1f,200);
 		
