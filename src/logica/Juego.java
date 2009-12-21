@@ -22,21 +22,22 @@ public class Juego implements ObjetoVivo{
 	private int vidas;
 	private int nivelActual;
 	ControladorJuego controladorJuego;
-	SuperficieDeDibujo superficieDeDibujo;
+	Ventana superficieDeDibujo;
 	
 	
 	
-	public Juego () throws IOException{
+	public Juego (String archivoTextoConEscenarios) throws IOException{
 		
 		this.puntaje = 0;
 		this.vidas = 3;
 		this.nivelActual = 1;
 		this.arrayDeFantasmas = new Fantasma[4];
-		this.listaDeEscenarios = new ListaDeEscenarios("C:\\ArchivoConEscenarios.txt", this);
+		this.listaDeEscenarios = new ListaDeEscenarios(archivoTextoConEscenarios, this);
 		this.pacman = null;
 		this.escenarioActual = null;
 		this.controladorJuego = new ControladorJuego();
-		this.superficieDeDibujo = new Ventana (this.controladorJuego);
+		this.superficieDeDibujo = new Ventana (500,500,this.controladorJuego);
+		
 	}	
 	
 
@@ -50,15 +51,16 @@ public class Juego implements ObjetoVivo{
 	
 		
 		arrayDeFantasmas[0] = new FantasmaRojo(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
-		arrayDeFantasmas[0] = new FantasmaNaranja(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
-		arrayDeFantasmas[0] = new FantasmaVerde(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
-		arrayDeFantasmas[0] = new FantasmaRosa(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
+		arrayDeFantasmas[1] = new FantasmaNaranja(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
+		arrayDeFantasmas[2] = new FantasmaVerde(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
+		arrayDeFantasmas[3] = new FantasmaRosa(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
 	}
 	
 	
 	private void agregarObjetosVivosAlControlador(){
 		this.controladorJuego.agregarObjetoVivo(pacman);
 		VistaPacman vistaPacman = new VistaPacman();
+		vistaPacman.setPosicionable(this.pacman);
 		this.controladorJuego.agregarDibujable(vistaPacman);
 		
 		VistaFantasma vistasFantasma[] = new VistaFantasma[arrayDeFantasmas.length];
@@ -67,6 +69,7 @@ public class Juego implements ObjetoVivo{
 	     	{ 
 			this.controladorJuego.agregarObjetoVivo(arrayDeFantasmas[i]);
 		    vistasFantasma[i] = new VistaFantasma(coloresFantasma[i]);
+		    vistasFantasma[i].setPosicionable(this.arrayDeFantasmas[i]);
 		    this.controladorJuego.agregarDibujable(vistasFantasma[i]);
 	     	}
 		}
@@ -74,19 +77,23 @@ public class Juego implements ObjetoVivo{
 	
 	private void inicializarNivel (int nivel) throws IOException{
 		
+		this.superficieDeDibujo.setVisible(true);
+		this.controladorJuego.setSuperficieDeDibujo(this.superficieDeDibujo);
 		Escenario escenario = listaDeEscenarios.getEscenario(nivel);
+		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman(),2 );
+		escenario.colocarPacman(this.pacman);
 		this.controladorJuego.setSuperficieDeDibujo(this.superficieDeDibujo);
 		this.escenarioActual = escenario;
 		this.inicializarFantasmas (escenario);
-		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman(),2 );
 		this.agregarObjetosVivosAlControlador();
 		this.controladorJuego.agregarObjetoVivo(this);
-		
+		this.controladorJuego.setIntervaloSimulacion(50);
 	}
 	
 	public void jugar() throws IOException{
 		while ((listaDeEscenarios.tieneSiguiente())&& (this.vidas != 0)){
 			this.inicializarNivel(this.nivelActual);
+			System.err.println("inicializé todo pillo");
 			while (((this.escenarioActual.getPuntosRestantes())!= 0) && (this.vidas != 0)){
 				this.controladorJuego.comenzarJuego();
 			}
@@ -95,7 +102,7 @@ public class Juego implements ObjetoVivo{
 
 	
 	public void vivir (){
-		if ((this.escenarioActual.getPuntosRestantes()!= 0)&& (this.vidas > 0)){
+		/*if ((this.escenarioActual.getPuntosRestantes()!= 0)&& (this.vidas > 0)){
 			this.ActualizarPuntajeJugador();
 			if (!this.pacman.estaVivo()){
 				this.RutinaCuandoElPacmanMuere();
@@ -104,7 +111,7 @@ public class Juego implements ObjetoVivo{
 		else{
 			this.controladorJuego.detenerJuego();
 		}
-		
+		*/
 	}
 	
 	private void RutinaCuandoElPacmanMuere() {

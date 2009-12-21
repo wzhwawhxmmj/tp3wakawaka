@@ -1,8 +1,6 @@
 package logica;
 
-import ar.uba.fi.algo3.titiritero.Posicionable;
-
-public abstract class Entidad implements Posicionable {
+public abstract class Entidad implements  ar.uba.fi.algo3.titiritero.Posicionable {
 
 	private Estado estado;
 	private Posicion posicion;
@@ -47,10 +45,10 @@ public abstract class Entidad implements Posicionable {
 	}
 
 	public int getX() {
-		return this.getPosicion().getx();
+		return this.getPosicion().getx()*10;
 	}
 	
 	public int getY() {
-		return this.getPosicion().gety();
+		return this.getPosicion().gety()*10;
 	}
 }

@@ -8,17 +8,11 @@ public class ClaseMain {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
-		
-		Juego juego = new Juego();
-		ListaDeEscenarios lista = new ListaDeEscenarios();
-		try {
-			lista.cargarEscenario("C:\\pruebaMapa.txt", juego);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public static void main(String[] args) throws IOException {
+		Juego juego = new Juego("C:\\niveles.txt");
+		juego.jugar();
 
 
 	}
