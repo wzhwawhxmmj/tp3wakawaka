@@ -1,6 +1,6 @@
 package logica;
 
-public abstract class Entidad {
+public abstract class Entidad implements  ar.uba.fi.algo3.titiritero.Posicionable {
 
 	private Estado estado;
 	private Posicion posicion;
@@ -42,5 +42,13 @@ public abstract class Entidad {
 	
 	protected void setEscenario(Escenario escenario){
 		this.escenario = escenario;
+	}
+
+	public int getX() {
+		return this.getPosicion().getx();
+	}
+	
+	public int getY() {
+		return this.getPosicion().gety();
 	}
 }

@@ -1,8 +1,6 @@
 package logica;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -89,7 +87,7 @@ public class ListaDeEscenarios {
 					vistaPiso = new VistaPiso ();
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
 					vistaPildora = new VistaPildora ();
-					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPuntito,this.juego);
+					this.cargarListaDeVistaDeControlador (noJugadorAPoner,vistaPildora,this.juego);
 					break;
 					
 				case 'C':
@@ -97,14 +95,14 @@ public class ListaDeEscenarios {
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.setPosicionCasa(posicionActual);
 					vistaCasa = new VistaCasa ();
-					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
+					this.cargarListaDeVistaDeControlador (uebAPoner,vistaCasa,this.juego);
 					break;
 					
 				case '#':
 					uebAPoner = new Pared();
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					vistaPared = new VistaPared ();
-					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
+					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPared,this.juego);
 					break;
 				
 				case 'E':
