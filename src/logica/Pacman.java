@@ -29,7 +29,7 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	}
 	
 	public void vivir() {
-		//this.moverHacia(direccion);
+		this.moverHacia(direccion);
 	}
 
 	public int getPuntajeAcumulado() {
