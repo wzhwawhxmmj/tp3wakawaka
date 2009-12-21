@@ -2,7 +2,7 @@ package logica;
 
 import junit.framework.TestCase;
 
-public class testFantasmaRojo extends TestCase {
+public class FantasmaRojoTest extends TestCase {
 	
 	/* mapaSimple()
 	 * Crea el siguiente mapa

@@ -229,9 +229,6 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 	protected void moverHacia(Posicion posicion){
 		if (this.getEscenario().getUeb(posicion).isPisablePorIA()){
 			
-			if(this.getEscenario().getPosicionCasa().equals(posicion) && !this.puedeEntrarACasa())
-				throw new PosicionIlegalException();
-			
 				this.sacarDePosicionOriginal();
 				this.setPosicion(posicion);
 				this.getEscenario().getUeb(posicion).addNoJugador(this);
@@ -302,16 +299,6 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 				return;
 			}
 		}
-	}
-	
-	private boolean puedeEntrarACasa(){
-		if (this.estaVivo()) {
-			if (!this.encerrado)
-				return false;
-			else
-				return true;
-		}else
-			return true;
 	}
 	
 	private void temporizarModos(){

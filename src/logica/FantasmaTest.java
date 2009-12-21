@@ -35,6 +35,7 @@ public class FantasmaTest extends TestCase {
 		}
 		
 		e.addUeb(new Posicion(2,2), new Pared());
+		e.addUeb(new Posicion(1,1), new Casa());
 		e.setPuntosTotales(8);
 		e.agregarPuntoDeSeparacion(new Posicion(3,2));
 		e.setPosicionCasa(new Posicion(1,1));
