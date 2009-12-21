@@ -13,7 +13,7 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 
 	public Pacman(Escenario escenario, Posicion posicion, int velocidad) {
 		super(escenario, posicion);
-		this.direccion = Direccion.NINGUNA;
+		this.direccion = Direccion.DERECHA;
 		this.escenario = escenario;
 		puntajeAcumulado = 0;
 	}
@@ -25,7 +25,7 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	public Direccion Direccion(){
 		return direccion;
 	}
-
+	
 	public void cambiarDireccion(Direccion direccion){
 		this.direccion = direccion;
 	}
