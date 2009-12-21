@@ -12,11 +12,6 @@ public class Pildora extends NoJugador implements ar.uba.fi.algo3.titiritero.Pos
 		this.juego = juegoActual;
 	}
 	
-
-	public int getPuntaje() {
-		return this.getPuntaje();
-	}
-	
 	public long activar(){
 		this.juego.ponerFantasmasAzules();
 		this.setComido(true);
