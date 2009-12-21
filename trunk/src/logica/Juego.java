@@ -15,6 +15,7 @@ import vista.*;
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
 import ar.uba.fi.algo3.titiritero.ObjetoVivo;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
+import ar.uba.fi.algo3.titiritero.vista.TextoDinamico;
 import ar.uba.fi.algo3.titiritero.vista.Ventana;
 
 
@@ -27,10 +28,12 @@ public class Juego implements ObjetoVivo{
 	private long puntaje;
 	private int vidas;
 	private int nivelActual;
-	ControladorJuego controladorJuego;
-	Ventana superficieDeDibujo;
-	//ManejoPorTeclado teclado;
-
+	private ControladorJuego controladorJuego;
+	private Ventana superficieDeDibujo;
+	private TextoInfomativo textoPuntaje; 
+	private TextoInfomativo textoVidas;
+	private int posicionHorizontalTextosInformativos;
+	
 	
 	public Juego (String archivoTextoConEscenarios) throws IOException{
 		
@@ -43,8 +46,6 @@ public class Juego implements ObjetoVivo{
 		this.escenarioActual = null;
 		this.controladorJuego = new ControladorJuego();
 		this.superficieDeDibujo = new Ventana (325,350,this.controladorJuego);
-		//this.teclado = new ManejoPorTeclado (this.pacman);
-
 	}	
 	
 
@@ -96,7 +97,19 @@ public class Juego implements ObjetoVivo{
 		this.controladorJuego.agregarObjetoVivo(this);
 		this.controladorJuego.setIntervaloSimulacion(200);
 		this.superficieDeDibujo.addKeyListener((KeyListener) new ManejoPorTeclado(this.pacman));
-
+		
+		Posicion posicionPuntaje = new Posicion (1,this.getPosicionHorizontalTextosInformativos());
+		Posicion posicionVidas = new Posicion (15,this.getPosicionHorizontalTextosInformativos());
+		this.textoPuntaje = new TextoInfomativo("Puntaje: ", this.puntaje,posicionPuntaje);
+		this.textoVidas = new TextoInfomativo("Vidas: ", this.puntaje, posicionVidas);
+		TextoDinamico textoDinamicoPuntaje = new TextoDinamico (this.textoPuntaje);
+		TextoDinamico textoDinamicoVidas = new TextoDinamico (this.textoVidas);
+		textoDinamicoPuntaje.setPosicionable(this.textoPuntaje);
+		textoDinamicoVidas.setPosicionable(this.textoVidas);
+		this.controladorJuego.agregarDibujable(textoDinamicoVidas);
+		this.controladorJuego.agregarDibujable(textoDinamicoPuntaje);
+		
+	
 	}
 	
 	public void jugar() throws IOException{
@@ -113,6 +126,8 @@ public class Juego implements ObjetoVivo{
 		System.err.println(this.puntaje);
 		if ((this.escenarioActual.getPuntosRestantes()!= 0)&& (this.vidas > 0)){
 			this.ActualizarPuntajeJugador();
+			this.textoPuntaje.actualizarValorDelTexto(this.puntaje);
+			this.textoVidas.actualizarValorDelTexto(this.vidas);
 			if (!this.pacman.estaVivo()){
 				this.RutinaCuandoElPacmanMuere();
 			}
@@ -152,5 +167,18 @@ public class Juego implements ObjetoVivo{
 	
 	public ControladorJuego getControlador (){
 		return this.controladorJuego;
+	}
+
+
+
+	public void setPosicionHorizontalTextosInformativos(
+			int posicionHorizontalTextosInformativos) {
+		this.posicionHorizontalTextosInformativos = posicionHorizontalTextosInformativos;
+	}
+
+
+
+	public int getPosicionHorizontalTextosInformativos() {
+		return posicionHorizontalTextosInformativos;
 	}
 }

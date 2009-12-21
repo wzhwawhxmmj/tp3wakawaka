@@ -50,7 +50,8 @@ public class ListaDeEscenarios {
 		VistaPildora vistaPildora;
 		VistaCasa vistaCasa;
 		VistaPared vistaPared;
-		
+		Posicion posicionPuntaje;
+		Posicion posicionVidas;
 		
 		while (filaMapa != null){
 			while (columna < filaMapa.length()){
@@ -137,7 +138,9 @@ public class ListaDeEscenarios {
 			columna=0;
 			uebAPoner= null;
 		}
-	escenarioACargar.setPuntosTotales(cantidadDePuntos);
+		this.juego.setPosicionHorizontalTextosInformativos(fila+1);
+		escenarioACargar.setPuntosTotales(cantidadDePuntos);
+		
 		return escenarioACargar;	
 	}
 		
