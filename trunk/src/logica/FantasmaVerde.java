@@ -2,8 +2,8 @@ package logica;
 
 public class FantasmaVerde extends Fantasma {
 	
-	private static final int pasosHastaSalto = 30;
-	private static final int distanciaDelSalto = 15;
+	private static final int pasosHastaSalto = 15;
+	private static final int distanciaDelSalto = 10;
 	private static final int cero = 0;
 	
 	private int temporizadorHastaSalto;
@@ -43,7 +43,7 @@ public class FantasmaVerde extends Fantasma {
 		int distanciaMinima = 2;
 		Calculador calc = this.getEscenario().calculador();
 		
-		if(this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()) == distanciaMinima)
+		if(this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()) > distanciaMinima)
 			this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPacman().getPosicion()));
 		else
 			this.movimientoAlAzar();
@@ -55,7 +55,7 @@ public class FantasmaVerde extends Fantasma {
 	
 	private void saltar(){
 		
-		if ( (this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()) > distanciaDelSalto) && (this.temporizadorHastaSalto == cero) ){
+		if ( (this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()) >= distanciaDelSalto) && (this.temporizadorHastaSalto == cero) ){
 			this.moverHacia(this.posicionCercanaAPacman());
 		}
 		
