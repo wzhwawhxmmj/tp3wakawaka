@@ -7,16 +7,16 @@ public class FantasmaTest extends TestCase {
 	/* mapaSimple()
 	 * Crea el siguiente mapa
 	 * P P P P P
-	 * P C _ S P
-	 * P _ P _ P
+	 * P C _ _ P
+	 * P _ P S P
 	 * P _ _ J P
 	 * P P P P P
 	 * 
 	 * referencia:
 	 * P: pared
-	 * p: _
+	 * _: piso
 	 * C: casa
-	 * E: punto de separacion
+	 * S: punto de separacion
 	 * J: jugador/pacman
 	 */
 	
@@ -90,23 +90,26 @@ public class FantasmaTest extends TestCase {
 		//el modo estrategizar para pasar al modo separacion
 		//que dura 50 pasos
 		
-		for (int j = 0 ; j < 84 ; j++)
+		for (int j = 0 ; j < 85 ; j++)
 			f.vivir();
 		
-		//Entra en modo Separacion, esta en (2,1)
-		//y el punto de separacion es en el (3,1)
+		//Entra en modo Separacion, esta en (3,1)
+		//y el punto de separacion es en el (3,2)
 		f.vivir();
-		assertEquals(new Posicion(3,1),f.getPosicion());
+		assertEquals(new Posicion(3,2),f.getPosicion());
 		
 		//Ahora que llego al punto de separacion
 		//empieza a moverse al azar
 		//Por lo que el siguiente vivir lo llevara a
-		//(2,1) o (3,2)
+		//(3,1) o (3,3)
 		f.vivir();
-		if ((new Posicion(2,1).equals(f.getPosicion())))
-			assertEquals(new Posicion(2,1),f.getPosicion());
+
+		if ((new Posicion(3,1).equals(f.getPosicion())))
+			assertEquals(new Posicion(3,1),f.getPosicion());
 		else
-			assertEquals(new Posicion(3,2),f.getPosicion());
+		if ((new Posicion(3,3).equals(f.getPosicion())))
+			assertEquals(new Posicion(3,3),f.getPosicion());
+		else fail();
 	}
 	
 	public void testCambioAModoEstrategizar(){
@@ -203,7 +206,7 @@ public class FantasmaTest extends TestCase {
 		assertTrue(f.estaAzul());
 	}
 	
-	public void testDesactivarModoAzulATiempo() {
+	public void testDesactivarModoAzulPorTiempo() {
 		Escenario escenario = this.mapaSimple();
 		Pacman pacman = new Pacman(escenario,new Posicion(3,3),1);
 		Fantasma f = new FantasmaParaPruebas(escenario,escenario.obtenerPuntoDeSeparacion(0),2f,1f,200);

@@ -111,22 +111,7 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 				}
 			}
 			
-			if (this.temporizadorDeEstrategizacion == 0) {
-				this.modoSeparacion = true;
-				this.temporizadorDeEstrategizacion = tiempoDeEstrategizacion;
-			}
-			
-			if (!this.modoSeparacion && !this.azul)
-				this.temporizadorDeEstrategizacion--;
-			
-			if (this.temporizadorModoSeparacion == 0) {
-				this.modoSeparacion = false;
-				this.llegoAPos = false;
-				this.temporizadorModoSeparacion = tiempoDeSeparacion;
-			}
-			
-			if (this.modoSeparacion && !this.azul)
-				this.temporizadorModoSeparacion--;
+			this.temporizarModos();
 			
 			if (this.modoSeparacion && !this.encerrado && !this.azul && this.estaVivo()) {
 				try{
@@ -327,6 +312,25 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 				return true;
 		}else
 			return true;
+	}
+	
+	private void temporizarModos(){
+		if (this.temporizadorDeEstrategizacion == 0) {
+			this.modoSeparacion = true;
+			this.temporizadorDeEstrategizacion = tiempoDeEstrategizacion;
+		}
+		
+		if (!this.modoSeparacion && !this.azul)
+			this.temporizadorDeEstrategizacion--;
+		
+		if (this.temporizadorModoSeparacion == 0) {
+			this.modoSeparacion = false;
+			this.llegoAPos = false;
+			this.temporizadorModoSeparacion = tiempoDeSeparacion;
+		}
+		
+		if (this.modoSeparacion && !this.azul)
+			this.temporizadorModoSeparacion--;
 	}
 	//Fin: Metodos privados.
 }

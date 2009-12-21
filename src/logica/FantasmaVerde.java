@@ -39,14 +39,6 @@ public class FantasmaVerde extends Fantasma {
 		return this.getPosicion();
 	}
 	
-	/*private void actuarTonto() {
-		Calculador calc = this.getEscenario().calculador();
-		if (!pacmanEstaCerca())
-			this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPacman().getPosicion()));
-		else
-			this.movimientoAlAzar();
-	}*/
-	
 	private void actuarTonto(){
 		int distanciaMinima = 2;
 		Calculador calc = this.getEscenario().calculador();
