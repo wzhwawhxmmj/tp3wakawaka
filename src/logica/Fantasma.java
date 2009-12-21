@@ -180,6 +180,23 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 		}
 		return 0;
 	}
+	
+	public void reset(){
+		this.azul = false;
+		this.modoSeparacion = false;
+
+		this.llegoAPos = false;
+		this.dirGuardia = Direccion.DERECHA;
+		this.encerrado = true;
+		this.retornoACasa = true;
+		this.contadorDeEncierro = tiempoDeEncierro;
+		this.temporizadorModoAzul = (int) Math.ceil(duracionModoAzul);
+		this.temporizadorDeEstrategizacion = tiempoDeEstrategizacion;
+		this.temporizadorModoSeparacion = tiempoDeSeparacion;
+		
+		this.moverHacia(this.getEscenario().getPosicionCasa());
+	}
+	
 	//Fin: Metodos publicos.
 	
 	//Inicio: Metodos protegidos.	
