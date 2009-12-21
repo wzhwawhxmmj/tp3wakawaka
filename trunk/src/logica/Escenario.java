@@ -36,7 +36,6 @@ public class Escenario {
 		return this.posicionInicialPacman;
 	}
 
-	
 	public Posicion obtenerPuntoDeSeparacion(int i){
 		return this.posicionesDeSeparacion.get(i);
 	}
@@ -62,12 +61,11 @@ public class Escenario {
 		casillero.setPosicion(p);
 	}
 
-	public Ueb getUeb(Posicion p) {
+	public Ueb getUeb(Posicion p) {		
 		if (tablero.containsKey(p))
 			return this.tablero.get(p);
 		else
 			throw new PosicionIlegalException();
-
 	}
 	
 	public int getPuntosTotales() {

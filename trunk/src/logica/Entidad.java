@@ -1,6 +1,8 @@
 package logica;
 
-public abstract class Entidad implements  ar.uba.fi.algo3.titiritero.Posicionable {
+import ar.uba.fi.algo3.titiritero.Posicionable;
+
+public abstract class Entidad implements Posicionable {
 
 	private Estado estado;
 	private Posicion posicion;

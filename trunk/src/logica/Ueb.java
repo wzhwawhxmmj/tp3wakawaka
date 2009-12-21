@@ -23,8 +23,7 @@ public abstract class Ueb implements ar.uba.fi.algo3.titiritero.Posicionable {
 		casillero.add(noJugador);
 	}
 	
-	public int getCantidadDeComestibles(){
-		
+	public int getCantidadDeComestibles(){		
 		return casillero.size();
 	}
 	

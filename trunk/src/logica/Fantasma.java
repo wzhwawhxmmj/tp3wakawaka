@@ -4,10 +4,8 @@ import java.util.Random;
 import java.util.Iterator;
 
 import ar.uba.fi.algo3.titiritero.ObjetoVivo;
-import ar.uba.fi.algo3.titiritero.Posicionable;
 
-
-public abstract class Fantasma extends NoJugador implements Posicionable, ObjetoVivo {
+public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 
 	private static final int tiempoDeEncierro = 16;
 	private static final int tiempoDeEstrategizacion = 100;
@@ -331,12 +329,4 @@ public abstract class Fantasma extends NoJugador implements Posicionable, Objeto
 			return true;
 	}
 	//Fin: Metodos privados.
-
-	public int getX() {
-		return this.getPosicion().getx();
-	}
-	
-	public int getY() {
-		return this.getPosicion().gety();
-	}
 }
