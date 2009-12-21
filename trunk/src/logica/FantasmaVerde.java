@@ -7,10 +7,10 @@ public class FantasmaVerde extends Fantasma {
 	private static final int cero = 0;
 	
 	private int temporizadorHastaSalto;
-	
+	private int contar;
 	public FantasmaVerde(Escenario escenario, Posicion posModoSeparacion, float duracionModoAzul, float velocidad, int puntosAlSerComido) { 
 		super(escenario, posModoSeparacion, duracionModoAzul, velocidad, puntosAlSerComido);
-		
+		this.contar = 0;
 		this.temporizadorHastaSalto = pasosHastaSalto;
 	}
 	
@@ -47,6 +47,8 @@ public class FantasmaVerde extends Fantasma {
 			this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPacman().getPosicion()));
 		else
 			this.movimientoAlAzar();
+		
+		System.out.println(this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()));
 	}
 	
 	private void resetContador(){
