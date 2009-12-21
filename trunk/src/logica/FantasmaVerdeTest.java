@@ -45,15 +45,13 @@ public class FantasmaVerdeTest extends TestCase {
 		Escenario e = new Escenario();
 		
 		for (int i = 0 ; i < 100 ; i++)
-			for (int j = 0 ; j < 100 ; j++) 
+			for (int j = 0 ; j < 3 ; j++) 
 					e.addUeb(new Posicion(i,j), new Pared());
 		
 		for (int i = 1 ; i < 99 ; i++)
-			for (int j = 1 ; j < 99 ; j++)
-				if ( (i == 1) || (j == 1) || (i == 98) || (j == 98) )
-					e.addUeb(new Posicion(i,j), new Piso());
+			e.addUeb(new Posicion(i,1), new Piso());
 
-		e.setPuntosTotales(16);
+		e.setPuntosTotales(98);
 		e.agregarPuntoDeSeparacion(new Posicion(9,1));
 	
 		e.addUeb(new Posicion(1,1), new Casa());
@@ -81,16 +79,14 @@ public class FantasmaVerdeTest extends TestCase {
 	
 	public void testSalto() {
 		Escenario e = mapaGrande();
-		Pacman p = new Pacman(e,new Posicion(99,99));
+		Pacman p = new Pacman(e,new Posicion(99,1));
 		e.colocarPacman(p);
-		Fantasma f = new FantasmaVerde(e,new Posicion(10,10),1f,1f,200);
+		Fantasma f = new FantasmaVerde(e,new Posicion(9,1),1f,1f,200);
 		
-		
-		
-		for(int i = 0 ; i < 30 ; i++) {
+		for(int i = 0 ; i < 33 ; i++) {
 			f.vivir();
 		}
 		
-		System.out.println(f.getPosicion());
+		assertEquals(new Posicion(94,1),f.getPosicion());
 	}
 }
