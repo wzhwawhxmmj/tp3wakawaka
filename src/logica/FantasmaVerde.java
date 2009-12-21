@@ -7,34 +7,33 @@ public class FantasmaVerde extends Fantasma {
 	private static final int cero = 0;
 	
 	private int temporizadorHastaSalto;
-	private int contar;
+	
 	public FantasmaVerde(Escenario escenario, Posicion posModoSeparacion, float duracionModoAzul, float velocidad, int puntosAlSerComido) { 
 		super(escenario, posModoSeparacion, duracionModoAzul, velocidad, puntosAlSerComido);
-		this.contar = 0;
 		this.temporizadorHastaSalto = pasosHastaSalto;
 	}
 	
 	private boolean posicionValida(Posicion posicion) {
-		if (this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()) >= 2 )
-			if (this.getEscenario().getUeb(posicion).isPisablePorIA())
-				return true;
-		
-		return false;
+		return (this.getEscenario().getUeb(posicion).isPisablePorIA() && !posicion.equals(this.getEscenario().getPosicionCasa()));
 	}
 	
 	private Posicion posicionCercanaAPacman(){
 		Posicion comparacionConPacman;
 		
 		for (int i = -5 ; i <= 5 ; i++) {
-			comparacionConPacman = new Posicion(this.getEscenario().getPacman().getPosicion().getx() + i,this.getEscenario().getPacman().getPosicion().gety());
-			if (this.posicionValida(comparacionConPacman))
-					return comparacionConPacman;
+			if ((i < -3) || (i > 3)) {
+				comparacionConPacman = new Posicion(this.getEscenario().getPacman().getPosicion().getx() + i,this.getEscenario().getPacman().getPosicion().gety());
+				if (this.posicionValida(comparacionConPacman))
+						return comparacionConPacman;
+			}
 		}
 		
 		for (int j = -5 ; j <= 5 ; j++) {
-			comparacionConPacman = new Posicion(this.getEscenario().getPacman().getPosicion().getx(), this.getEscenario().getPacman().getPosicion().gety() + j);
-			if (this.posicionValida(comparacionConPacman))
-				return comparacionConPacman;
+			if ( (j < -3) || (j > 3)) {
+				comparacionConPacman = new Posicion(this.getEscenario().getPacman().getPosicion().getx(), this.getEscenario().getPacman().getPosicion().gety() + j);
+				if (this.posicionValida(comparacionConPacman))
+					return comparacionConPacman;
+			}
 		}
 		return this.getPosicion();
 	}
@@ -47,8 +46,6 @@ public class FantasmaVerde extends Fantasma {
 			this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPacman().getPosicion()));
 		else
 			this.movimientoAlAzar();
-		
-		System.out.println(this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()));
 	}
 	
 	private void resetContador(){
@@ -57,18 +54,21 @@ public class FantasmaVerde extends Fantasma {
 	
 	private void saltar(){
 		
-		if ( (this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()) >= distanciaDelSalto) && (this.temporizadorHastaSalto == cero) ){
-			this.moverHacia(this.posicionCercanaAPacman());
+		if ( this.getPosicion().distanciaHasta(this.getEscenario().getPacman().getPosicion()) >= distanciaDelSalto) {
+			if (this.temporizadorHastaSalto <= cero) 		
+				this.moverHacia(this.posicionCercanaAPacman());
 		}
 		
-		if (this.temporizadorHastaSalto == cero)
-			this.resetContador();
 	}
 	
 	public void estrategizar() {
 		this.actuarTonto();
 		this.saltar();
-		this.temporizadorHastaSalto--;
+		
+		if (this.temporizadorHastaSalto <= cero)
+			this.resetContador();
+		
+		this.temporizadorHastaSalto--;		
 	}
 
 }
