@@ -19,13 +19,13 @@ public class ManejoPorTeclado implements KeyListener {
 	public void keyPressed(KeyEvent event) {
 		
 		if( event.getKeyCode() == KeyEvent.VK_UP) 
-			this.pacman.moverHacia(Direccion.ARRIBA);
+			this.pacman.cambiarDireccion(Direccion.ARRIBA);
 		if( event.getKeyCode() == KeyEvent.VK_DOWN) 
-			this.pacman.moverHacia(Direccion.ABAJO);
+			this.pacman.cambiarDireccion(Direccion.ABAJO);
 		if( event.getKeyCode() == KeyEvent.VK_LEFT) 
-			this.pacman.moverHacia(Direccion.IZQUIERDA);
+			this.pacman.cambiarDireccion(Direccion.IZQUIERDA);
 		if( event.getKeyCode() == KeyEvent.VK_RIGHT) 
-			this.pacman.moverHacia(Direccion.DERECHA);
+			this.pacman.cambiarDireccion(Direccion.DERECHA);
 		
 	}
 
