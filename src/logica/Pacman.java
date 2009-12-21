@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.Iterator;
+
 import ar.uba.fi.algo3.titiritero.ObjetoVivo;
 import ar.uba.fi.algo3.titiritero.Posicionable;
 
@@ -30,6 +32,9 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	
 	public void vivir() {
 		this.moverHacia(direccion);
+		Iterator<NoJugador> i = this.getEscenario().getUeb(this.getPosicion()).iterator();
+		while (i.hasNext())
+			this.comer(i.next());
 	}
 
 	public int getPuntajeAcumulado() {

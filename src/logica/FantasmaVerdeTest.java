@@ -1,8 +1,5 @@
 package logica;
 
-import java.io.IOException;
-import java.util.Iterator;
-
 import junit.framework.TestCase;
 
 public class FantasmaVerdeTest extends TestCase {
@@ -71,7 +68,7 @@ public class FantasmaVerdeTest extends TestCase {
 		e.colocarPacman(p);
 		Fantasma f = new FantasmaVerde(e,new Posicion(3,2),15f,1f,200);
 		
-		for (int i = 0 ; i < 20 ; i++)
+		for (int i = 0 ; i < 19 ; i++)
 			f.vivir();
 		
 		if (f.getPosicion().equals(new Posicion(2,1)))
@@ -85,15 +82,13 @@ public class FantasmaVerdeTest extends TestCase {
 	public void testSalto() {
 		Escenario e = mapaGrande();
 		Pacman p = new Pacman(e,new Posicion(99,99),1);
+		e.colocarPacman(p);
 		Fantasma f = new FantasmaVerde(e,new Posicion(10,10),1f,1f,200);
 		
-		e.colocarPacman(p);
 		
-		for(int i = 0 ; i < 200 ; i++) {
+		
+		for(int i = 0 ; i < 30 ; i++) {
 			f.vivir();
-			if (f.estaEnModoSeparacion()){
-				System.out.println("Modo Separacion");
-			}
 		}
 		
 		System.out.println(f.getPosicion());
