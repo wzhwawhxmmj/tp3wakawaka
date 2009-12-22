@@ -1,27 +1,40 @@
 package logica;
 
-public class Fruta extends NoJugador implements ar.uba.fi.algo3.titiritero.Posicionable{
+import ar.uba.fi.algo3.titiritero.*; 
 
+public class Fruta extends NoJugador implements Posicionable, ObjetoVivo {
+		
+	private static final int tiempoDeVida = 30;
+	private static final int tiempoDeNoExistencia = 50;
 	
-		private boolean comido;
-		
-		public Fruta(Escenario escenario, Posicion posicion, int puntosAlSerComido) {
-			super(escenario, posicion, puntosAlSerComido);
-		}
-		
-		
-
-		public void setComido(boolean comido) {
-			this.comido = comido;
-		}
-
-		public boolean isComido() {
-			return comido;
-		}
-		public long activar(){
-			this.setComido(true);
-			this.getEscenario().restarPuntos(1);
+	private int contadorDeNoVida;
+	private int contadorDeVida;
+	
+	public Fruta(Escenario escenario, Posicion posicion, int puntosAlSerComido) {
+		super(escenario, posicion, puntosAlSerComido);
+		this.contadorDeVida = tiempoDeVida;
+		this.contadorDeNoVida = tiempoDeNoExistencia;
+		this.morir();
+	}
+	
+	public long activar(){
+		if (this.estaVivo()){
+			this.morir();
 			return this.getPuntaje();
-		}
-	
+		}else
+			return 0;
+	}
+
+	public void vivir() {
+		if (this.contadorDeNoVida == 0)
+			this.revivir();
+		
+		this.contadorDeNoVida--;
+		
+		if (this.contadorDeVida == 0)
+			this.morir();
+		
+		if (this.contadorDeNoVida <= 0)
+			this.contadorDeVida--;		
+	}
 }
