@@ -33,7 +33,7 @@ public class Juego implements ObjetoVivo{
 	private TextoInfomativo textoPuntaje; 
 	private TextoInfomativo textoVidas;
 	private int posicionHorizontalTextosInformativos;
-	
+	private Fruta fruta;
 	
 	public Juego (String archivoTextoConEscenarios) throws IOException{
 		
@@ -44,8 +44,8 @@ public class Juego implements ObjetoVivo{
 		this.listaDeEscenarios = new ListaDeEscenarios(archivoTextoConEscenarios, this);
 		this.pacman = null;
 		this.escenarioActual = null;
-		this.controladorJuego = new ControladorJuego();
 		this.superficieDeDibujo = new Ventana (325,350,this.controladorJuego);
+		
 	}	
 	
 
@@ -66,10 +66,14 @@ public class Juego implements ObjetoVivo{
 	
 	
 	private void agregarObjetosVivosAlControlador(){
+		
+		VistaFruta vistaFruta = new VistaFruta (this.fruta);
+		this.controladorJuego.agregarDibujable(vistaFruta);
 		this.controladorJuego.agregarObjetoVivo(pacman);
 		VistaPacman vistaPacman = new VistaPacman();
 		vistaPacman.setPosicionable(this.pacman);
 		this.controladorJuego.agregarDibujable(vistaPacman);
+		
 		
 		VistaFantasma vistasFantasma[] = new VistaFantasma[arrayDeFantasmas.length];
 		final Color coloresFantasma[] = {Color.RED,Color.ORANGE,Color.GREEN,Color.PINK};
@@ -83,14 +87,21 @@ public class Juego implements ObjetoVivo{
 	
 	
 	private void inicializarNivel (int nivel) throws IOException{
-		
 		this.superficieDeDibujo.setVisible(true);
+		this.superficieDeDibujo.limpiar();
+		this.controladorJuego = new ControladorJuego();
 		this.controladorJuego.setSuperficieDeDibujo(this.superficieDeDibujo);
 		Escenario escenario = listaDeEscenarios.getEscenario(nivel);
 		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman());
+		this.pacman.setPuntajeAcumulado(this.puntaje);
 		escenario.colocarPacman(this.pacman);
 		this.controladorJuego.setSuperficieDeDibujo(this.superficieDeDibujo);
 		this.escenarioActual = escenario;
+		
+		this.fruta = new Fruta(this.escenarioActual,this.escenarioActual.getPosicionInicialPacman(),50);
+		this.escenarioActual.getUeb(this.escenarioActual.getPosicionInicialPacman()).addNoJugador(this.fruta);
+		this.controladorJuego.agregarObjetoVivo(this.fruta);
+		
 		this.inicializarFantasmas (escenario);
 		this.agregarObjetosVivosAlControlador();
 		this.controladorJuego.agregarObjetoVivo(this);
@@ -114,15 +125,14 @@ public class Juego implements ObjetoVivo{
 	public void jugar() throws IOException{
 		while ((listaDeEscenarios.tieneSiguiente())&& (this.vidas != 0)){
 			this.inicializarNivel(this.nivelActual);
-			while (((this.escenarioActual.getPuntosRestantes())!= 0) && (this.vidas != 0)){
-				this.controladorJuego.comenzarJuego();
-			}
+			this.controladorJuego.comenzarJuego();
+			
 		}
+		
 	}
 
 	
 	public void vivir (){
-		System.err.println(this.puntaje);
 		if ((this.escenarioActual.getPuntosRestantes()!= 0)&& (this.vidas > 0)){
 			this.ActualizarPuntajeJugador();
 			this.textoPuntaje.actualizarValorDelTexto(this.puntaje);
@@ -131,8 +141,17 @@ public class Juego implements ObjetoVivo{
 				this.RutinaCuandoElPacmanMuere();
 			}
 		}
+		//el juego se frena.
 		else{
 			this.controladorJuego.detenerJuego();
+			//si Ganó.
+			if (this.vidas>0){
+				this.nivelActual++;
+			}
+			//si Perdió.
+			else{
+			this.superficieDeDibujo.setVisible(false);
+			}
 		}
 		
 	}

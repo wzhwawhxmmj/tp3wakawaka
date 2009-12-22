@@ -7,7 +7,7 @@ import ar.uba.fi.algo3.titiritero.Posicionable;
 
 public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	
-	private int puntajeAcumulado;
+	private long puntajeAcumulado;
 	private Direccion direccion;
 	private Escenario escenario;	
 
@@ -50,9 +50,14 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 			this.comer(it.next());	
 	}
 
-	public int getPuntajeAcumulado() {
+	public long getPuntajeAcumulado() {
 		return puntajeAcumulado;
 	}
+	
+	public void setPuntajeAcumulado(long unPuntaje) {
+		 this.puntajeAcumulado = unPuntaje;
+	}
+
 
 
 	private void moverHacia(Direccion unaDireccion) {

@@ -18,6 +18,7 @@ public class Pildora extends NoJugador implements ar.uba.fi.algo3.titiritero.Pos
 		}
 		this.juego.ponerFantasmasAzules();
 		this.setComido(true);
+		this.getEscenario().restarPuntos(1);
 		return this.getPuntaje();
 		
 	}
