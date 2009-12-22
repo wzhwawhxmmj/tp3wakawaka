@@ -163,7 +163,7 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 	}
 	
 	public long activar(){
-		if (this.estaVivo()){
+		if (this.estaVivo() && (this.getPosicion().equals(this.getEscenario().getPacman().getPosicion())) ){
 			
 			if (this.estaAzul()){
 				this.morir();
