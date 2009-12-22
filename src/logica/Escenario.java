@@ -13,13 +13,15 @@ public class Escenario {
 	private Pacman pacman;
 	private ArrayList<Posicion> posicionesDeSeparacion;
 	private HashMap <Posicion, Ueb>  tablero;
-	
+	private Calculador calculador;
+	private Posicion esquinaInferiorDerecha;
 	
 	public Escenario() {
 		this.tablero = new HashMap <Posicion, Ueb>();
 		this.posicionesDeSeparacion = new ArrayList<Posicion>();
 		this.puntosRestantes = 0;
 		this.puntosTotales = 0;
+		calculador = new Calculador(this);
 	}
 	
 	public void agregarPuntoDeSeparacion(Posicion posicion){
@@ -61,7 +63,29 @@ public class Escenario {
 		casillero.setPosicion(p);
 	}
 
+	public void setEsquinaInferiorDerecha(Posicion posicion){
+		this.esquinaInferiorDerecha = posicion;
+	}
+	
+	public Posicion getEsquinaInferiorDerecha(){
+		Iterator<Posicion> i = this.tablero.keySet().iterator();
+		Posicion retorno = null;
+		Posicion aux = null;
+		
+		if (i.hasNext())
+			retorno = i.next().clonar();
+		
+		while(i.hasNext()) {
+			aux = i.next().clonar();
+			if ( (aux.getx() > retorno.getx()) || (aux.gety() > retorno.gety()) )
+				retorno = aux.clonar();
+		}
+		
+		return retorno;
+	}
+	
 	public Ueb getUeb(Posicion p) {		
+		
 		if (tablero.containsKey(p))
 			return this.tablero.get(p);
 		else
@@ -101,7 +125,7 @@ public class Escenario {
 
 	
 	public Calculador calculador(){
-		return new Calculador (this);
+		return calculador;
 	}
 		
 }

@@ -13,6 +13,33 @@ public abstract class Entidad implements  ar.uba.fi.algo3.titiritero.Posicionabl
 	}
 
 	public void setPosicion(Posicion posicion){
+		Posicion esquina = escenario.getEsquinaInferiorDerecha().clonar();
+		
+		if (posicion.gety() == esquina.gety()){
+			this.posicion = new Posicion(posicion.getx(),0);
+			return;
+		}
+			
+		esquina = escenario.getEsquinaInferiorDerecha().clonar();
+		
+		if (posicion.getx() == esquina.getx()){
+			this.posicion = new Posicion(0,posicion.gety());
+			return;
+		}
+		Posicion nueva = new Posicion(0,0);
+		
+		if (posicion.gety() == nueva.gety()){
+			this.posicion = new Posicion(posicion.getx(),esquina.gety());
+			return;
+		}
+		
+		nueva = new Posicion(0,0);
+	
+		if (posicion.getx() == nueva.getx()){
+			this.posicion = new Posicion(esquina.getx(),posicion.gety());
+			return;
+		}
+		
 		this.posicion = posicion;
 	}
 	
