@@ -32,8 +32,10 @@ public class Fruta extends NoJugador implements Posicionable, ObjetoVivo {
 		this.contadorDeNoVida--;
 		
 		if (this.contadorDeVida == 0)
-			this.morir();
-		
+			try{
+				this.morir();
+			}catch (EstadoInvalidoException e){}
+			
 		if (this.contadorDeNoVida <= 0)
 			this.contadorDeVida--;		
 	}
