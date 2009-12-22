@@ -14,13 +14,17 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	private Direccion direccionInicialActual;
 	private Direccion mejorDireccion;
 	private boolean primerIteracion;
-	
 
-	public Calculador(Escenario elEscenarioQueMeDan){
+	
+	private void Inicializar(){
 		pasosEfectuados  = new ArrayList<Posicion>();
 		pasosMejorCamino = new ArrayList<Posicion>();
 		direccionInicialActual = Direccion.NINGUNA;
 		mejorDireccion         = Direccion.NINGUNA;	
+	}
+	
+	public Calculador(Escenario elEscenarioQueMeDan){
+		Inicializar();
 		escenario = elEscenarioQueMeDan;
 	}
 	
@@ -64,17 +68,18 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 		}
 
 	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
-	Calculador c = new Calculador(escenario);
-	return c.CalcularDireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDirecciones);
+		Direccion direccionARetornar = this.CalcularDireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDirecciones);
+	    this.Inicializar();
+		return direccionARetornar;
 	}
 	
 	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
-		return CalcularDireccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
+		return DireccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
 	}
 	
 	
 	private Direccion CalcularDireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
-		llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
+		//llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
 		
 		if(salida.equals(llegada)){
 				if((pasosEfectuados.size() < pasosMejorCamino.size())||(pasosMejorCamino.isEmpty())){
