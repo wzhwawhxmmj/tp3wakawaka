@@ -1,11 +1,9 @@
 package logica;
 
 public class FantasmaParaPruebas extends Fantasma {
-
-	public FantasmaParaPruebas(Escenario escenario, Posicion posModoSeparacion,
-			float duracionModoAzul, float velocidad, int puntosAlSerComido) {
-		super(escenario, posModoSeparacion, duracionModoAzul, velocidad,
-				puntosAlSerComido);
+	
+	public FantasmaParaPruebas(Escenario escenario, Posicion posModoSeparacion,float duracionModoAzul, float velocidad, int puntosAlSerComido) {
+		super(escenario, posModoSeparacion, duracionModoAzul, velocidad,puntosAlSerComido);
 	}
 
 	protected void estrategizar() {

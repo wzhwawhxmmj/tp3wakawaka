@@ -83,7 +83,7 @@ public class FantasmaVerdeTest extends TestCase {
 		e.colocarPacman(p);
 		Fantasma f = new FantasmaVerde(e,new Posicion(9,1),1f,1f,200);
 		
-		for(int i = 0 ; i < 33 ; i++) {
+		for(int i = 0 ; i < 37 ; i++) {
 			f.vivir();
 		}
 		

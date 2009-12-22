@@ -244,11 +244,23 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 	protected abstract void estrategizar();
 	
 	protected void moverHacia(Posicion posicion){
+		Posicion comparar = this.getPosicion().clonar();
+		Direccion direccionDeVerificacion = Direccion.NINGUNA;
+		comparar.avanzarAbajo();
+		
+		if (posicion.equals(comparar)) {
+			direccionDeVerificacion = Direccion.ABAJO;
+		}
+		
+		if ( !this.getEscenario().getUeb(posicion).isPisablePorJugador() && (direccionDeVerificacion == Direccion.ABAJO))
+			if(!this.encerrado)
+				throw new PosicionIlegalException();
+		
 		if (this.getEscenario().getUeb(posicion).isPisablePorIA()){
 			
-				this.sacarDePosicionOriginal();
-				this.setPosicion(posicion);
-				this.getEscenario().getUeb(posicion).addNoJugador(this);
+			this.sacarDePosicionOriginal();
+			this.setPosicion(posicion);
+			this.getEscenario().getUeb(posicion).addNoJugador(this);
 		}else
 			throw new PosicionIlegalException();
 	}
