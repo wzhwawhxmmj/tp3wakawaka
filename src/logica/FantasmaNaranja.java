@@ -1,22 +1,34 @@
 package logica;
 
+import java.util.Iterator;
+import java.util.Random;
+
 /*Yo, Javier Sampietro, me encago del Fantasma Naranja*/
-import java.util.*;
+
 
 public class FantasmaNaranja extends Fantasma {
 
-	boolean arrasando;
-	int casillasArrasadas;
+
+	private boolean persiguiendoPacMan;
+	private boolean arrasando;
+	private int casillasArrasadas;
+	private int distanciaAlPivote;
+	private int pasosArrasados;
 	
 	public FantasmaNaranja(Escenario escenario, Posicion posModoSeparacion , int duracionModoAzul, float velocidad, int puntosAlSerComido) {
 
 		super(escenario, posModoSeparacion , duracionModoAzul , velocidad, puntosAlSerComido);
 		this.arrasando = false;
 		this.casillasArrasadas = 0;
+		this.distanciaAlPivote = 21;
+		this.persiguiendoPacMan = true;
+		this.pasosArrasados = 0;
 	}
 
 
 	public void estrategizar() {
+		System.err.println(this.arrasando);
+		System.err.println(this.casillasArrasadas);
 		Random generadorRandom;
 		int	random =1;
 		
@@ -24,7 +36,7 @@ public class FantasmaNaranja extends Fantasma {
 			this.arrasar();
 		else{
 			generadorRandom = new Random();
-			generadorRandom.nextInt (10);
+			random= generadorRandom.nextInt (20);
 			if ((random==1)&& (this.casillasArrasadas < 10)){
 				this.arrasando = true;
 				this.arrasar();	
@@ -38,20 +50,22 @@ public class FantasmaNaranja extends Fantasma {
 		Ueb casilleroActual;
 		NoJugador comestible;
 		Iterator<NoJugador> iteradorCasillero;
+		long valorDelComestible;
 		
-		if (this.casillasArrasadas >= 10){
+		if ((this.casillasArrasadas >= 7)||(this.pasosArrasados>20)){
 			this.arrasando = false;
 			return;
 		}
 		else{	
 			this.movimientoAlAzar();
-			casilleroActual = this.getEscenario().getUeb(this.getPosicion());
-			iteradorCasillero = casilleroActual.iterator();
-			while(iteradorCasillero.hasNext()){
-				comestible = casilleroActual.removeNoJugador(0);
-				comestible.activar();
-			}
-			this.casillasArrasadas = this.casillasArrasadas + 1;
+			iteradorCasillero = this.getEscenario().getUeb(this.getPosicion()).iterator();
+			while (iteradorCasillero.hasNext()){
+				comestible = iteradorCasillero.next();
+				System.err.println(comestible.getClass().toString());
+				valorDelComestible = comestible.activar();
+				if (valorDelComestible !=0)
+					this.casillasArrasadas = this.casillasArrasadas + 1;
+			}	
 		}
 
 	}
@@ -62,13 +76,31 @@ public class FantasmaNaranja extends Fantasma {
 		Posicion posicionPivote = this.getPosicionModoSeparacion();
 		Posicion posicionActual = this.getPosicion();
 		
-		if(posicionActual.distanciaHasta(posicionPivote)< posicionActual.distanciaHasta(posicionPacman)){
-			this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPivote));
-		}
-		else{
-			this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
-		}
+		if ((this.persiguiendoPacMan)&&(this.distanciaAlPivote>20)){
+			if((posicionActual.distanciaHasta(posicionPivote)< posicionActual.distanciaHasta(posicionPacman))&& !(posicionActual.equals(posicionPivote))){
+				this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPivote));
+				this.persiguiendoPacMan = false;
+			}
+			else{
+				this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
+				this.persiguiendoPacMan =true;
+			}
 			
-	
+		}
+		else {
+			if (posicionActual.distanciaHasta(posicionPivote)== 0){
+				this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
+				this.distanciaAlPivote = 0;
+				this.persiguiendoPacMan = true;
+			}
+			else{
+				this.distanciaAlPivote++;
+				if (this.persiguiendoPacMan)
+					this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
+				else
+					this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPivote));
+				
+			}
+		}
 	}
 }
