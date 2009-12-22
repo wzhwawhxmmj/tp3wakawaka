@@ -31,8 +31,10 @@ public class VistaFantasma extends Cuadrado {
 		if(this.fantasma.estaAzul())
 			this.setColor(Color.BLUE);
 		else
-			this.setColor(this.color);
-		
+			if (this.fantasma.estaVivo())
+				this.setColor(this.color);
+			else
+				this.setColor(Color.white);
 		grafico.setColor(this.getColor());
 		grafico.fillRect(this.getPosicionable().getX(), this.getPosicionable().getY(),ancho,alto);
 		
