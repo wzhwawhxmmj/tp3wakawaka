@@ -3,6 +3,7 @@ package logica;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import vista.*;
@@ -138,6 +139,8 @@ public class ListaDeEscenarios {
 			columna=0;
 			uebAPoner= null;
 		}
+		escenarioACargar.setEsquinaInferiorDerecha(this.calcularEsquinaInferiorDerecha(escenarioACargar));
+
 		this.juego.setPosicionHorizontalTextosInformativos(fila+1);
 		escenarioACargar.setPuntosTotales(cantidadDePuntos);
 		
@@ -171,6 +174,25 @@ public class ListaDeEscenarios {
 			return false;
 		}
 		
+	}
+
+	private Posicion calcularEsquinaInferiorDerecha(Escenario tablero) {
+
+		Iterator<Posicion> i = tablero.iterator();
+		Posicion retorno = null;
+		Posicion aux = null;
+		
+		if (i.hasNext())
+			retorno = i.next().clonar();
+		
+		while(i.hasNext()) {
+			aux = i.next().clonar();
+			if ( (aux.getx() > retorno.getx()) || (aux.gety() > retorno.gety()) )
+				retorno = aux.clonar();
+		}
+		
+		return retorno;
+
 	}
 	
 
