@@ -68,20 +68,7 @@ public class Escenario {
 	}
 	
 	public Posicion getEsquinaInferiorDerecha(){
-		Iterator<Posicion> i = this.tablero.keySet().iterator();
-		Posicion retorno = null;
-		Posicion aux = null;
-		
-		if (i.hasNext())
-			retorno = i.next().clonar();
-		
-		while(i.hasNext()) {
-			aux = i.next().clonar();
-			if ( (aux.getx() > retorno.getx()) || (aux.gety() > retorno.gety()) )
-				retorno = aux.clonar();
-		}
-		
-		return retorno;
+		return this.esquinaInferiorDerecha;
 	}
 	
 	public Ueb getUeb(Posicion p) {		
