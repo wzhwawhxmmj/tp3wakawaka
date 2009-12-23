@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
 import logica.NoJugador;
-import logica.Pildora;
 import logica.Puntito;
 
 public class VistaPuntito extends ar.uba.fi.algo3.titiritero.vista.Circulo {
@@ -24,7 +23,7 @@ public class VistaPuntito extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 	
 	public void dibujar(SuperficieDeDibujo superfice) {
 		Graphics grafico = (Graphics)superfice.getBuffer();
-		if(!this.puntito.isComido())
+		if(this.puntito.estaVivo())
 			this.setColor(Color.YELLOW);
 		else
 			this.setColor(Color.GRAY);

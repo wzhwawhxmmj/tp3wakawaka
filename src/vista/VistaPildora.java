@@ -23,7 +23,7 @@ public class VistaPildora extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 
 	public void dibujar(SuperficieDeDibujo superfice) {
 		Graphics grafico = (Graphics)superfice.getBuffer();
-		if(!this.pildora.isComido())
+		if(this.pildora.estaVivo())
 			this.setColor(Color.GREEN);
 		else
 			this.setColor(Color.GRAY);
