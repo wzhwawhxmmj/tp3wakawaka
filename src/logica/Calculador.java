@@ -53,7 +53,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}	
 	
 	
-	private Posicion nuevaPosicionPisable(Posicion posicion, Direccion[] prioridadDeDirecciones){
+	public Posicion nuevaPosicionPisable(Posicion posicion, Direccion[] prioridadDeDirecciones){
 		if(esPisable(posicion))return posicion;
 		else {
 			Posicion posicionNueva = posicion;
@@ -65,15 +65,8 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 			}
 		}
 
-	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
-		Direccion direccionARetornar = this.CalcularDireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDirecciones);
-	    this.Inicializar();
-		return direccionARetornar;
-	}
 	
-	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
-		return DireccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
-	}
+
 	
 	
 	private Direccion CalcularDireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
@@ -100,6 +93,16 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	    }
 
 	
+	
+	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
+		Direccion direccionARetornar = this.CalcularDireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDirecciones);
+	    this.Inicializar();
+		return direccionARetornar;
+	}
+	
+	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
+		return DireccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
+	}
 
 	
 }	

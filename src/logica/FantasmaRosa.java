@@ -13,33 +13,6 @@ public class FantasmaRosa extends Fantasma {
 		super(escenario, posModoSeparacion, duracionModoAzul, velocidad, puntosAlSerComido);
 	}
 
-	private boolean esPisable(Posicion posicion){
-		try{
-		Ueb casillero = this.getEscenario().getUeb(posicion);
-		return casillero.isPisablePorIA();
-		}
-		catch (PosicionIlegalException e){
-		return false;
-		}
-	}
-	
-	private Posicion nuevaPosicionHacia(Direccion direccion, Posicion posicion){
-		Posicion posicionNueva = posicion.clonar(); 
-		posicionNueva.moverHacia(direccion);
-		return posicionNueva;
-	}
-
-	private Posicion nuevaPosicionPisable(Posicion posicion, Direccion[] prioridadDeDirecciones){
-		if(esPisable(posicion))return posicion;
-		else {
-			Posicion posicionNueva = posicion;
-			for(int i=0;i<(prioridadDeDirecciones.length);i++){
-			       posicionNueva = nuevaPosicionHacia(prioridadDeDirecciones[i], posicion);
-			       if(esPisable(posicionNueva))break;
-				   }
-			return nuevaPosicionPisable(posicionNueva, prioridadDeDirecciones);
-			}
-		}
 
 	private Posicion CalcularPosicion(){
 		Escenario escenario = this.getEscenario();
@@ -77,15 +50,14 @@ public class FantasmaRosa extends Fantasma {
 	}
 	
 	
-	@Override
 	public void estrategizar() {
-		// TODO Auto-generated method stub
-		
+	
         Direccion direccionFinal;
         Posicion destino;
+        Calculador calculador = this.getEscenario().calculador(); 
         
-		destino = nuevaPosicionPisable(CalcularPosicion(), prioridadDeDirecciones());
-		direccionFinal  = this.getEscenario().calculador().DireccionHaciaMenorCaminoEntre(this.getPosicion(), destino);
+		destino = calculador.nuevaPosicionPisable(CalcularPosicion(), prioridadDeDirecciones());
+		direccionFinal  = calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), destino);
 		this.moverHacia(direccionFinal);
 		
 	}
