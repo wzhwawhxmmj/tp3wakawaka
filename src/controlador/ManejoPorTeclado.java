@@ -3,8 +3,6 @@ package controlador;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import ar.uba.fi.algo3.titiritero.KeyPressedObservador;
-
 import logica.Direccion;
 import logica.Pacman;
 

@@ -47,7 +47,6 @@ public class FantasmaNaranja extends Fantasma {
 	}
 
 	private void arrasar(){
-		Ueb casilleroActual;
 		NoJugador comestible;
 		Iterator<NoJugador> iteradorCasillero;
 		long valorDelComestible;
