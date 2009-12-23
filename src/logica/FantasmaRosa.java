@@ -13,22 +13,19 @@ public class FantasmaRosa extends Fantasma {
 		super(escenario, posModoSeparacion, duracionModoAzul, velocidad, puntosAlSerComido);
 	}
 
-
-	private Posicion CalcularPosicion(){
-		Escenario escenario = this.getEscenario();
+    private Escenario escenario(){
+    	return this.getEscenario();	
+    }
+	
+	private Posicion calcularPosicion(){
 		Iterator<NoJugador> iteradorCosas;
-		Iterator<Posicion> iteradorPosicionCasilleros;
-		NoJugador noJugadorActual;
-		Posicion posisionCasillero;  
 		int Xtotal = 0, Ytotal = 0;
 		int cantidad = 0;
 		
-		iteradorPosicionCasilleros = escenario.iterator();
-        while(iteradorPosicionCasilleros.hasNext()){
-        	    posisionCasillero = iteradorPosicionCasilleros.next();
-			    iteradorCosas = escenario.getUeb(posisionCasillero).iterator();
+        while(escenario().iterator().hasNext()){
+			    iteradorCosas = escenario().getUeb(escenario().iterator().next()).iterator();
 		        while(iteradorCosas.hasNext()){
-		        	noJugadorActual = iteradorCosas.next();
+		        	NoJugador noJugadorActual = iteradorCosas.next();
 		        	if(noJugadorActual.estaVivo()){
 		        		Xtotal += noJugadorActual.getPosicion().getx();
 		            	Ytotal += noJugadorActual.getPosicion().gety();
@@ -37,8 +34,8 @@ public class FantasmaRosa extends Fantasma {
 		            }
 			    }
                
-        Xtotal += multiplicadorPacman * escenario.getPacman().getPosicion().getx();
-        Ytotal += multiplicadorPacman * escenario.getPacman().getPosicion().gety();
+        Xtotal += multiplicadorPacman * escenario().getPacman().getPosicion().getx();
+        Ytotal += multiplicadorPacman * escenario().getPacman().getPosicion().gety();
         cantidad += multiplicadorPacman;
         return new Posicion(Xtotal/cantidad, Ytotal/cantidad);
 	}
@@ -56,7 +53,7 @@ public class FantasmaRosa extends Fantasma {
         Posicion destino;
         Calculador calculador = this.getEscenario().calculador(); 
         
-		destino = calculador.nuevaPosicionPisable(CalcularPosicion(), prioridadDeDirecciones());
+		destino = calculador.nuevaPosicionPisable(calcularPosicion(), prioridadDeDirecciones());
 		direccionFinal  = calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), destino);
 		this.moverHacia(direccionFinal);
 		
