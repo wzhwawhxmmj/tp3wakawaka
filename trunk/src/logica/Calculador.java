@@ -49,10 +49,11 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 
 	private boolean optimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Posicion pasoActual){
-		 return (    (   ( pasosEfectuados.size() < pasosMejorCamino.size() )
-				       ||( pasosMejorCamino.isEmpty()) )
-				   &&( !pasosEfectuados.contains(pasoActual)                  ));
-	}
+		int numeroDePasosMaximo = escenario.getEsquinaInferiorDerecha().getx() + escenario.getEsquinaInferiorDerecha().gety(); 
+		return (    ( (pasosEfectuados.size() < pasosMejorCamino.size())||( pasosMejorCamino.isEmpty()) )
+				   &&( !pasosEfectuados.contains(pasoActual)                  )
+				   &&( (pasosEfectuados.size() < numeroDePasosMaximo) ));
+	}	
 	
 	
 	private Posicion nuevaPosicionPisable(Posicion posicion, Direccion[] prioridadDeDirecciones){
