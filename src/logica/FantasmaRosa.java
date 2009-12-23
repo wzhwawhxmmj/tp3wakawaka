@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class FantasmaRosa extends Fantasma {
-    final Direccion prioridadDeDireccionesPorDefectoUno[] = {Direccion.ARRIBA, Direccion.DERECHA, Direccion.ABAJO,  Direccion.IZQUIERDA};
-    final Direccion prioridadDeDireccionesPorDefectoDos[] = {Direccion.ABAJO, Direccion.IZQUIERDA, Direccion.ARRIBA,  Direccion.DERECHA};
+    final Direccion prioridadDeDireccionesPorDefecto[][] = {{Direccion.ARRIBA, Direccion.DERECHA, Direccion.ABAJO,  Direccion.IZQUIERDA}
+    														,{Direccion.ABAJO, Direccion.IZQUIERDA, Direccion.ARRIBA,  Direccion.DERECHA}}; 
     final int multiplicadorPacman = 500;
 	
 
@@ -18,12 +18,13 @@ public class FantasmaRosa extends Fantasma {
     }
 	
 	private Posicion calcularPosicion(){
-		Iterator<NoJugador> iteradorCosas;
 		int Xtotal = 0, Ytotal = 0;
 		int cantidad = 0;
+		Iterator<NoJugador> iteradorCosas;
+		Iterator<Posicion> iteradorDePosiciones = escenario().iterator();
 		
-        while(escenario().iterator().hasNext()){
-			    iteradorCosas = escenario().getUeb(escenario().iterator().next()).iterator();
+        while(iteradorDePosiciones.hasNext()){
+			    iteradorCosas = escenario().getUeb(iteradorDePosiciones.next()).iterator();
 		        while(iteradorCosas.hasNext()){
 		        	NoJugador noJugadorActual = iteradorCosas.next();
 		        	if(noJugadorActual.estaVivo()){
@@ -42,8 +43,7 @@ public class FantasmaRosa extends Fantasma {
 	
 	
 	private Direccion[] prioridadDeDirecciones(){
-		if((new Random()).nextInt(2)==1)return prioridadDeDireccionesPorDefectoUno;
-        else 							return prioridadDeDireccionesPorDefectoDos;
+		return prioridadDeDireccionesPorDefecto[(new Random()).nextInt(2)];
 	}
 	
 	
