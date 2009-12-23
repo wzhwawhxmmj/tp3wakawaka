@@ -16,27 +16,27 @@ public abstract class Entidad implements  ar.uba.fi.algo3.titiritero.Posicionabl
 		Posicion esquina = escenario.getEsquinaInferiorDerecha().clonar();
 		
 		if (posicion.gety() == esquina.gety()){
-			this.posicion = new Posicion(posicion.getx(),0);
+			this.posicion = new Posicion(posicion.getx(),1);
 			return;
 		}
 			
 		esquina = escenario.getEsquinaInferiorDerecha().clonar();
 		
 		if (posicion.getx() == esquina.getx()){
-			this.posicion = new Posicion(0,posicion.gety());
+			this.posicion = new Posicion(1,posicion.gety());
 			return;
 		}
 		Posicion nueva = new Posicion(0,0);
 		
 		if (posicion.gety() == nueva.gety()){
-			this.posicion = new Posicion(posicion.getx(),esquina.gety());
+			this.posicion = new Posicion(posicion.getx(),esquina.gety()-1);
 			return;
 		}
 		
 		nueva = new Posicion(0,0);
 	
 		if (posicion.getx() == nueva.getx()){
-			this.posicion = new Posicion(esquina.getx(),posicion.gety());
+			this.posicion = new Posicion(esquina.getx()-1,posicion.gety());
 			return;
 		}
 		
