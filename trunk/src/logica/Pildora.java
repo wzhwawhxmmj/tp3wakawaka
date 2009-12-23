@@ -3,9 +3,7 @@ package logica;
 public class Pildora extends NoJugador implements ar.uba.fi.algo3.titiritero.Posicionable{
 
 	
-	private Juego juego;
-	private boolean comido;
-	
+	private Juego juego;	
 	
 	public Pildora(Escenario escenario, Posicion posicion, int puntosAlSerComido, Juego juegoActual ) {
 		super(escenario, posicion, puntosAlSerComido );
@@ -13,22 +11,13 @@ public class Pildora extends NoJugador implements ar.uba.fi.algo3.titiritero.Pos
 	}
 	
 	public long activar(){
-		if (this.comido){
+		if (!this.estaVivo())
 			return 0;
-		}
+
 		this.juego.ponerFantasmasAzules();
-		this.setComido(true);
+		this.morir();
 		this.getEscenario().restarPuntos(1);
 		return this.getPuntaje();
 		
 	}
-
-	public void setComido(boolean comido) {
-		this.comido = comido;
-	}
-
-	public boolean isComido() {
-		return comido;
-	}
-
 }

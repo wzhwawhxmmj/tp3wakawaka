@@ -105,7 +105,7 @@ public class Juego implements ObjetoVivo{
 		this.inicializarFantasmas (escenario);
 		this.agregarObjetosVivosAlControlador();
 		this.controladorJuego.agregarObjetoVivo(this);
-		this.controladorJuego.setIntervaloSimulacion(200);
+		this.controladorJuego.setIntervaloSimulacion(120);
 		this.superficieDeDibujo.addKeyListener((KeyListener) new ManejoPorTeclado(this.pacman));
 		
 		Posicion posicionPuntaje = new Posicion (1,this.getPosicionHorizontalTextosInformativos());
