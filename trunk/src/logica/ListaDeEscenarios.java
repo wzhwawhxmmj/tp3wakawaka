@@ -51,8 +51,6 @@ public class ListaDeEscenarios {
 		VistaPildora vistaPildora;
 		VistaCasa vistaCasa;
 		VistaPared vistaPared;
-		Posicion posicionPuntaje;
-		Posicion posicionVidas;
 		
 		while (filaMapa != null){
 			while (columna < filaMapa.length()){

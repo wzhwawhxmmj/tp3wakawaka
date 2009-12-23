@@ -1,8 +1,6 @@
 package logica;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
 
 public class Calculador {//su nombre final sera Calculador, y tendra ciertas similitudes con un iterador.
 	
@@ -13,7 +11,6 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	private ArrayList<Posicion> pasosEfectuados; 
 	private Direccion direccionInicialActual;
 	private Direccion mejorDireccion;
-	private boolean primerIteracion;
 
 	
 	private void Inicializar(){
