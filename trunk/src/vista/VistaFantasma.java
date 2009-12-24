@@ -23,21 +23,40 @@ public class VistaFantasma extends CirculoIncompleto {
 		setColor(color);
 	}
 	
-	public void dibujar(SuperficieDeDibujo superfice) {
+	private void dibujarFantasma(SuperficieDeDibujo superfice){
 		Graphics grafico = (Graphics)superfice.getBuffer();
-		if(this.fantasma.estaAzul())
-			this.setColor(Color.BLUE);
-		else
-			if (this.fantasma.estaVivo())
-				this.setColor(this.color);
-			else
-				this.setColor(Color.GRAY);
 		grafico.setColor(this.getColor());
 		grafico.fillArc(getPosicionable().getX(), getPosicionable().getY(), 15, 17, 315, 270);
 		grafico.fillArc(getPosicionable().getX()+1, getPosicionable().getY()+9, 15, 15, 125, -45);
+	}
+
+	private void dibujarOjos(SuperficieDeDibujo superfice){
+		Graphics grafico = (Graphics)superfice.getBuffer();
+		grafico.setColor(Color.WHITE);
+		grafico.fillOval(getPosicionable().getX()+2,getPosicionable().getY()+1, 5, 6);
+		grafico.fillOval(getPosicionable().getX()+8,getPosicionable().getY()+1, 5, 6);
 		grafico.setColor(Color.BLACK);
 		grafico.fillOval(getPosicionable().getX()+3,getPosicionable().getY()+2, 3, 3);
 		grafico.fillOval(getPosicionable().getX()+9,getPosicionable().getY()+2, 3, 3);
+		
+	}
+	
+	public void dibujar(SuperficieDeDibujo superfice) {
+		if(this.fantasma.estaAzul()){
+			this.setColor(Color.BLUE);
+			dibujarFantasma(superfice);
+			dibujarOjos(superfice);
+			}
+		else
+			if (this.fantasma.estaVivo()){
+				this.setColor(this.color);
+				dibujarFantasma(superfice);
+				dibujarOjos(superfice);
+				}
+			else
+				{
+				dibujarOjos(superfice);
+				}
 		
 	}
 
