@@ -10,7 +10,7 @@ public class FantasmaNaranja extends Fantasma {
 
 
 	private boolean persiguiendoPacMan;
-	private boolean arrasando;
+	protected boolean arrasando;
 	private int casillasArrasadas;
 	private int distanciaAlPivote;
 	private int pasosArrasados;
@@ -29,7 +29,6 @@ public class FantasmaNaranja extends Fantasma {
 	public void estrategizar() {
 		Random generadorRandom;
 		int	random =1;
-		
 		if (this.arrasando)
 			this.arrasar();
 		else{
@@ -44,7 +43,7 @@ public class FantasmaNaranja extends Fantasma {
 		}
 	}
 
-	private void arrasar(){
+	protected void arrasar(){
 		NoJugador comestible;
 		Iterator<NoJugador> iteradorCasillero;
 		long valorDelComestible;
@@ -61,17 +60,14 @@ public class FantasmaNaranja extends Fantasma {
 				comestible = iteradorCasillero.next();
 				valorDelComestible = comestible.activar();
 				if (valorDelComestible !=0)
-					this.casillasArrasadas++
-					
-					
-					
-						;
+					this.casillasArrasadas++;
 			}	
 		}
 
 	}
 	
-	private void perseguir (){
+	protected void perseguir (){
+		
 		Calculador calculador = this.getEscenario().calculador();
 		Posicion posicionPacman = this.getEscenario().getPacman().getPosicion();
 		Posicion posicionPivote = this.getPosicionModoSeparacion();
@@ -106,14 +102,6 @@ public class FantasmaNaranja extends Fantasma {
 
 	public boolean estaArrasando(){
 		return this.arrasando;
-	}
-	
-	public void activarArrasarParaTest (){
-		this.arrasando = true;
-	}
-
-	public void activarPerseguirParaTest (){
-		this.casillasArrasadas = 7;
 	}
 	
 }

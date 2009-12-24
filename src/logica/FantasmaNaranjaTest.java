@@ -70,18 +70,19 @@ public class FantasmaNaranjaTest extends TestCase  {
 			Escenario e = this.mapaSimple();
 			Pacman p = new Pacman(e,new Posicion(5,3));
 			e.colocarPacman(p);
-			FantasmaNaranja f = new FantasmaNaranja(e,new Posicion(3,2),10,1f,200);
+			FantasmaNaranjaParaPruebas f = new FantasmaNaranjaParaPruebas(e,new Posicion(3,2),10,1f,200);
 			int pasosArrasando = 0;
 			
 			for (int i = 0 ; i < 17 ; i++){
 				f.vivir();
 			}
 			
-			f.activarArrasarParaTest();
+			f.activarArrasar();
 			for (int i = 0 ; i < 25 ; i++){
 				f.vivir();
-				if (f.estaArrasando())
+				if (f.estaArrasando()){
 					pasosArrasando++;
+				}
 			}
 	
 			//Demuestra que comió al menos un punto
@@ -90,18 +91,19 @@ public class FantasmaNaranjaTest extends TestCase  {
 			//Si arrasó la mayor cantidad de casillas posibles (7), sus pasos deben
 			//ser menor o iguales a 20.
 			if (e.getPuntosRestantes() == 5)
+				
 				assertTrue(pasosArrasando <= 20);
 			
 			//Si caminó la mayor cantidad de pasos posibles en modo arrasar (20)
 			//la cantidad de Puntos restantes tiene que ser mayor a 5.
 			if (pasosArrasando == 20)
-				assertTrue(e.getPuntosRestantes()>5);
+				assertTrue(e.getPuntosRestantes()>=5);
 			
 			//Si cualquiera de las dos anteriores asserts no es correcta
 			if ((pasosArrasando >20 ) || (e.getPuntosRestantes() < 5))
 				fail();
 			
-			assertTrue(pasosArrasando<20);
+			assertTrue(pasosArrasando<21);
 			
 		}
 
@@ -110,9 +112,9 @@ public class FantasmaNaranjaTest extends TestCase  {
 		 * P P P P P P P P P P / / P P P
 		 * P S _ _ _ _ _ _ _ _ \ \ _ J P
 		 * P P P P P P C C C P / / P P P
-		 * ^		 P P P P P		 ^
-		 * Col. O        ^           Col.21
-		 * 				 Col.7
+		 * P P P P P P P P P P \ \ P P P	
+		 * ^        ^                  ^
+		 * Col. O  Col.7               Col.22
 		 * 
 		 * 
 		 * 	
@@ -128,14 +130,14 @@ public class FantasmaNaranjaTest extends TestCase  {
 		private Escenario otroMapaSimple(){
 			Escenario e = new Escenario();
 			
-			for (int i = 0 ; i < 22; i++){
-				for (int j = 0 ; j < 3 ; j++) {
-					if ( (i > 0) || (j > 0) || (i < 21) || (j < 2)){
+			for (int i = 0 ; i < 23; i++){
+				for (int j = 0 ; j < 3; j++) {
+					if ( (i > 0) || (j > 0) || (i < 22) || (j < 2)){
 							e.addUeb(new Posicion(i,j), new Piso());
 							e.getUeb(new Posicion(i,j)).addNoJugador(new Puntito(e, new Posicion(i,j), 50));
 						
 					}
-					if ( (i == 0) || (j == 0) || (i == 21) || (j == 2))
+					if ( (i == 0) || (j == 0) || (i == 22) || (j == 2))
 							e.addUeb(new Posicion(i,j), new Pared());
 				}
 			}
@@ -143,15 +145,15 @@ public class FantasmaNaranjaTest extends TestCase  {
 			for (int i = 6 ; i < 9; i++){
 				e.addUeb(new Posicion(i,2), new Casa());
 			}
-			for (int i = 5 ; i < 10; i++){
+			for (int i = 0 ; i < 23; i++){
 				e.addUeb(new Posicion(i,3), new Pared());
 			}
 			
 			e.setPuntosTotales(20);
 			e.agregarPuntoDeSeparacion(new Posicion(1,1));
 			e.setPosicionCasa(new Posicion(7,2));
-			e.setEsquinaInferiorDerecha(new Posicion(21,2));
-			e.setPosicionInicialPacman(new Posicion(20,1));
+			e.setEsquinaInferiorDerecha(new Posicion(22,3));
+			e.setPosicionInicialPacman(new Posicion(21,1));
 			
 			
 			return e;
@@ -159,29 +161,61 @@ public class FantasmaNaranjaTest extends TestCase  {
 		
 		public void testPerseguir (){
 			Escenario e = this.otroMapaSimple();
-			Pacman p = new Pacman(e,new Posicion(20,1));
+			Pacman p = new Pacman(e,new Posicion(21,1));
 			e.colocarPacman(p);
-			FantasmaNaranja f = new FantasmaNaranja(e,new Posicion(1,1),10,1f,200);
+			FantasmaNaranjaParaPruebas f = new FantasmaNaranjaParaPruebas(e,new Posicion(1,1),10,1f,200);
 			
 			
-			
+		
+	
 			for (int i = 0 ; i < 17 ; i++){
-				System.err.println(f.getPosicion());
 				f.vivir();
 			}
 	
 
-			f.activarPerseguirParaTest();
-			
+			f.activarPerseguir();
+		
 			//Si la lógica es correcta, luego de 7 pasos tendría que
 			//Haberse movido a su punto de Separación
-			for (int i = 0; i < 7; i ++){
-				//System.err.println(f.getPosicion());
+			//(tener en cuenta que al terminar la guardia Horizontal queda 
+			//parado en el (8,2)
+			for (int i = 0; i < 8; i ++){
+				f.vivir();
+
+			}
+
+			
+			//Si la lógica es correcta, luego se moverá 20 pasos hasta el
+			//pacman
+			
+			assertEquals(f.getPosicionModoSeparacion(),f.getPosicion());
+		
+			for (int i = 0; i < 21; i ++){
 				f.vivir();
 			}
-				
-			assertEquals(f.getPosicionModoSeparacion(),f.getPosicion());
 			
+			assertEquals(p.getPosicion(),f.getPosicion());
+		
+		
+			//Por último se prueba la situación contraria, el pacman mas cerca
+			//que el punto de escape, colocando al pacman en la posicoion (12,1)
+			
+			Escenario otroE = this.otroMapaSimple();
+			Pacman otroP = new Pacman(otroE,new Posicion(12,1));
+			otroE.setPosicionInicialPacman(new Posicion(12,1));
+			otroE.colocarPacman(otroP);
+			FantasmaNaranjaParaPruebas otroF = new FantasmaNaranjaParaPruebas (otroE,new Posicion(1,1),10,1f,200);
+		
+			for (int i = 0 ; i < 17 ; i++){
+				otroF.vivir();
+			}
+		
+			otroF.activarPerseguir();
+			for (int i = 0; i < 5; i ++){
+				otroF.vivir();
+			}
+			
+			assertEquals(otroP.getPosicion(),otroF.getPosicion());
 			
 		}
 		
