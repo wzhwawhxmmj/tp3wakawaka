@@ -26,18 +26,18 @@ public class VistaFantasma extends CirculoIncompleto {
 	private void dibujarFantasma(SuperficieDeDibujo superfice){
 		Graphics grafico = (Graphics)superfice.getBuffer();
 		grafico.setColor(this.getColor());
-		grafico.fillArc(getPosicionable().getX(), getPosicionable().getY(), 15, 17, 315, 270);
-		grafico.fillArc(getPosicionable().getX()+1, getPosicionable().getY()+9, 15, 15, 125, -45);
+		grafico.fillArc(getPosicionable().getX()-2, getPosicionable().getY()-2, 15, 17, 315, 270);
+		grafico.fillArc(getPosicionable().getX()-1, getPosicionable().getY()+6, 15, 15, 125, -45);
 	}
 
 	private void dibujarOjos(SuperficieDeDibujo superfice){
 		Graphics grafico = (Graphics)superfice.getBuffer();
 		grafico.setColor(Color.WHITE);
-		grafico.fillOval(getPosicionable().getX()+2,getPosicionable().getY()+1, 5, 6);
-		grafico.fillOval(getPosicionable().getX()+8,getPosicionable().getY()+1, 5, 6);
+		grafico.fillOval(getPosicionable().getX(),getPosicionable().getY()+1, 5, 6);
+		grafico.fillOval(getPosicionable().getX()+6,getPosicionable().getY()+1, 5, 6);
 		grafico.setColor(Color.BLACK);
-		grafico.fillOval(getPosicionable().getX()+3,getPosicionable().getY()+2, 3, 3);
-		grafico.fillOval(getPosicionable().getX()+9,getPosicionable().getY()+2, 3, 3);
+		grafico.fillOval(getPosicionable().getX()+1,getPosicionable().getY()+2, 3, 3);
+		grafico.fillOval(getPosicionable().getX()+7,getPosicionable().getY()+2, 3, 3);
 		
 	}
 	

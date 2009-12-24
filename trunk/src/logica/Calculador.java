@@ -56,7 +56,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	public Posicion nuevaPosicionPisable(Posicion posicion, Direccion[] prioridadDeDirecciones){
 		if(esPisable(posicion))return posicion;
 		else {
-			Posicion posicionNueva = posicion;
+			Posicion posicionNueva = null;
 			for(int i=0;i<(prioridadDeDirecciones.length);i++){
 			       posicionNueva = nuevaPosicionHacia(prioridadDeDirecciones[i], posicion);
 			       if(esPisable(posicionNueva))break;

@@ -18,6 +18,9 @@ import ar.uba.fi.algo3.titiritero.vista.Ventana;
 
 
 public class Juego implements ObjetoVivo{
+    private final int resolucionX = 640;
+    private final int resolucionY = 480;
+	
 	
 	private Pacman pacman;
 	private Fantasma[] arrayDeFantasmas;
@@ -42,7 +45,7 @@ public class Juego implements ObjetoVivo{
 		this.listaDeEscenarios = new ListaDeEscenarios(archivoTextoConEscenarios, this);
 		this.pacman = null;
 		this.escenarioActual = null;
-		this.superficieDeDibujo = new Ventana (325,350,this.controladorJuego);
+		this.superficieDeDibujo = new Ventana (resolucionX,resolucionY,this.controladorJuego);
 		
 	}	
 	
@@ -54,7 +57,6 @@ public class Juego implements ObjetoVivo{
 		int duracionModoAzulActual =  (40 -  (this.nivelActual - 1));
 		int puntosAlSerComidoActual =  (100 + (10*(this.nivelActual - 1)));
 		Iterator<Posicion> iteradorPuntosDeSeparacion = escenario.iteradorPuntosDeSeparacion();
-	
 		
 		arrayDeFantasmas[0] = new FantasmaRojo(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
 		arrayDeFantasmas[1] = new FantasmaNaranja(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);

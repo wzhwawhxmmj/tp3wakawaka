@@ -6,7 +6,7 @@ public class VistaPiso extends ar.uba.fi.algo3.titiritero.vista.Cuadrado{
 
 	public VistaPiso() {
         super(32,32);
-        setColor(Color.GRAY);
+        setColor(Color.BLACK);
 }
 
 
