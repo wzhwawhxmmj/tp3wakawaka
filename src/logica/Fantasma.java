@@ -264,7 +264,6 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 		
 		if (this.getEscenario().getUeb(posicion).isPisablePorIA()){
 			this.modificarDireccionActual(posicion);
-			System.out.println(this.direccionActual);
 			this.sacarDePosicionOriginal();
 			this.setPosicion(posicion);
 			this.getEscenario().getUeb(posicion).addNoJugador(this);
