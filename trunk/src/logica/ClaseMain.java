@@ -9,7 +9,7 @@ public class ClaseMain {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		Juego juego = new Juego("C:\\niveles.txt");
+		Juego juego = new Juego("recursos/niveles/niveles.txt");
 		juego.jugar();
 
 
