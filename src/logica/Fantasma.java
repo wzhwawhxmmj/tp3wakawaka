@@ -16,6 +16,7 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 	private Posicion posModoSeparacion;
 	private boolean modoSeparacion;
 	private int duracionModoAzul;
+	private Direccion direccionActual;
 	
 	private boolean llegoAPos;
 	private boolean encerrado;
@@ -33,6 +34,7 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 		this.posModoSeparacion = posModoSeparacion;
 		this.modoSeparacion = false;
 		this.duracionModoAzul = (int) Math.ceil(duracionModoAzul);
+		this.direccionActual = Direccion.NINGUNA;
 
 		this.llegoAPos = false;
 		this.dirGuardia = Direccion.DERECHA;
@@ -197,6 +199,10 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 		this.moverHacia(this.getEscenario().getPosicionCasa());
 	}
 	
+	public Direccion getDireccionDeMovimiento(){
+		return this.direccionActual;
+	}
+	
 	//Fin: Metodos publicos.
 	
 	//Inicio: Metodos protegidos.	
@@ -257,14 +263,15 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 				throw new PosicionIlegalException();
 		
 		if (this.getEscenario().getUeb(posicion).isPisablePorIA()){
-			
+			this.modificarDireccionActual(posicion);
+			System.out.println(this.direccionActual);
 			this.sacarDePosicionOriginal();
 			this.setPosicion(posicion);
 			this.getEscenario().getUeb(posicion).addNoJugador(this);
 		}else
 			throw new PosicionIlegalException();
 	}
-	
+
 	protected void montarGuardiaHorizontal(){
 		try{
 			this.moverHacia(this.dirGuardia);
@@ -347,6 +354,35 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 		
 		if (this.modoSeparacion && !this.azul)
 			this.temporizadorModoSeparacion--;
+	}
+	private void modificarDireccionActual(Posicion posicion) {
+		Posicion actual = this.getPosicion().clonar();
+		actual.avanzarAbajo();
+		if (posicion.gety() == actual.gety()) {
+			this.direccionActual = Direccion.ABAJO;
+			return;
+		}
+			
+		actual = this.getPosicion().clonar();
+		actual.avanzarArriba();
+		if (posicion.gety() == actual.gety()) {
+			this.direccionActual = Direccion.ARRIBA;
+			return;
+		}
+		
+		actual = this.getPosicion().clonar();
+		actual.avanzarDerecha();
+		if (posicion.getx() == actual.getx()) {
+			this.direccionActual = Direccion.DERECHA;
+			return;
+		}
+		
+		actual = this.getPosicion().clonar();
+		actual.avanzarIzquierda();
+		if (posicion.getx() == actual.getx()) {
+			this.direccionActual = Direccion.IZQUIERDA;
+			return;
+		}
 	}
 	//Fin: Metodos privados.
 }
