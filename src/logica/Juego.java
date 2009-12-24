@@ -68,7 +68,7 @@ public class Juego implements ObjetoVivo{
 		VistaFruta vistaFruta = new VistaFruta (this.fruta);
 		this.controladorJuego.agregarDibujable(vistaFruta);
 		this.controladorJuego.agregarObjetoVivo(pacman);
-		VistaPacman vistaPacman = new VistaPacman();
+		VistaPacman vistaPacman = new VistaPacman(pacman);
 		vistaPacman.setPosicionable(this.pacman);
 		this.controladorJuego.agregarDibujable(vistaPacman);
 		
