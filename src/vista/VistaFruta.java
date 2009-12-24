@@ -26,7 +26,7 @@ public class VistaFruta extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 		if(this.fruta.estaVivo())
 			this.setColor(Color.RED);
 		else
-			this.setColor(Color.GRAY);
+			this.setColor(Color.BLACK);
 		grafico.setColor(this.getColor());
 		grafico.fillOval(getPosicionable().getX() , getPosicionable().getY(),this.radio,this.radio);
 

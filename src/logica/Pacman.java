@@ -9,24 +9,19 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	
 	private long puntajeAcumulado;
 	private Direccion direccion;
-	private Escenario escenario;	
+	private Direccion proximaDireccion;
+	private Escenario escenario;
+	
 
 	public Pacman(Escenario escenario, Posicion posicion) {
 		super(escenario, posicion);
 		this.direccion = Direccion.DERECHA;
 		this.escenario = escenario;
 		this.puntajeAcumulado = 0;
-		
+		this.proximaDireccion = Direccion.DERECHA;
 	}
 
-	public void comer(NoJugador algunaCosa) {
-		puntajeAcumulado += algunaCosa.activar();
-	}
 
-	public Direccion Direccion(){
-		return direccion;
-	}
-	
 	private boolean direccionValida(Direccion direccion){
 		Posicion posicionTemporal = this.getPosicion().clonar();
 		posicionTemporal.moverHacia(direccion);
@@ -35,21 +30,41 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 		return false;
 	}
 	
+	
+	public Direccion Direccion(){
+		return direccion;
+	}
+	
 	public void cambiarDireccion(Direccion direccion){		
-			
-		if (direccionValida(direccion))
-			this.direccion = direccion;
+		this.proximaDireccion = direccion;
+	}
+	
+
+	private void moverHacia(Direccion unaDireccion) {
+		if(direccionValida(unaDireccion)){
+			Posicion posNueva = this.getPosicion().clonar();
+			posNueva.moverHacia(unaDireccion);
+			this.setPosicion(posNueva);
+		}
+	}	
+	
+
+	public void comer(NoJugador algunaCosa) {
+		puntajeAcumulado += algunaCosa.activar();
 	}
 	
 	
 	public void vivir() {
+		if(direccionValida(proximaDireccion))this.direccion = proximaDireccion;
+		
 		this.moverHacia(this.direccion);
-			
+		
 		Iterator<NoJugador> it = this.getEscenario().getUeb(this.getPosicion()).iterator();
 		while (it.hasNext())
 			this.comer(it.next());	
 	}
 
+	
 	public long getPuntajeAcumulado() {
 		return puntajeAcumulado;
 	}
@@ -60,12 +75,7 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 
 
 
-	private void moverHacia(Direccion unaDireccion) {
-		Posicion posicionTemporal = this.getPosicion().clonar();
-		posicionTemporal.moverHacia(unaDireccion);
-		if(escenario.getUeb(posicionTemporal).isPisablePorJugador())
-			this.setPosicion(posicionTemporal);
-	}
+
 
 
 }

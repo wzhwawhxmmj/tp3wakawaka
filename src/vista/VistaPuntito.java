@@ -24,9 +24,11 @@ public class VistaPuntito extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 	public void dibujar(SuperficieDeDibujo superfice) {
 		Graphics grafico = (Graphics)superfice.getBuffer();
 		if(this.puntito.estaVivo())
+			{
 			this.setColor(Color.YELLOW);
+			}
 		else
-			this.setColor(Color.GRAY);
+			this.setColor(Color.BLACK);
 		grafico.setColor(this.getColor());
 		grafico.fillOval(getPosicionable().getX() , getPosicionable().getY(),this.radio,this.radio);
 

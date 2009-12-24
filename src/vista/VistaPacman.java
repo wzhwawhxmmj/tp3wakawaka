@@ -9,8 +9,9 @@ import ar.uba.fi.algo3.titiritero.Posicionable;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
 public class VistaPacman extends ar.uba.fi.algo3.titiritero.vista.CirculoIncompleto {
-			private static int framesBoca = 60;
-		
+			private static int framesBoca = 50;
+ 
+
 			private int anguloBoca; 
 			private boolean bocaCierra;
 			private int anguloInicial;
@@ -45,32 +46,32 @@ public class VistaPacman extends ar.uba.fi.algo3.titiritero.vista.CirculoIncompl
 	    				anguloInicial = 315;
 	    				break;
 	    			case DERECHA:
-	    				desfaseOjoX = 4;
+	    				desfaseOjoX = 2;
 	    				desfaseOjoY = 2;
 	    				anguloInicial = 45;
 	    				break;
 	    			case IZQUIERDA:
-	    				desfaseOjoX = 5;
+	    				desfaseOjoX = 3;
 	    				desfaseOjoY = 2;
 	    				anguloInicial = 225;
 	    				break;
 	    			}
 				anguloFinal = 270;
 				
-				if(anguloBoca > 91){anguloBoca=90;
+				if(bocaCierra)
+					anguloBoca += framesBoca;
+					else 
+					anguloBoca -= framesBoca;	
+
+				
+				if(anguloBoca > 90){anguloBoca=90;
 				 					bocaCierra = false;
 									}
 				if(anguloBoca < 0){anguloBoca=0;
 								   bocaCierra = true;
 								   }
 				
-				if(bocaCierra)
-				anguloBoca += framesBoca;
-				else 
-				anguloBoca -= framesBoca;	
-				
-				
-	    		grafico.fillArc(getPosicionable().getX(), getPosicionable().getY(), 15, 15, anguloInicial - anguloBoca/2 , anguloFinal  + anguloBoca);
+	    		grafico.fillArc(getPosicionable().getX()-3, getPosicionable().getY()-1, 15, 15, anguloInicial - anguloBoca/2 , anguloFinal  + anguloBoca);
 	    		grafico.setColor(Color.BLACK);
 	    		grafico.fillOval(getPosicionable().getX()+desfaseOjoX,getPosicionable().getY()+desfaseOjoY, 3, 3);
 	        	

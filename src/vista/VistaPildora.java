@@ -26,7 +26,7 @@ public class VistaPildora extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 		if(this.pildora.estaVivo())
 			this.setColor(Color.GREEN);
 		else
-			this.setColor(Color.GRAY);
+			this.setColor(Color.BLACK);
 		grafico.setColor(this.getColor());
 		grafico.fillOval(getPosicionable().getX()-1 , getPosicionable().getY()-1,this.radio,this.radio);
 
