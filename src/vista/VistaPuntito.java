@@ -14,8 +14,8 @@ public class VistaPuntito extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 	private Puntito puntito;
 	
 	public VistaPuntito(NoJugador unPuntito) {
-		super(6);
-	    this.radio = 6;
+		super(7);
+	    this.radio = 7;
 	    this.puntito= (Puntito) unPuntito;
 	    this.setPosicionable(this.puntito);
 	    setColor(Color.YELLOW);

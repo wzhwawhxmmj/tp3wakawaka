@@ -14,8 +14,8 @@ public class VistaPildora extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 	private Pildora pildora;
 	
 	public VistaPildora(NoJugador unaPildora) {
-		super(9);
-	    this.radio = 9;
+		super(10);
+	    this.radio = 10;
 		this.pildora= (Pildora) unaPildora;
 	    this.setPosicionable(this.pildora);
 		setColor(Color.GREEN);
@@ -28,7 +28,7 @@ public class VistaPildora extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 		else
 			this.setColor(Color.GRAY);
 		grafico.setColor(this.getColor());
-		grafico.fillOval(getPosicionable().getX() , getPosicionable().getY(),this.radio,this.radio);
+		grafico.fillOval(getPosicionable().getX()-1 , getPosicionable().getY()-1,this.radio,this.radio);
 
 	}
 }
