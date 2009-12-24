@@ -31,7 +31,7 @@ public class VistaFantasma extends CirculoIncompleto {
 			if (this.fantasma.estaVivo())
 				this.setColor(this.color);
 			else
-				this.setColor(Color.white);
+				this.setColor(Color.GRAY);
 		grafico.setColor(this.getColor());
 		grafico.fillArc(getPosicionable().getX(), getPosicionable().getY(), 15, 17, 315, 270);
 		grafico.fillArc(getPosicionable().getX()+1, getPosicionable().getY()+9, 15, 15, 125, -45);
