@@ -27,8 +27,6 @@ public class FantasmaNaranja extends Fantasma {
 
 
 	public void estrategizar() {
-		System.err.println(this.arrasando);
-		System.err.println(this.casillasArrasadas);
 		Random generadorRandom;
 		int	random =1;
 		
@@ -37,7 +35,7 @@ public class FantasmaNaranja extends Fantasma {
 		else{
 			generadorRandom = new Random();
 			random= generadorRandom.nextInt (20);
-			if ((random==1)&& (this.casillasArrasadas < 10)){
+			if ((random==1)&& (this.casillasArrasadas < 7)){
 				this.arrasando = true;
 				this.arrasar();	
 			}
@@ -51,19 +49,23 @@ public class FantasmaNaranja extends Fantasma {
 		Iterator<NoJugador> iteradorCasillero;
 		long valorDelComestible;
 		
-		if ((this.casillasArrasadas >= 7)||(this.pasosArrasados>20)){
+		if ((this.casillasArrasadas >= 7)||(this.pasosArrasados>=20)){
 			this.arrasando = false;
 			return;
 		}
 		else{	
 			this.movimientoAlAzar();
 			iteradorCasillero = this.getEscenario().getUeb(this.getPosicion()).iterator();
+			this.pasosArrasados++;
 			while (iteradorCasillero.hasNext()){
 				comestible = iteradorCasillero.next();
-				System.err.println(comestible.getClass().toString());
 				valorDelComestible = comestible.activar();
 				if (valorDelComestible !=0)
-					this.casillasArrasadas = this.casillasArrasadas + 1;
+					this.casillasArrasadas++
+					
+					
+					
+						;
 			}	
 		}
 
@@ -74,7 +76,6 @@ public class FantasmaNaranja extends Fantasma {
 		Posicion posicionPacman = this.getEscenario().getPacman().getPosicion();
 		Posicion posicionPivote = this.getPosicionModoSeparacion();
 		Posicion posicionActual = this.getPosicion();
-		
 		if ((this.persiguiendoPacMan)&&(this.distanciaAlPivote>20)){
 			if((posicionActual.distanciaHasta(posicionPivote)< posicionActual.distanciaHasta(posicionPacman))&& !(posicionActual.equals(posicionPivote))){
 				this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPivote));
@@ -102,4 +103,17 @@ public class FantasmaNaranja extends Fantasma {
 			}
 		}
 	}
+
+	public boolean estaArrasando(){
+		return this.arrasando;
+	}
+	
+	public void activarArrasarParaTest (){
+		this.arrasando = true;
+	}
+
+	public void activarPerseguirParaTest (){
+		this.casillasArrasadas = 7;
+	}
+	
 }
