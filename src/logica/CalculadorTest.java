@@ -1,6 +1,5 @@
 package logica;
 
-import java.io.IOException;
 import junit.framework.TestCase;
 
 

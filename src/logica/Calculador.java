@@ -69,6 +69,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 
 	
 	
+	@SuppressWarnings("unchecked")
 	private Direccion CalcularDireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
 		//llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
 		
