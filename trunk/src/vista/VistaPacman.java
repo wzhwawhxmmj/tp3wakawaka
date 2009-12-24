@@ -3,7 +3,6 @@ package vista;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import logica.Direccion;
 import logica.Pacman;
 
 import ar.uba.fi.algo3.titiritero.Posicionable;
@@ -52,7 +51,7 @@ public class VistaPacman extends ar.uba.fi.algo3.titiritero.vista.CirculoIncompl
 	    				break;
 	    			}
 				anguloFinal = 270 + anguloBoca;
-				anguloBoca += 30;
+				anguloBoca += 40;
 				if(anguloBoca > 90)anguloBoca=0;
 				
 	    		grafico.fillArc(getPosicionable().getX(), getPosicionable().getY(), 15, 15, anguloInicial, anguloFinal);
