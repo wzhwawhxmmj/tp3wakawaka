@@ -13,7 +13,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	private Direccion mejorDireccion;
 
 	
-	private void Inicializar(){
+	private void reinicializar(){
 		pasosEfectuados  = new ArrayList<Posicion>();
 		pasosMejorCamino = new ArrayList<Posicion>();
 		direccionInicialActual = Direccion.NINGUNA;
@@ -21,7 +21,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 	
 	public Calculador(Escenario elEscenarioQueMeDan){
-		Inicializar();
+		reinicializar();
 		escenario = elEscenarioQueMeDan;
 	}
 	
@@ -46,11 +46,14 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 
 	private boolean optimizacionesDeRecorridoSeCumplen(ArrayList<Posicion> pasosEfectuados, ArrayList<Posicion> pasosMejorCamino, Posicion pasoActual){
-		int numeroDePasosMaximo = escenario.getEsquinaInferiorDerecha().getx() + escenario.getEsquinaInferiorDerecha().gety(); 
-		return (    ( (pasosEfectuados.size() < pasosMejorCamino.size())||( pasosMejorCamino.isEmpty()) )
-				   &&( !pasosEfectuados.contains(pasoActual)                  )
-				   &&( (pasosEfectuados.size() < numeroDePasosMaximo) ));
-	}	
+		int numeroDePasosMaximo = escenario.getMaximoTrayectoPosible();
+		if(numeroDePasosMaximo == 0)
+			numeroDePasosMaximo	= escenario.getEsquinaInferiorDerecha().getx() + escenario.getEsquinaInferiorDerecha().gety(); 
+		
+		return( ( (pasosEfectuados.size() < pasosMejorCamino.size())||( pasosMejorCamino.isEmpty()) )
+			  &&( !pasosEfectuados.contains(pasoActual)                                             )
+			  &&( (pasosEfectuados.size() < numeroDePasosMaximo)                                    ));
+	}
 	
 	
 	public Posicion nuevaPosicionPisable(Posicion posicion, Direccion[] prioridadDeDirecciones){
@@ -95,14 +98,21 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 
 	
 	
-	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
+	public Direccion direccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
 		Direccion direccionARetornar = this.CalcularDireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDirecciones);
-	    this.Inicializar();
+	    this.reinicializar();
 		return direccionARetornar;
 	}
+
+	public int cantidadDePasosDelCaminoEntre(Posicion salida, Posicion llegada){
+		this.CalcularDireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDireccionesPorDefecto);
+		int pasosARetornar = pasosMejorCamino.size();
+		this.reinicializar();
+		return pasosARetornar;
+	}
 	
-	public Direccion DireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
-		return DireccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
+	public Direccion direccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
+		return direccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
 	}
 
 	

@@ -17,13 +17,13 @@ public class ManejoPorTeclado implements KeyListener {
 	public void keyPressed(KeyEvent event) {
 		
 		if( event.getKeyCode() == KeyEvent.VK_UP) 
-			this.pacman.cambiarDireccion(Direccion.ARRIBA);
+			this.pacman.setDireccion(Direccion.ARRIBA);
 		if( event.getKeyCode() == KeyEvent.VK_DOWN) 
-			this.pacman.cambiarDireccion(Direccion.ABAJO);
+			this.pacman.setDireccion(Direccion.ABAJO);
 		if( event.getKeyCode() == KeyEvent.VK_LEFT) 
-			this.pacman.cambiarDireccion(Direccion.IZQUIERDA);
+			this.pacman.setDireccion(Direccion.IZQUIERDA);
 		if( event.getKeyCode() == KeyEvent.VK_RIGHT) 
-			this.pacman.cambiarDireccion(Direccion.DERECHA);
+			this.pacman.setDireccion(Direccion.DERECHA);
 		
 	}
 

@@ -31,13 +31,31 @@ public class VistaFantasma extends CirculoIncompleto {
 	}
 
 	private void dibujarOjos(SuperficieDeDibujo superfice){
+		int  desfasePupilaX = 0, desfasePupilaY = 0;
+		
 		Graphics grafico = (Graphics)superfice.getBuffer();
 		grafico.setColor(Color.WHITE);
 		grafico.fillOval(getPosicionable().getX(),getPosicionable().getY()+1, 5, 6);
 		grafico.fillOval(getPosicionable().getX()+6,getPosicionable().getY()+1, 5, 6);
 		grafico.setColor(Color.BLACK);
-		grafico.fillOval(getPosicionable().getX()+1,getPosicionable().getY()+2, 3, 3);
-		grafico.fillOval(getPosicionable().getX()+7,getPosicionable().getY()+2, 3, 3);
+		
+		switch(fantasma.getDireccionDeMovimiento()){
+		case ARRIBA:
+			desfasePupilaY = -1;
+			break;
+		case ABAJO:
+			desfasePupilaY = 2;
+			break;
+		case DERECHA:
+			desfasePupilaX = 1;
+			break;
+		case IZQUIERDA:
+			desfasePupilaX = -1;
+			break;
+		}
+		
+		grafico.fillOval(getPosicionable().getX()+1+desfasePupilaX,getPosicionable().getY()+2+desfasePupilaY, 3, 3);
+		grafico.fillOval(getPosicionable().getX()+7+desfasePupilaX,getPosicionable().getY()+2+desfasePupilaY, 3, 3);
 		
 	}
 	

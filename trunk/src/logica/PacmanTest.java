@@ -31,7 +31,7 @@ public class PacmanTest extends TestCase{
     public void testSeMovioDerecha(){
         Posicion pos = new Posicion(1,1);
         Pacman waka = new Pacman(escenario, pos);
-        waka.cambiarDireccion(Direccion.DERECHA);
+        waka.setDireccion(Direccion.DERECHA);
         waka.vivir();
         if(waka.getPosicion().equals(new Posicion(2,1))){
                 assert (true);
@@ -45,16 +45,16 @@ public class PacmanTest extends TestCase{
 		Pacman waka = new Pacman(escenario, pos);
 		for(int i=0;i<555;i++)
 		{
-			waka.cambiarDireccion(Direccion.DERECHA);
+			waka.setDireccion(Direccion.DERECHA);
 			waka.vivir();
 			waka.vivir();
-			waka.cambiarDireccion(Direccion.ABAJO);
+			waka.setDireccion(Direccion.ABAJO);
 			waka.vivir();
 			waka.vivir();
-			waka.cambiarDireccion(Direccion.IZQUIERDA);
+			waka.setDireccion(Direccion.IZQUIERDA);
 			waka.vivir();
 			waka.vivir();
-			waka.cambiarDireccion(Direccion.ARRIBA);
+			waka.setDireccion(Direccion.ARRIBA);
 			waka.vivir();
 			waka.vivir();
 		}

@@ -28,6 +28,6 @@ public class FantasmaRojo extends Fantasma {
 		Calculador calc = this.getEscenario().calculador();
 		if (this.pasarLimiteDePuntitosRestantes()) this.activarModoRapido();
 		
-		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPacman().getPosicion()));	
+		this.moverHacia(calc.direccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPacman().getPosicion()));	
 	}
 }

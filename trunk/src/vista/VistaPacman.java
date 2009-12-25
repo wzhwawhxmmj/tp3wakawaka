@@ -34,7 +34,7 @@ public class VistaPacman extends ar.uba.fi.algo3.titiritero.vista.CirculoIncompl
 	    	public void dibujar(SuperficieDeDibujo superfice) {
 	    		Graphics grafico = (Graphics)superfice.getBuffer();
 	    		grafico.setColor(getColor());
-	    		switch(pacman.Direccion()){
+	    		switch(pacman.getDireccion()){
 	    			case ARRIBA:
 	    				desfaseOjoX = 1;
 	    				desfaseOjoY = 5;

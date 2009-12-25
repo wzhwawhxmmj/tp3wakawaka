@@ -31,11 +31,11 @@ public class Pacman extends Entidad implements Posicionable,ObjetoVivo {
 	}
 	
 	
-	public Direccion Direccion(){
+	public Direccion getDireccion(){
 		return direccion;
 	}
 	
-	public void cambiarDireccion(Direccion direccion){		
+	public void setDireccion(Direccion direccion){		
 		this.proximaDireccion = direccion;
 	}
 	
