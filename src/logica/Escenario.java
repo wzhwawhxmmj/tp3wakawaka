@@ -15,6 +15,7 @@ public class Escenario {
 	private HashMap <Posicion, Ueb>  tablero;
 	private Calculador calculador;
 	private Posicion esquinaInferiorDerecha;
+	private int maximoTrayectoPosible;
 	
 	public Escenario() {
 		this.tablero = new HashMap <Posicion, Ueb>();
@@ -22,6 +23,25 @@ public class Escenario {
 		this.puntosRestantes = 0;
 		this.puntosTotales = 0;
 		calculador = new Calculador(this);
+		maximoTrayectoPosible = calcularMaximoTrayectoPosible();
+	}
+	
+	private int calcularMaximoTrayectoPosible(){
+		int caminoMasLargo = 0;
+		int caminoActual = 0;
+		
+		for(int i=0;i<posicionesDeSeparacion.size();i++)
+			for(int j=0;j<posicionesDeSeparacion.size();j++){
+		    	caminoActual = this.calculador().cantidadDePasosDelCaminoEntre(posicionesDeSeparacion.get(i),posicionesDeSeparacion.get(j));
+		    	if(caminoActual > caminoMasLargo)
+		    		caminoMasLargo = caminoActual;
+			    }
+		
+		return caminoMasLargo; 
+	}
+	
+	public int getMaximoTrayectoPosible(){
+		return maximoTrayectoPosible;
 	}
 	
 	public void agregarPuntoDeSeparacion(Posicion posicion){

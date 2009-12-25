@@ -74,27 +74,27 @@ public class FantasmaNaranja extends Fantasma {
 		Posicion posicionActual = this.getPosicion();
 		if ((this.persiguiendoPacMan)&&(this.distanciaAlPivote>20)){
 			if((posicionActual.distanciaHasta(posicionPivote)< posicionActual.distanciaHasta(posicionPacman))&& !(posicionActual.equals(posicionPivote))){
-				this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPivote));
+				this.moverHacia(calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPivote));
 				this.persiguiendoPacMan = false;
 			}
 			else{
-				this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
+				this.moverHacia(calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
 				this.persiguiendoPacMan =true;
 			}
 			
 		}
 		else {
 			if (posicionActual.distanciaHasta(posicionPivote)== 0){
-				this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
+				this.moverHacia(calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
 				this.distanciaAlPivote = 0;
 				this.persiguiendoPacMan = true;
 			}
 			else{
 				this.distanciaAlPivote++;
 				if (this.persiguiendoPacMan)
-					this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
+					this.moverHacia(calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPacman));
 				else
-					this.moverHacia(calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPivote));
+					this.moverHacia(calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), posicionPivote));
 				
 			}
 		}

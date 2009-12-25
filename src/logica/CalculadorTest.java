@@ -24,7 +24,7 @@ public class CalculadorTest extends TestCase {
 	}
 	
 	private Direccion DireccionMenorCamino(Posicion salida, Posicion llegada){
-		return new Calculador(escenario).DireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDireccionesPorDefecto);
+		return new Calculador(escenario).direccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDireccionesPorDefecto);
 		}
 
 	private Posicion hacerPosicionPisable(Posicion posicion){

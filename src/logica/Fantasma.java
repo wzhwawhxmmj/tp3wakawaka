@@ -61,7 +61,7 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 			throw new PosicionIlegalException();
 		
 		if (!this.getPosicion().equals(this.posModoSeparacion)) {
-			this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), posModoSeparacion));
+			this.moverHacia(calc.direccionHaciaMenorCaminoEntre(this.getPosicion(), posModoSeparacion));
 			this.llegoAPos = true;
 			return;
 		}
@@ -311,7 +311,7 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 	protected void retonarACasa() {
 		Calculador calc = this.getEscenario().calculador(); 
 		
-		this.moverHacia(calc.DireccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPosicionCasa()));		
+		this.moverHacia(calc.direccionHaciaMenorCaminoEntre(this.getPosicion(), this.getEscenario().getPosicionCasa()));		
 	}
 	
 	protected Posicion getPosicionModoSeparacion(){

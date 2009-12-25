@@ -42,20 +42,13 @@ public class FantasmaRosa extends Fantasma {
 	}
 	
 	
-	private Direccion[] prioridadDeDirecciones(){
-		return prioridadDeDireccionesPorDefecto[(new Random()).nextInt(2)];
-	}
-	
-	
 	public void estrategizar() {
-	
         Direccion direccionFinal;
         Posicion destino;
         Calculador calculador = this.getEscenario().calculador(); 
         
-		destino = calculador.nuevaPosicionPisable(calcularPosicion(), prioridadDeDirecciones());
-		direccionFinal  = calculador.DireccionHaciaMenorCaminoEntre(this.getPosicion(), destino);
-		this.moverHacia(direccionFinal);
+        direccionFinal  = calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), calcularPosicion());
+        this.moverHacia(direccionFinal);
 		
 	}
 
