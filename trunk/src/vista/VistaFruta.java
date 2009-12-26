@@ -3,8 +3,8 @@ package vista;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import logica.Fruta;
 import logica.entidades.NoJugador;
+import logica.escenario.Fruta;
 
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 

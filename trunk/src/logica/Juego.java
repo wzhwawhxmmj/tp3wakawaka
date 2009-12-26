@@ -12,6 +12,7 @@ import logica.entidades.FantasmaRosa;
 import logica.entidades.FantasmaVerde;
 import logica.entidades.Pacman;
 import logica.escenario.Escenario;
+import logica.escenario.Fruta;
 import logica.escenario.ListaDeEscenarios;
 
 import controlador.ManejoPorTeclado;
