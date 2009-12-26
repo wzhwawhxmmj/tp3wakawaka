@@ -1,4 +1,8 @@
-package logica;
+package logica.entidades;
+
+import logica.Posicion;
+import logica.escenario.Calculador;
+import logica.escenario.Escenario;
 
 public class FantasmaRojo extends Fantasma {
 

@@ -1,10 +1,14 @@
-package logica;
+package logica.escenario;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import logica.Juego;
+import logica.Posicion;
+import logica.entidades.NoJugador;
 
 import vista.*;
 

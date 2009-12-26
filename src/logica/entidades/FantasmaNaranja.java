@@ -1,7 +1,11 @@
-package logica;
+package logica.entidades;
 
 import java.util.Iterator;
 import java.util.Random;
+
+import logica.Posicion;
+import logica.escenario.Calculador;
+import logica.escenario.Escenario;
 
 /*Yo, Javier Sampietro, me encago del Fantasma Naranja*/
 

@@ -5,8 +5,8 @@ import java.awt.Graphics;
 
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
-import logica.NoJugador;
-import logica.Puntito;
+import logica.entidades.NoJugador;
+import logica.escenario.Puntito;
 
 public class VistaPuntito extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 

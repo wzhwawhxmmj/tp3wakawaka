@@ -1,6 +1,8 @@
-package logica;
+package logica.escenario;
 
 import junit.framework.TestCase;
+import logica.Direccion;
+import logica.Posicion;
 
 
 public class CalculadorTest extends TestCase {

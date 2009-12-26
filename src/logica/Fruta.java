@@ -1,5 +1,8 @@
 package logica;
 
+import logica.entidades.EstadoInvalidoException;
+import logica.entidades.NoJugador;
+import logica.escenario.Escenario;
 import ar.uba.fi.algo3.titiritero.*; 
 
 public class Fruta extends NoJugador implements Posicionable, ObjetoVivo {

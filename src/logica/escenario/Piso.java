@@ -1,4 +1,5 @@
-package logica;
+package logica.escenario;
+
 
 
 public class Piso extends Ueb {

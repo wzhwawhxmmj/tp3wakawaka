@@ -1,6 +1,10 @@
-package logica;
+package logica.entidades;
 
 import java.util.Iterator;
+
+import logica.Direccion;
+import logica.Posicion;
+import logica.escenario.Escenario;
 
 import ar.uba.fi.algo3.titiritero.ObjetoVivo;
 import ar.uba.fi.algo3.titiritero.Posicionable;

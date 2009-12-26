@@ -1,4 +1,4 @@
-package logica;
+package logica.entidades;
 
 public class EstadoInvalidoException extends RuntimeException {
 

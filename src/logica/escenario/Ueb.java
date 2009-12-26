@@ -1,8 +1,11 @@
-package logica;
+package logica.escenario;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import logica.Posicion;
+import logica.entidades.NoJugador;
 
 public abstract class Ueb implements ar.uba.fi.algo3.titiritero.Posicionable {
 

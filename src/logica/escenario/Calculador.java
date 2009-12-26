@@ -1,6 +1,9 @@
-package logica;
+package logica.escenario;
 
 import java.util.ArrayList;
+
+import logica.Direccion;
+import logica.Posicion;
 
 public class Calculador {//su nombre final sera Calculador, y tendra ciertas similitudes con un iterador.
 	

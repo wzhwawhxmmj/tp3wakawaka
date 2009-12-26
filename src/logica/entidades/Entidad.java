@@ -1,4 +1,7 @@
-package logica;
+package logica.entidades;
+
+import logica.Posicion;
+import logica.escenario.Escenario;
 
 public abstract class Entidad implements  ar.uba.fi.algo3.titiritero.Posicionable {
 

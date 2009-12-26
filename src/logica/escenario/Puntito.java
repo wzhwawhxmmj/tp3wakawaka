@@ -1,4 +1,7 @@
-package logica;
+package logica.escenario;
+
+import logica.Posicion;
+import logica.entidades.NoJugador;
 
 public class Puntito extends NoJugador implements ar.uba.fi.algo3.titiritero.Posicionable {
 	

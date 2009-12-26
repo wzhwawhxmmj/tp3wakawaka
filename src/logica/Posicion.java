@@ -1,5 +1,6 @@
 package logica;
 
+
 public class Posicion extends Punto {
 	/*
 	 * Hereda de punto. Controla la direccion que toman los personajes y la

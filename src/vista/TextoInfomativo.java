@@ -1,4 +1,4 @@
-package logica;
+package vista;
 
 import logica.Posicion;
 import ar.uba.fi.algo3.titiritero.Posicionable;

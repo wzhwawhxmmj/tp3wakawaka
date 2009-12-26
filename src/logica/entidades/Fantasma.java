@@ -1,7 +1,13 @@
-package logica;
+package logica.entidades;
 
 import java.util.Random;
 import java.util.Iterator;
+
+import logica.Direccion;
+import logica.Posicion;
+import logica.escenario.Calculador;
+import logica.escenario.Escenario;
+import logica.escenario.PosicionIlegalException;
 
 import ar.uba.fi.algo3.titiritero.ObjetoVivo;
 

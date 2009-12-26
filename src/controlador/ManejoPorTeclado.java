@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import logica.Direccion;
-import logica.Pacman;
+import logica.entidades.Pacman;
 
 public class ManejoPorTeclado implements KeyListener {
 	
