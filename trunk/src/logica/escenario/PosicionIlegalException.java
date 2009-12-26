@@ -1,4 +1,4 @@
-package logica;
+package logica.escenario;
 
 public class PosicionIlegalException extends RuntimeException {
 

@@ -1,7 +1,9 @@
-package logica;
+package logica.escenario;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import logica.entidades.Fantasma;
 
 public class Casa extends Ueb {
 

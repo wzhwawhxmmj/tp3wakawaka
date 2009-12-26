@@ -1,8 +1,12 @@
-package logica;
+package logica.escenario;
 
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import logica.Posicion;
+import logica.entidades.EstadoInvalidoException;
+import logica.entidades.Pacman;
 
 public class Escenario {
 

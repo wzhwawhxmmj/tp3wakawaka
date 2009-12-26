@@ -1,4 +1,8 @@
-package logica;
+package logica.escenario;
+
+import logica.Juego;
+import logica.Posicion;
+import logica.entidades.NoJugador;
 
 public class Pildora extends NoJugador implements ar.uba.fi.algo3.titiritero.Posicionable{
 

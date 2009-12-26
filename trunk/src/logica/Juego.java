@@ -5,6 +5,15 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.Iterator;
 
+import logica.entidades.Fantasma;
+import logica.entidades.FantasmaNaranja;
+import logica.entidades.FantasmaRojo;
+import logica.entidades.FantasmaRosa;
+import logica.entidades.FantasmaVerde;
+import logica.entidades.Pacman;
+import logica.escenario.Escenario;
+import logica.escenario.ListaDeEscenarios;
+
 import controlador.ManejoPorTeclado;
 
 //import controlador.ManejoPorTeclado;

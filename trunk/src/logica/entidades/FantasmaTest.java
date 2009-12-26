@@ -1,6 +1,12 @@
-package logica;
+package logica.entidades;
 
 import junit.framework.TestCase;
+import logica.Posicion;
+import logica.escenario.Casa;
+import logica.escenario.Escenario;
+import logica.escenario.Pared;
+import logica.escenario.Piso;
+import logica.escenario.Puntito;
 
 public class FantasmaTest extends TestCase {
 	

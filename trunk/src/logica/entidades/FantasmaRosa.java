@@ -1,12 +1,14 @@
-package logica;
+package logica.entidades;
 
 import java.util.Iterator;
-import java.util.Random;
+
+import logica.Direccion;
+import logica.Posicion;
+import logica.escenario.Calculador;
+import logica.escenario.Escenario;
 
 public class FantasmaRosa extends Fantasma {
-    final Direccion prioridadDeDireccionesPorDefecto[][] = {{Direccion.ARRIBA, Direccion.DERECHA, Direccion.ABAJO,  Direccion.IZQUIERDA}
-    														,{Direccion.ABAJO, Direccion.IZQUIERDA, Direccion.ARRIBA,  Direccion.DERECHA}}; 
-    final int multiplicadorPacman = 400;
+    final int masaDelPacman = 400;
 	
 
 	public FantasmaRosa(Escenario escenario, Posicion posModoSeparacion, float duracionModoAzul, float velocidad, int puntosAlSerComido) {
@@ -37,9 +39,9 @@ public class FantasmaRosa extends Fantasma {
 		            }
 			    }
                
-        cmX += multiplicadorPacman * escenario().getPacman().getPosicion().getx();
-        cmY += multiplicadorPacman * escenario().getPacman().getPosicion().gety();
-        masa += multiplicadorPacman;
+        cmX += masaDelPacman * escenario().getPacman().getPosicion().getx();
+        cmY += masaDelPacman * escenario().getPacman().getPosicion().gety();
+        masa += masaDelPacman;
         return new Posicion(cmX/masa, cmY/masa);
 	}
 	
@@ -50,7 +52,7 @@ public class FantasmaRosa extends Fantasma {
 		Calculador calculador = this.getEscenario().calculador();
 		
 		if(this.getPosicion().distanciaHasta(posPacman)<3)
-			direccionFinal = calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), escenario().getPacman().getPosicion());
+			direccionFinal = calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), posPacman);
 		else    
 			direccionFinal = calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), calcularCentroDeMasa());
         

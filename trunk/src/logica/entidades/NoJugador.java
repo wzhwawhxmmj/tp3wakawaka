@@ -1,4 +1,7 @@
-package logica;
+package logica.entidades;
+
+import logica.Posicion;
+import logica.escenario.Escenario;
 
 public abstract class NoJugador extends Entidad {
 

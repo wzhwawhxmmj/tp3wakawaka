@@ -3,7 +3,7 @@ package vista;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import logica.Pacman;
+import logica.entidades.Pacman;
 
 import ar.uba.fi.algo3.titiritero.Posicionable;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
