@@ -1,0 +1,26 @@
+#summary Todo sobre el algoritmo para encontrar el camino mas corto
+
+= Introducción =
+
+= Historia =
+
+El calculador surgió como necesidad para poder decirles a los fantasmas a donde dirigirse, instante a instante.
+En un principio surgió como una clase estática, Utilitario, pero solo fue para no molestar a  l integrante que estaba haciendo la clase Escenario, después de complicarme mucho, me di cuenta que estaba perdiendo tiempo y le saque ese atributo. 
+Quedo entonces como una clase que iba a ser parte del escenario en el futuro, o bien que iba a ser instanciada por este, como si fuera un iterador.
+
+
+El algoritmo en si, de un principio fue pensado como un recorrido completo del tablero, un recorrido usando recursividad, similar a los recorridos de arboles binarios que se ven en algoritmos 2.
+Se iban almacenando los pasos y cuando se encontraba al Pacman se almacenaba o sustituía por el anterior.
+
+
+La próxima decisión, fue que el escenario.... continuará
+
+
+ 
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
