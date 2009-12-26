@@ -1,9 +1,5 @@
 #summary Todo sobre el algoritmo para encontrar el camino mas corto
 
-= Introducción =
-
-= Historia =
-
 El calculador surgió como necesidad para poder decirles a los fantasmas a donde dirigirse, instante a instante.
 En un principio surgió como una clase estática, Utilitario, pero solo fue para no molestar a  l integrante que estaba haciendo la clase Escenario, después de complicarme mucho, me di cuenta que estaba perdiendo tiempo y le saque ese atributo. 
 Quedo entonces como una clase que iba a ser parte del escenario en el futuro, o bien que iba a ser instanciada por este, como si fuera un iterador.
@@ -30,14 +26,20 @@ Si estaria pasandose de esa cantidad, estaria buscando un camino en vano, ya que
 Bueno, básicamente eso era el algoritmo. 
 Hubo un problema al principio con las instancias de las posiciones y la recursividad, nunca llegamos a entender bien porque, pero se soluciono mandando una instancia nueva de la posición en cada llamado nuevo.
 
-Luego, no hubo mas problemas relevantes, hasta que.... propaganda
+Luego se intento solucionar esto, primero usando un método para reinicializar. Pero luego me di cuenta que este método no se estaba ejecutando , debido a la recursividad. Entonces lo que hice fue hacer que el método que se llamaba desde el exterior, llamaba a otro método interno.
+Pero por alguna razón seguía sin funcionar, finalmente implemente algo medio extraño, que lo que hacia era hacer una instancia nueva y ejecutar a partir de ahí.
+
+Luego, no hubo mas problemas relevantes, hasta el momento de testear gráficamente.
+
+En ese momento, nos dimos cuenta de que el algoritmo estaba consumiendo muchos recursos, a tal punto que hacia muy lento el juego.
+Lo primero que hice para intentar solucionarlo, fue eliminar la cantidad innecesaria de instancias que tenia, cada fantasma llamaba una instancia nueva para cada movimiento, aparte el método de calcular, llamaba a una instancia nueva también.
+No me costo mucha modificación hacer que todos usen la misma instancia. Y pude implementar finalmente que las variables se re-inicializen sin problemas.
+
+Pero esto no soluciono el problema.
+Trate de estimar que era lo que estaba pasando, y evidentemente el problema era en que bajo ciertas busquedas estaba recorriendo excesivamente el tablero sin encontrar al pacman. Luego de pensar en muchas optimizaciones, se me ocurrio una bastante simple, basandome en el problema. 
+Lo que hice fue limitar la cantidad de "pisadas" de un recorrido a una cantidad razonable, por ejemplo en el tablero del nivel 1 eran 60. Total nunca va a haber un camino entre el pacman y el fantasma que sea mayor a eso.
+
+Luego lo implemente un poco mas complejo, ya que los "puntos de escape" de los fantasmas era la zona mas distante, entonces use la distancia entre esos puntos como cantidad de pasos máxima.
 
 
- 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Ahí entonces si, el calculador fué lo que es ahora.
