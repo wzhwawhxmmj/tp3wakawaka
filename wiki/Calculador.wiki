@@ -9,11 +9,28 @@ En un principio surgió como una clase estática, Utilitario, pero solo fue para
 Quedo entonces como una clase que iba a ser parte del escenario en el futuro, o bien que iba a ser instanciada por este, como si fuera un iterador.
 
 
-El algoritmo en si, de un principio fue pensado como un recorrido completo del tablero, un recorrido usando recursividad, similar a los recorridos de arboles binarios que se ven en algoritmos 2.
-Se iban almacenando los pasos y cuando se encontraba al Pacman se almacenaba o sustituía por el anterior.
+El algoritmo en si, de un principio fue pensado como un recorrido completo del tablero,  usando recursividad, similar a los recorridos de arboles binarios que se ven en algoritmos 2.
+Se van almacenando temporalmente los pasos, cuando se encuentra al Pacman se almacena el recorrido en otra variable, si ya hay uno almacenado y el ultimo es mejor, se sustituye por el anterior.
 
 
-La próxima decisión, fue que el escenario.... continuará
+La próxima decisión, fue que sea instanciado por el escenario, esto debido a que habia muchas variables que debían inicializarse al comienzo del algoritmo, entonces aproveche que se inicialize al usar el constructor.
+Lo malo de esto era que la instancia se podía usar solo una vez, a la segunda vez ya daria datos inválidos, porque no borraba todo lo que había almacenado del llamado anterior.
+
+Esto por el momento se paso por alto, y se siguió con otras cosas.
+
+
+El algoritmo, necesitaba de una optimizacion, que mas que una optimizacion era una necesidad, sin eso el algoritmo funcionaria infinitamente. Esta se trataba de que, cada vez que daba un paso nuevo, se aseguraba que el paso no habia sido hecho en el recorrido actual.
+Si esto no se hace, el recorrido podria ser infinito, dando vueltas y vueltas, porque el tablero tiene muchas comunicaciones,  no es como un arbol que tiene un fin.
+
+
+Otra optimizacion, menos importante pero que economizaba bastante, se me ocurrio despues. Esta se trata de que antes de hacer un paso nuevo, se asegure que no esta haciendo mas pasos que el camino mas corto almacenado. 
+Si estaria pasandose de esa cantidad, estaria buscando un camino en vano, ya que la idea siempre es seguir buscando para encontrar un camino mas corto al anterior.
+
+
+Bueno, básicamente eso era el algoritmo. 
+Hubo un problema al principio con las instancias de las posiciones y la recursividad, nunca llegamos a entender bien porque, pero se soluciono mandando una instancia nueva de la posición en cada llamado nuevo.
+
+Luego, no hubo mas problemas relevantes, hasta que.... propaganda
 
 
  
