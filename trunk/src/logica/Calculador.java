@@ -70,10 +70,8 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 
 	
 
-	
-	
 	@SuppressWarnings("unchecked")
-	private Direccion CalcularDireccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
+	private void calcularMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
 		//llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
 		
 		if(salida.equals(llegada)){
@@ -87,25 +85,24 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 					pasosEfectuados.add(salida);
 					for(int i=0;i<(prioridadDeDirecciones.length);i++){
 						if(pasosEfectuados.size()==1)direccionInicialActual = prioridadDeDirecciones[i];
-						CalcularDireccionHaciaMenorCaminoEntre(nuevaPosicionHacia(prioridadDeDirecciones[i],salida),llegada,prioridadDeDirecciones); 
+						calcularMenorCaminoEntre(nuevaPosicionHacia(prioridadDeDirecciones[i],salida),llegada,prioridadDeDirecciones); 
 						}
 					removerUltimoPaso(pasosEfectuados);
 					}
 				}
-		
-		return mejorDireccion;
-	    }
+		}
 
 	
 	
 	public Direccion direccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
-		Direccion direccionARetornar = this.CalcularDireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDirecciones);
+		this.calcularMenorCaminoEntre(salida, llegada, prioridadDeDirecciones);
+		Direccion direccionARetornar = mejorDireccion;
 	    this.reinicializar();
 		return direccionARetornar;
 	}
 
 	public int cantidadDePasosDelCaminoEntre(Posicion salida, Posicion llegada){
-		this.CalcularDireccionHaciaMenorCaminoEntre(salida, llegada, prioridadDeDireccionesPorDefecto);
+		this.calcularMenorCaminoEntre(salida, llegada, prioridadDeDireccionesPorDefecto);
 		int pasosARetornar = pasosMejorCamino.size();
 		this.reinicializar();
 		return pasosARetornar;
