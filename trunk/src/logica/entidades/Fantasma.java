@@ -109,6 +109,9 @@ public abstract class Fantasma extends NoJugador implements ObjetoVivo {
 	public void vivir(){
 		int velocidadTruncada = (int) Math.ceil(this.velocidad);
 
+		if (this.azul || !this.estaVivo() || this.encerrado)
+			velocidadTruncada = 1;
+		
 		for (int i = 1; i <= velocidadTruncada ; i++) {
 			
 			if ((!this.encerrado) && !this.azul && !this.modoSeparacion && this.estaVivo()){
