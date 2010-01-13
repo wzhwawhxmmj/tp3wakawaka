@@ -33,6 +33,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 	
 	private boolean esPisable(Posicion posicion){
+		if(posicion == null) return false;
 		try{
 		Ueb casillero = escenario.getUeb(posicion);
 		return casillero.isPisablePorIA();
@@ -41,6 +42,8 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 		return false;
 		}
 	}
+	
+
 	
 	private Posicion nuevaPosicionHacia(Direccion direccion, Posicion posicion){
 		Posicion posicionNueva = posicion.clonar(); 
@@ -59,20 +62,61 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 	
 	
-	public Posicion nuevaPosicionPisable(Posicion posicion, Direccion[] prioridadDeDirecciones){
-		if(esPisable(posicion))return posicion;
-		else {
-			Posicion posicionNueva = null;
-			for(int i=0;i<(prioridadDeDirecciones.length);i++){
-			       posicionNueva = nuevaPosicionHacia(prioridadDeDirecciones[i], posicion);
-			       if(esPisable(posicionNueva))break;
-				   }
-			return nuevaPosicionPisable(posicionNueva, prioridadDeDirecciones);
-			}
+	private Direccion[] calcularPrioridadDirecciones(Posicion salida, Posicion llegada){
+		Direccion[] direcciones = new Direccion[4];
+		
+		int x = llegada.getx() - salida.getx();
+		int y = llegada.gety() - salida.gety();
+		
+		int izq = -1, der = -1, arr = -1, ab = -1;
+		
+		if((x<y)||(y==0)){
+			    if(x>0){der=0;
+			    		izq=2;}
+			    else{  	izq=0;
+			    		der=2;}
+        		if(y>0){ab=1;
+        				arr=3;}
+        		else{	arr=1;
+        				ab=3;}
+        		}
+		else if((y<=x)||(x==0)){
+				if(y>0){ab=0;
+						arr=2;}
+				else{	arr=0;
+						ab=2;}
+        		if(x>0){der=1;
+        				izq=3;}
+        		else{	izq=1;
+        				der=3;}
 		}
 
+		direcciones[izq] = Direccion.IZQUIERDA;
+		direcciones[der] = Direccion.DERECHA;
+		direcciones[arr] = Direccion.ARRIBA;
+		direcciones[ab]  = Direccion.ABAJO;
+		
+        return direcciones;
+	}
 	
 
+		
+
+	public Posicion nuevaPosicionPisable(Posicion posicion){
+		    Posicion nuevaPos,mejorPos = null;
+			
+		    for(int j=0;j<=escenario.getEsquinaInferiorDerecha().gety();j++){
+		    	for(int i=0;i<=escenario.getEsquinaInferiorDerecha().getx(); i++){
+		    		nuevaPos = new Posicion(i,j);
+					if(esPisable(nuevaPos))
+						if((mejorPos == null)||(nuevaPos.distanciaHasta(posicion) < mejorPos.distanciaHasta(posicion)))
+							mejorPos = nuevaPos;
+				}
+			}
+			return mejorPos;
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	private void calcularMenorCaminoEntre(Posicion salida, Posicion llegada, Direccion[] prioridadDeDirecciones){
 		//llegada = nuevaPosicionPisable(llegada,prioridadDeDirecciones);
@@ -105,14 +149,14 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 	}
 
 	public int cantidadDePasosDelCaminoEntre(Posicion salida, Posicion llegada){
-		this.calcularMenorCaminoEntre(salida, llegada, prioridadDeDireccionesPorDefecto);
+		this.calcularMenorCaminoEntre(salida, llegada, this.calcularPrioridadDirecciones(salida,llegada));
 		int pasosARetornar = pasosMejorCamino.size();
 		this.reinicializar();
 		return pasosARetornar;
 	}
 	
 	public Direccion direccionHaciaMenorCaminoEntre(Posicion salida, Posicion llegada){
-		return direccionHaciaMenorCaminoEntre(salida,llegada,prioridadDeDireccionesPorDefecto);
+		return direccionHaciaMenorCaminoEntre(salida,llegada,this.calcularPrioridadDirecciones(salida,llegada));
 	}
 
 	
