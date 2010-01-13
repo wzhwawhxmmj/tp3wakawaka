@@ -53,8 +53,10 @@ public class FantasmaRosa extends Fantasma {
 		
 		if(this.getPosicion().distanciaHasta(posPacman)<3)
 			direccionFinal = calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), posPacman);
-		else    
-			direccionFinal = calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), calcularCentroDeMasa());
+		else {  
+			Posicion posFinal = calculador.nuevaPosicionPisable(calcularCentroDeMasa());
+			direccionFinal = calculador.direccionHaciaMenorCaminoEntre(this.getPosicion(), posFinal);
+			}
         
 		this.moverHacia(direccionFinal);
 		

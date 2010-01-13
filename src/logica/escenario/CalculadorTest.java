@@ -30,7 +30,7 @@ public class CalculadorTest extends TestCase {
 		}
 
 	private Posicion hacerPosicionPisable(Posicion posicion){
-		return (new Calculador(escenario)).nuevaPosicionPisable(posicion, prioridadDeDireccionesPorDefecto);
+		return (new Calculador(escenario)).nuevaPosicionPisable(posicion);
 		
 	}
 	
