@@ -146,6 +146,8 @@ public class ListaDeEscenarios {
 		this.juego.setPosicionHorizontalTextosInformativos(fila+1);
 		escenarioACargar.setPuntosTotales(cantidadDePuntos);
 		
+		escenarioACargar.calcularMaximoTrayectoPosible();
+		
 		return escenarioACargar;	
 	}
 		

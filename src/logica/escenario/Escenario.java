@@ -27,21 +27,19 @@ public class Escenario {
 		this.puntosRestantes = 0;
 		this.puntosTotales = 0;
 		calculador = new Calculador(this);
-		maximoTrayectoPosible = calcularMaximoTrayectoPosible();
 	}
 	
-	private int calcularMaximoTrayectoPosible(){
+	public void calcularMaximoTrayectoPosible(){
 		int caminoMasLargo = 0;
 		int caminoActual = 0;
 		
 		for(int i=0;i<posicionesDeSeparacion.size();i++)
 			for(int j=0;j<posicionesDeSeparacion.size();j++){
-		    	caminoActual = this.calculador().cantidadDePasosDelCaminoEntre(posicionesDeSeparacion.get(i),posicionesDeSeparacion.get(j));
+		    	caminoActual = calculador.cantidadDePasosDelCaminoEntre(posicionesDeSeparacion.get(i),posicionesDeSeparacion.get(j));
 		    	if(caminoActual > caminoMasLargo)
 		    		caminoMasLargo = caminoActual;
 			    }
-		
-		return caminoMasLargo; 
+		this.maximoTrayectoPosible = caminoMasLargo;
 	}
 	
 	public int getMaximoTrayectoPosible(){
