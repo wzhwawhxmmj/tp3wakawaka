@@ -132,7 +132,7 @@ public class Calculador {//su nombre final sera Calculador, y tendra ciertas sim
 					pasosEfectuados.add(salida);
 					for(int i=0;i<(prioridadDeDirecciones.length);i++){
 						if(pasosEfectuados.size()==1)direccionInicialActual = prioridadDeDirecciones[i];
-						calcularMenorCaminoEntre(nuevaPosicionHacia(prioridadDeDirecciones[i],salida),llegada,prioridadDeDirecciones); 
+						calcularMenorCaminoEntre(nuevaPosicionHacia(prioridadDeDirecciones[i],salida),llegada,this.calcularPrioridadDirecciones(salida,llegada)); 
 						}
 					removerUltimoPaso(pasosEfectuados);
 					}
