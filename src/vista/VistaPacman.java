@@ -21,7 +21,7 @@ public class VistaPacman extends Figura {
 			private Pacman pacman;
 			EscalaYPosicion escalaYPos;
 			
-	        public VistaPacman(Posicionable posicionable, EscalaYPosicion escalaYPos) {
+	        public VistaPacman(Posicionable posicionable) {
 	        		anguloBoca = 0;
 	                pacman = (Pacman) posicionable; 
 	                estaCerrandoBoca = true;
