@@ -7,29 +7,37 @@ import logica.entidades.Fantasma;
 
 import ar.uba.fi.algo3.titiritero.Posicionable;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
-import ar.uba.fi.algo3.titiritero.vista.CirculoIncompleto;
+import ar.uba.fi.algo3.titiritero.vista.Figura;
 
 
-public class VistaFantasma extends CirculoIncompleto {
- 
+public class VistaFantasma extends Figura {
+	private static int anguloInicial = 315;
+	private static int anguloFinal = 270;
+	private static int anguloColaInicial = 125;
+	private static int anguloColaFinal = -45;
+	private static int radio = 15;
+	private static int radioPupila = 3;
+	
 	private Fantasma fantasma;
 	private Color color;
+
 	
 	public VistaFantasma(Color unColor, Posicionable posicionable) {
-		super(15,315,270);
 		this.color = unColor;
 		this.fantasma= (Fantasma) posicionable;
 		this.setPosicionable(this.fantasma);
-		setColor(color);
+		this.setColor(color);
 	}
+	
 	
 	private void dibujarFantasma(SuperficieDeDibujo superfice){
 		Graphics grafico = (Graphics)superfice.getBuffer();
 		grafico.setColor(this.getColor());
-		grafico.fillArc(getPosicionable().getX()-2, getPosicionable().getY()-2, 15, 17, 315, 270);
-		grafico.fillArc(getPosicionable().getX()-1, getPosicionable().getY()+6, 15, 15, 125, -45);
+		grafico.fillArc(getPosicionable().getX()-2, getPosicionable().getY()-2, radio, radio+2, anguloInicial, anguloFinal);
+		grafico.fillArc(getPosicionable().getX()-1, getPosicionable().getY()+6, radio, radio, anguloColaInicial, anguloColaFinal);
 	}
 
+	
 	private void dibujarOjos(SuperficieDeDibujo superfice){
 		int  desfasePupilaX = 0, desfasePupilaY = 0;
 		
@@ -53,11 +61,11 @@ public class VistaFantasma extends CirculoIncompleto {
 			desfasePupilaX = -1;
 			break;
 		}
-		
-		grafico.fillOval(getPosicionable().getX()+1+desfasePupilaX,getPosicionable().getY()+2+desfasePupilaY, 3, 3);
-		grafico.fillOval(getPosicionable().getX()+7+desfasePupilaX,getPosicionable().getY()+2+desfasePupilaY, 3, 3);
-		
+	
+		grafico.fillOval(getPosicionable().getX()+1+desfasePupilaX,getPosicionable().getY()+2+desfasePupilaY, radioPupila, radioPupila);
+		grafico.fillOval(getPosicionable().getX()+7+desfasePupilaX,getPosicionable().getY()+2+desfasePupilaY, radioPupila, radioPupila);
 	}
+	
 	
 	public void dibujar(SuperficieDeDibujo superfice) {
 		if(this.fantasma.estaAzul()){
