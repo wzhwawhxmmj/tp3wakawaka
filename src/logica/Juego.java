@@ -26,11 +26,12 @@ import ar.uba.fi.algo3.titiritero.ObjetoVivo;
 import ar.uba.fi.algo3.titiritero.vista.TextoDinamico;
 import ar.uba.fi.algo3.titiritero.vista.Ventana;
 
-
 public class Juego implements ObjetoVivo{
-    private final int resolucionX = 640;
-    private final int resolucionY = 480;
-	
+    private final static int resolucionX = 700;
+    private final static int resolucionY = 600;
+	private final static double escala = 1.85;
+	private final static int margenSinEscalarX = 0;
+	private final static int margenSinEscalarY = 0;
 	
 	private Pacman pacman;
 	private Fantasma[] arrayDeFantasmas;
@@ -68,19 +69,19 @@ public class Juego implements ObjetoVivo{
 		int puntosAlSerComidoActual =  (100 + (10*(this.nivelActual - 1)));
 		Iterator<Posicion> iteradorPuntosDeSeparacion = escenario.iteradorPuntosDeSeparacion();
 		
-		arrayDeFantasmas[0] = new FantasmaRojo(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
+		arrayDeFantasmas[0] =new FantasmaRosa(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual); 
 		arrayDeFantasmas[1] = new FantasmaNaranja(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
 		arrayDeFantasmas[2] = new FantasmaVerde(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
-		arrayDeFantasmas[3] = new FantasmaRosa(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual);
+		arrayDeFantasmas[3] =new FantasmaRojo(escenario, iteradorPuntosDeSeparacion.next(), duracionModoAzulActual,  velocidadActual, puntosAlSerComidoActual); 
 	}
 	
 	
 	private void agregarObjetosVivosAlControlador(){
 		
-		VistaFruta vistaFruta = new VistaFruta (this.fruta);
+		VistaFruta vistaFruta = new VistaFruta (this.fruta,this.getEscalaYPosicion());
 		this.controladorJuego.agregarDibujable(vistaFruta);
 		this.controladorJuego.agregarObjetoVivo(pacman);
-		VistaPacman vistaPacman = new VistaPacman(pacman);
+		VistaPacman vistaPacman = new VistaPacman(pacman,this.getEscalaYPosicion());
 		vistaPacman.setPosicionable(this.pacman);
 		this.controladorJuego.agregarDibujable(vistaPacman);
 		
@@ -90,7 +91,7 @@ public class Juego implements ObjetoVivo{
 		for(int i=0;i<arrayDeFantasmas.length;i++)
 		{ 
 			this.controladorJuego.agregarObjetoVivo(arrayDeFantasmas[i]);
-		    vistasFantasma[i] = new VistaFantasma(coloresFantasma[i],arrayDeFantasmas[i] );
+		    vistasFantasma[i] = new VistaFantasma(coloresFantasma[i],arrayDeFantasmas[i],this.getEscalaYPosicion());
 		    this.controladorJuego.agregarDibujable(vistasFantasma[i]);
 	     	}
 		}
@@ -120,8 +121,8 @@ public class Juego implements ObjetoVivo{
 		
 		Posicion posicionPuntaje = new Posicion (1,this.getPosicionHorizontalTextosInformativos());
 		Posicion posicionVidas = new Posicion (15,this.getPosicionHorizontalTextosInformativos());
-		this.textoPuntaje = new TextoInfomativo("Puntaje: ", this.puntaje,posicionPuntaje);
-		this.textoVidas = new TextoInfomativo("Vidas: ", this.puntaje, posicionVidas);
+		this.textoPuntaje = new TextoInfomativo("Puntaje: ", this.puntaje,posicionPuntaje,getEscalaYPosicion());
+		this.textoVidas = new TextoInfomativo("Vidas: ", this.puntaje, posicionVidas,getEscalaYPosicion());
 		TextoDinamico textoDinamicoPuntaje = new TextoDinamico (this.textoPuntaje);
 		TextoDinamico textoDinamicoVidas = new TextoDinamico (this.textoVidas);
 		textoDinamicoPuntaje.setPosicionable(this.textoPuntaje);
@@ -197,7 +198,9 @@ public class Juego implements ObjetoVivo{
 		return this.controladorJuego;
 	}
 
-
+	public EscalaYPosicion getEscalaYPosicion(){
+		return new EscalaYPosicion(escala, margenSinEscalarX, margenSinEscalarY);
+	}
 
 	public void setPosicionHorizontalTextosInformativos(
 			int posicionHorizontalTextosInformativos) {

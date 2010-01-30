@@ -1,8 +1,6 @@
 package vista;
 
 import java.awt.Color;
-import java.awt.Graphics;
-
 import logica.entidades.NoJugador;
 import logica.escenario.Fruta;
 
@@ -10,25 +8,23 @@ import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
 public class VistaFruta extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 	 
-	private int radio;
+	private static int radio = 8; 
 	private Fruta fruta;
 	
-	public VistaFruta(NoJugador unaFruta) {
-		super(8);
-	    this.radio = 8;
+	public VistaFruta(NoJugador unaFruta, EscalaYPosicion escalayPos) {
+		super(radio,escalayPos,0,0);
+
 		this.fruta= (Fruta) unaFruta;
 	    this.setPosicionable(this.fruta);
 		setColor(Color.RED);
     }
 
-	public void dibujar(SuperficieDeDibujo superfice) {
-		Graphics grafico = (Graphics)superfice.getBuffer();
+	public void dibujar(SuperficieDeDibujo superficie) {
 		if(this.fruta.estaVivo())
 			this.setColor(Color.RED);
 		else
 			this.setColor(Color.BLACK);
-		grafico.setColor(this.getColor());
-		grafico.fillOval(getPosicionable().getX() , getPosicionable().getY(),this.radio,this.radio);
+		super.dibujar(superficie);
 
 	}
 }

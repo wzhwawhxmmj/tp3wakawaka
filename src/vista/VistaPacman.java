@@ -1,37 +1,43 @@
 package vista;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 import logica.entidades.Pacman;
 
 import ar.uba.fi.algo3.titiritero.Posicionable;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
-import ar.uba.fi.algo3.titiritero.vista.Figura;
+import ar.uba.fi.algo3.titiritero.vista.Circulo;
+import ar.uba.fi.algo3.titiritero.vista.CirculoIncompleto;
 
-public class VistaPacman extends Figura {
+public class VistaPacman extends CirculoIncompleto {
 			private static int framesBoca = 50;
-			private static int radio= 15;
+			private static int radioSinEscalar = 15;
+			private static int radioPupilaSinEscalar = 3;
 			private static Color colorPacman = Color.YELLOW;
+			private static Color colorPupila = Color.BLACK;
 			
 			private int anguloBoca; 
 			private boolean estaCerrandoBoca;
-			
-			
+						
 			private Pacman pacman;
-			EscalaYPosicion escalaYPos;
+			private Circulo pupila;
 			
-	        public VistaPacman(Posicionable posicionable) {
+	        public VistaPacman(Posicionable posicionable, EscalaYPosicion escalayPos) {
+	        		super(radioSinEscalar,0,0,escalayPos,-3,-1);
+	        		
+	        		pupila = new Circulo(radioPupilaSinEscalar,escalayPos,0,0);
+	        		pupila.setPosicionable(posicionable);
+	        		
 	        		anguloBoca = 0;
 	                pacman = (Pacman) posicionable; 
 	                estaCerrandoBoca = true;
-                
-	        }
+	                
+	            	}
 
 	        
-	    	public void dibujar(SuperficieDeDibujo superfice) {
-				int anguloInicial = 0;
-				int anguloFinal; 
+	        private void calcularOjosYBoca(){
+	        	int anguloInicial = 0;
+				int anguloFinal = 270; 
 				int desfaseOjoX = 0;
 				int desfaseOjoY = 0;
 	    		
@@ -57,7 +63,6 @@ public class VistaPacman extends Figura {
 	    				anguloInicial = 225;
 	    				break;
 	    			}
-				anguloFinal = 270;
 				
 				if(estaCerrandoBoca)
 					anguloBoca += framesBoca;
@@ -70,12 +75,21 @@ public class VistaPacman extends Figura {
 				if(anguloBoca < 0){anguloBoca=0;
 								   estaCerrandoBoca = true;
 								   }
-				
-	    		Graphics grafico = (Graphics)superfice.getBuffer();
-	    		grafico.setColor(colorPacman);
-				
-	    		grafico.fillArc(getPosicionable().getX()-3, getPosicionable().getY()-1, radio, radio, anguloInicial - anguloBoca/2 , anguloFinal  + anguloBoca);
-	    		grafico.setColor(Color.BLACK);
-	    		grafico.fillOval(getPosicionable().getX()+desfaseOjoX,getPosicionable().getY()+desfaseOjoY, 3, 3);
+	    		
+				this.setAngulos(anguloInicial - anguloBoca/2 , anguloFinal  + anguloBoca);
+	    		pupila.setDesfaseX(desfaseOjoX);
+	    		pupila.setDesfaseY(desfaseOjoY);
 	        }
+	        
+	        
+	        
+	    	public void dibujar(SuperficieDeDibujo superficie) {
+				this.calcularOjosYBoca();
+	    		
+	    		this.setColor(colorPacman);
+	    		super.dibujar(superficie);
+	    		
+	    		pupila.setColor(colorPupila);
+	    		pupila.dibujar(superficie);
+	    		}
 }

@@ -50,6 +50,8 @@ public class ListaDeEscenarios {
 		Escenario escenarioACargar = new Escenario();
 		Posicion posicionActual;
 		int cantidadDePuntos = 0;
+		
+		
 		VistaPiso vistaPiso;
 		VistaPuntito vistaPuntito;
 		VistaPildora vistaPildora;
@@ -64,7 +66,7 @@ public class ListaDeEscenarios {
 				case '0':
 					uebAPoner = new Piso();
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
-					vistaPiso = new VistaPiso ();
+					vistaPiso = new VistaPiso (juego.getEscalaYPosicion());
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
 					break;
 					
@@ -74,9 +76,9 @@ public class ListaDeEscenarios {
 					uebAPoner.addNoJugador(noJugadorAPoner);
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					cantidadDePuntos++;
-					vistaPiso = new VistaPiso ();
+					vistaPiso = new VistaPiso (juego.getEscalaYPosicion());
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
-					vistaPuntito = new VistaPuntito (noJugadorAPoner);
+					vistaPuntito = new VistaPuntito (noJugadorAPoner,juego.getEscalaYPosicion());
 					this.juego.getControlador().agregarDibujable(vistaPuntito);
 					break;
 				
@@ -86,9 +88,9 @@ public class ListaDeEscenarios {
 					uebAPoner.addNoJugador(noJugadorAPoner);
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					cantidadDePuntos++;
-					vistaPiso = new VistaPiso ();
+					vistaPiso = new VistaPiso (juego.getEscalaYPosicion());
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
-					vistaPildora = new VistaPildora (noJugadorAPoner);
+					vistaPildora = new VistaPildora (noJugadorAPoner,juego.getEscalaYPosicion());
 					juego.getControlador().agregarDibujable(vistaPildora);
 					break;
 					
@@ -96,14 +98,14 @@ public class ListaDeEscenarios {
 					uebAPoner = new Casa();
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.setPosicionCasa(posicionActual);
-					vistaCasa = new VistaCasa ();
+					vistaCasa = new VistaCasa (juego.getEscalaYPosicion());
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaCasa,this.juego);
 					break;
 					
 				case '#':
 					uebAPoner = new Pared();
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
-					vistaPared = new VistaPared ();
+					vistaPared = new VistaPared (juego.getEscalaYPosicion());
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPared,this.juego);
 					break;
 				
@@ -114,9 +116,9 @@ public class ListaDeEscenarios {
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.agregarPuntoDeSeparacion(posicionActual);
 					cantidadDePuntos++;
-					vistaPiso = new VistaPiso ();
+					vistaPiso = new VistaPiso (juego.getEscalaYPosicion());
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
-					vistaPuntito = new VistaPuntito (noJugadorAPoner);
+					vistaPuntito = new VistaPuntito (noJugadorAPoner,juego.getEscalaYPosicion());
 					juego.getControlador().agregarDibujable(vistaPuntito);
 					break;
 				
@@ -127,9 +129,9 @@ public class ListaDeEscenarios {
 					escenarioACargar.addUeb(posicionActual,uebAPoner);
 					escenarioACargar.setPosicionInicialPacman(posicionActual);
 					cantidadDePuntos++;
-					vistaPiso = new VistaPiso ();
+					vistaPiso = new VistaPiso (juego.getEscalaYPosicion());
 					this.cargarListaDeVistaDeControlador (uebAPoner,vistaPiso,this.juego);
-					vistaPuntito = new VistaPuntito (noJugadorAPoner);
+					vistaPuntito = new VistaPuntito (noJugadorAPoner,juego.getEscalaYPosicion());
 					juego.getControlador().agregarDibujable(vistaPuntito);
 					break;	
 				
