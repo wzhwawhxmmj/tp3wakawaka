@@ -1,8 +1,6 @@
 package vista;
 
 import java.awt.Color;
-import java.awt.Graphics;
-
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
 import logica.entidades.NoJugador;
@@ -10,27 +8,26 @@ import logica.escenario.Puntito;
 
 public class VistaPuntito extends ar.uba.fi.algo3.titiritero.vista.Circulo {
 
-	private int radio;
+	private static int desfaseX = 2;
+	private static int desfaseY = 2;
+	private static int radio = 5;
 	private Puntito puntito;
 	
-	public VistaPuntito(NoJugador unPuntito) {
-		super(7);
-	    this.radio = 7;
+	public VistaPuntito(NoJugador unPuntito, EscalaYPosicion escalayPos) {
+		super(radio,escalayPos,desfaseX,desfaseY);
+		
 	    this.puntito= (Puntito) unPuntito;
 	    this.setPosicionable(this.puntito);
 	    setColor(Color.YELLOW);
 	    }
 	
 	public void dibujar(SuperficieDeDibujo superfice) {
-		Graphics grafico = (Graphics)superfice.getBuffer();
-		if(this.puntito.estaVivo())
-			{
+		if(this.puntito.estaVivo()){
 			this.setColor(Color.YELLOW);
+			super.dibujar(superfice);
 			}
-		else
-			this.setColor(Color.BLACK);
-		grafico.setColor(this.getColor());
-		grafico.fillOval(getPosicionable().getX() , getPosicionable().getY(),this.radio,this.radio);
+
+		
 
 	}
 	

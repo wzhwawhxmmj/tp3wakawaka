@@ -10,10 +10,10 @@ public class TextoInfomativo implements ObjetoDeTexto, Posicionable {
 	private String texto;
 	private long valor;
 	
-	public TextoInfomativo(String unTexto, long unValor, Posicion unaPosicion){
+	public TextoInfomativo(String unTexto, long unValor, Posicion unaPosicion, EscalaYPosicion escalaYPos){
 		this.texto = unTexto;
 		this.valor = unValor;
-		this.posicionTexto = unaPosicion;
+		this.posicionTexto = escalaYPos.rePosicionar(unaPosicion);
 	}
 	
 	public void actualizarValorDelTexto(long nuevoValor){

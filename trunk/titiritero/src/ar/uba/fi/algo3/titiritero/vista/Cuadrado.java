@@ -3,6 +3,8 @@ package ar.uba.fi.algo3.titiritero.vista;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import vista.EscalaYPosicion;
+
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
 
 /* 
@@ -12,16 +14,21 @@ public class Cuadrado extends Figura {
 
 	private int alto;
 	private int ancho;
-
-	public Cuadrado(int ancho, int alto){
-		this.alto = alto;
-		this.ancho = ancho;
-		setColor(Color.GRAY);
+	
+	public Cuadrado(int ancho, int alto, EscalaYPosicion escalayPos, int desfaseX, int desfaseY){
+		this.alto = escalayPos.escalaryPosicionarY(alto);
+		this.ancho = escalayPos.escalaryPosicionarX(ancho);
+		this.desfaseX = desfaseX;
+		this.desfaseY = desfaseY;
+		
+		setColor(Color.BLACK);
+		
+		this.escalayPos = escalayPos; 
 	}
 	
 	public void dibujar(SuperficieDeDibujo superfice) {
 		Graphics grafico = (Graphics)superfice.getBuffer();
 		grafico.setColor(this.getColor());
-		grafico.fillRect(this.getPosicionable().getX(), this.getPosicionable().getY(), this.ancho, this.alto);
+		grafico.fillRect(escalayPos.posicionableX(getPosicionable(), desfaseX),escalayPos.posicionableY(getPosicionable(), desfaseY), this.ancho, this.alto);
 	}
 }
