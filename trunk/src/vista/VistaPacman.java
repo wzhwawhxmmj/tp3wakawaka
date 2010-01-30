@@ -7,33 +7,34 @@ import logica.entidades.Pacman;
 
 import ar.uba.fi.algo3.titiritero.Posicionable;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
+import ar.uba.fi.algo3.titiritero.vista.Figura;
 
-public class VistaPacman extends ar.uba.fi.algo3.titiritero.vista.CirculoIncompleto {
+public class VistaPacman extends Figura {
 			private static int framesBoca = 50;
- 
-
+			private static int radio= 15;
+			private static Color colorPacman = Color.YELLOW;
+			
 			private int anguloBoca; 
-			private boolean bocaCierra;
-			private int anguloInicial;
-			private int anguloFinal; 
-			private int desfaseOjoX;
-			private int desfaseOjoY;
+			private boolean estaCerrandoBoca;
+			
+			
 			private Pacman pacman;
+			EscalaYPosicion escalaYPos;
 			
-			
-	        public VistaPacman(Posicionable posicionable) {
-	        		super(15,45,270);
+	        public VistaPacman(Posicionable posicionable, EscalaYPosicion escalaYPos) {
 	        		anguloBoca = 0;
-
 	                pacman = (Pacman) posicionable; 
-	                
-	                bocaCierra = true;
-	                setColor(Color.YELLOW);
+	                estaCerrandoBoca = true;
+                
 	        }
 
+	        
 	    	public void dibujar(SuperficieDeDibujo superfice) {
-	    		Graphics grafico = (Graphics)superfice.getBuffer();
-	    		grafico.setColor(getColor());
+				int anguloInicial = 0;
+				int anguloFinal; 
+				int desfaseOjoX = 0;
+				int desfaseOjoY = 0;
+	    		
 	    		switch(pacman.getDireccion()){
 	    			case ARRIBA:
 	    				desfaseOjoX = 1;
@@ -58,24 +59,23 @@ public class VistaPacman extends ar.uba.fi.algo3.titiritero.vista.CirculoIncompl
 	    			}
 				anguloFinal = 270;
 				
-				if(bocaCierra)
+				if(estaCerrandoBoca)
 					anguloBoca += framesBoca;
 					else 
 					anguloBoca -= framesBoca;	
 
-				
 				if(anguloBoca > 90){anguloBoca=90;
-				 					bocaCierra = false;
+				 					estaCerrandoBoca = false;
 									}
 				if(anguloBoca < 0){anguloBoca=0;
-								   bocaCierra = true;
+								   estaCerrandoBoca = true;
 								   }
 				
-	    		grafico.fillArc(getPosicionable().getX()-3, getPosicionable().getY()-1, 15, 15, anguloInicial - anguloBoca/2 , anguloFinal  + anguloBoca);
+	    		Graphics grafico = (Graphics)superfice.getBuffer();
+	    		grafico.setColor(colorPacman);
+				
+	    		grafico.fillArc(getPosicionable().getX()-3, getPosicionable().getY()-1, radio, radio, anguloInicial - anguloBoca/2 , anguloFinal  + anguloBoca);
 	    		grafico.setColor(Color.BLACK);
 	    		grafico.fillOval(getPosicionable().getX()+desfaseOjoX,getPosicionable().getY()+desfaseOjoY, 3, 3);
-	        	
-	    		
-	    		
 	        }
 }
