@@ -24,6 +24,7 @@ public class VistaFantasma extends CirculoIncompleto {
 	private Fantasma fantasma;
 	private Circulo pupila, ojo;
 	private CirculoIncompleto cola1, cola2;
+	private Color color;
 	
 	public VistaFantasma(Color unColor, Posicionable posicionable, EscalaYPosicion escalaYPos) {
 		super(radioSinEscalar, anguloInicial, anguloFinal, escalaYPos, -2, -2);
@@ -31,6 +32,7 @@ public class VistaFantasma extends CirculoIncompleto {
 		this.fantasma= (Fantasma) posicionable;
 		this.setPosicionable(this.fantasma);
 		this.setColor(unColor);
+		this.color = unColor;
 		
 		pupila = new Circulo(radioPupilaSinEscalar,escalayPos,0,0);
 		pupila.setPosicionable(posicionable);
@@ -101,7 +103,7 @@ public class VistaFantasma extends CirculoIncompleto {
 			}
 		else
 			if (this.fantasma.estaVivo()){
-				this.setColor(this.getColor());
+				this.setColor(this.color);
 				dibujarFantasma(superfice);
 				dibujarOjos(superfice);
 				}
