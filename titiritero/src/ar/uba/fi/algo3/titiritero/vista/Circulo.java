@@ -1,21 +1,31 @@
 package ar.uba.fi.algo3.titiritero.vista;
 
 import java.awt.Graphics;
-
+import java.awt.Color;
 import ar.uba.fi.algo3.titiritero.SuperficieDeDibujo;
+
+import vista.EscalaYPosicion;
 
 public class Circulo  extends Figura {
 
 	private int radio;
 	
-	public Circulo(int radio){
-		this.radio = radio;
-	}
+    public Circulo(int radio,EscalaYPosicion escalayPos, int desfaseX, int desfaseY){
+        this.radio = escalayPos.escalar(radio);
+       
+        this.desfaseX = desfaseX;
+        this.desfaseY = desfaseY;
+       
+        setColor(Color.BLACK);
+       
+        this.escalayPos = escalayPos;          
+}
+
 	
 	public void dibujar(SuperficieDeDibujo superfice) {
 		Graphics grafico = (Graphics)superfice.getBuffer();
 		grafico.setColor(getColor());
-		grafico.fillOval(getPosicionable().getX() , getPosicionable().getY(), this.radio, this.radio);
+		grafico.fillOval(escalayPos.posicionableX(getPosicionable(), desfaseX),escalayPos.posicionableY(getPosicionable(), desfaseY), this.radio, this.radio);
 	}
 
 }
