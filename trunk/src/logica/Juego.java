@@ -100,7 +100,7 @@ public class Juego implements ObjetoVivo{
 	private void inicializarNivel (int nivel) throws IOException{
 		this.superficieDeDibujo.setVisible(true);
 		this.superficieDeDibujo.limpiar();
-		this.controladorJuego = new ControladorJuego();
+		this.controladorJuego = new ControladorJuego(true);
 		this.controladorJuego.setSuperficieDeDibujo(this.superficieDeDibujo);
 		Escenario escenario = listaDeEscenarios.getEscenario(nivel);
 		this.pacman = new Pacman(escenario, escenario.getPosicionInicialPacman());
@@ -155,11 +155,11 @@ public class Juego implements ObjetoVivo{
 		//el juego se frena.
 		else{
 			this.controladorJuego.detenerJuego();
-			//si Ganó.
+			//si GanÃ³.
 			if (this.vidas>0){
 				this.nivelActual++;
 			}
-			//si Perdió.
+			//si PerdiÃ³.
 			else{
 			this.superficieDeDibujo.setVisible(false);
 			}
