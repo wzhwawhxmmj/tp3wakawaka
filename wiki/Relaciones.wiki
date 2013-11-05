@@ -32,7 +32,7 @@ Conoce
 
 == Responsabilidades == 
  * Comportarse segun su inteligencia y las cosas que conoce
- * Actuar: morir si esta azul, matar al pacman si no.
+ * Activar: morir si esta azul, matar al pacman si no.
 
 = Pacman = 
 Conoce
