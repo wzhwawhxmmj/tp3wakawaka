@@ -17,8 +17,6 @@ import logica.escenario.ListaDeEscenarios;
 
 import controlador.ManejoPorTeclado;
 
-//import controlador.ManejoPorTeclado;
-
 import vista.*;
 
 import ar.uba.fi.algo3.titiritero.ControladorJuego;
